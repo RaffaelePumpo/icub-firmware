@@ -3,21 +3,21 @@
 // granting, nonprofit, education, and research organizations only. Not
 // for commercial or industrial use.
 //
-// File: position_velocity_cascade_types.h
+// File: Calibrator_types.h
 //
-// Code generated for Simulink model 'position_velocity_cascade'.
+// Code generated for Simulink model 'Calibrator'.
 //
-// Model version                  : 9.30
+// Model version                  : 1.91
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Jul 10 11:56:12 2025
+// C/C++ source code generated on : Thu Jul 10 16:48:53 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef position_velocity_cascade_types_h_
-#define position_velocity_cascade_types_h_
+#ifndef Calibrator_types_h_
+#define Calibrator_types_h_
 #include "rtwtypes.h"
 #ifndef DEFINED_TYPEDEF_FOR_ControlModes_
 #define DEFINED_TYPEDEF_FOR_ControlModes_
@@ -32,39 +32,6 @@ typedef enum {
   ControlModes_Voltage,
   ControlModes_HwFaultCM
 } ControlModes;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_EstimatedData_
-#define DEFINED_TYPEDEF_FOR_EstimatedData_
-
-struct EstimatedData
-{
-  // velocity
-  real32_T rotor_velocity;
-
-  // filtered motor current
-  real32_T Iq_filtered;
-
-  // motor temperature
-  real32_T motor_temperature;
-
-  // velocity
-  real32_T joint_velocity;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Targets_
-#define DEFINED_TYPEDEF_FOR_Targets_
-
-struct Targets
-{
-  real32_T position;
-  real32_T velocity;
-  real32_T current;
-  real32_T voltage;
-};
 
 #endif
 
@@ -89,21 +56,17 @@ typedef enum {
 
 #endif
 
-#ifndef DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
-#define DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
+#ifndef DEFINED_TYPEDEF_FOR_EstimationVelocityModes_
+#define DEFINED_TYPEDEF_FOR_EstimationVelocityModes_
 
-struct ControlOuterOutputs
-{
-  boolean_T vel_en;
-  boolean_T cur_en;
-  boolean_T out_en;
-  boolean_T pid_reset;
-  real32_T motorcurrent;
-  real32_T current_limiter;
-};
+typedef enum {
+  EstimationVelocityModes_Disabled = 0,// Default value
+  EstimationVelocityModes_MovingAverage,
+  EstimationVelocityModes_LeastSquares
+} EstimationVelocityModes;
 
 #endif
-#endif                                 // position_velocity_cascade_types_h_
+#endif                                 // Calibrator_types_h_
 
 //
 // File trailer for generated code.

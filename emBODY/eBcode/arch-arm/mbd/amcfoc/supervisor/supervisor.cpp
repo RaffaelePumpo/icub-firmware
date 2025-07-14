@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 4.45
+// Model version                  : 4.62
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul  8 15:09:26 2025
+// C/C++ source code generated on : Thu Jul 10 16:49:25 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -22,8 +22,6 @@
 #include <cmath>
 #include "rt_roundf.h"
 #include "rtw_defines.h"
-
-//#include "embot_core.h"
 
 // Named constants for Chart: '<Root>/Supervisor'
 const int32_T supervisor_CALL_EVENT = -1;
@@ -460,7 +458,8 @@ static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData
   switch (localDW->is_ControlModeHandler) {
    case supervisor_IN_Calibration:
     // Chart: '<Root>/Supervisor'
-    if (rty_Flags->calibration_type == CalibrationTypes_None) {
+    if (rtu_ControlOutputs->calibrationdone) {
+      rty_Flags->calibration_type = CalibrationTypes_None;
       localDW->is_ControlModeHandler = supervisor_IN_Idle;
       rty_Flags->control_mode = ControlModes_Idle;
       rtw_disableMotor();
@@ -783,8 +782,6 @@ static void supervisor_SetLimits(real32_T limits_overload, real32_T limits_peak,
   *rty_Flags, DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
-    
-//    embot::core::print("BINGO: supervisor_SetLimits() executes .....................................................................");
 
   // Chart: '<Root>/Supervisor'
   rty_ConfigurationParameters->thresholds.motorNominalCurrents = std::abs
@@ -1019,10 +1016,10 @@ void supervisor_Init(Targets *rty_targets, ActuatorConfiguration
 void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
                 *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs, const
                 SensorsData *rtu_SensorsData, const ReceivedEvents
-                rtu_ReceivedEvents[MAX_EVENTS_PER_TICK], const
-                ActuatorConfiguration *rtu_InitConf, Targets *rty_targets,
-                ActuatorConfiguration *rty_ConfigurationParameters, Flags
-                *rty_Flags, DW_supervisor_f_T *localDW)
+                rtu_ReceivedEvents[4], const ActuatorConfiguration *rtu_InitConf,
+                Targets *rty_targets, ActuatorConfiguration
+                *rty_ConfigurationParameters, Flags *rty_Flags,
+                DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
   int32_T ei;

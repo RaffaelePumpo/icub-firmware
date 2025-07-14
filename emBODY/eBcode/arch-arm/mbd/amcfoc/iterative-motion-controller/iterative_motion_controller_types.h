@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.0
+// Model version                  : 4.2
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul  9 14:16:48 2025
+// C/C++ source code generated on : Mon Jul 14 09:23:16 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -287,6 +287,8 @@ struct Flags
 
 struct FOCOutputs
 {
+  boolean_T calibrationdone;
+
   // control effort (quadrature)
   real32_T Vq;
 

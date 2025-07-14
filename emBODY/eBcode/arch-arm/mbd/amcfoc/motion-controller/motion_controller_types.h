@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.32
+// Model version                  : 5.114
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul  9 14:16:19 2025
+// C/C++ source code generated on : Mon Jul 14 09:23:00 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,9 +19,6 @@
 #ifndef motion_controller_types_h_
 #define motion_controller_types_h_
 #include "rtwtypes.h"
-
-// Includes for objects with custom storage classes
-#include "rtw_defines.h"
 #ifndef DEFINED_TYPEDEF_FOR_DriverSensors_
 #define DEFINED_TYPEDEF_FOR_DriverSensors_
 
@@ -362,6 +359,8 @@ struct ReceivedEvents
 
 struct FOCOutputs
 {
+  boolean_T calibrationdone;
+
   // control effort (quadrature)
   real32_T Vq;
 
@@ -379,35 +378,6 @@ struct FOCOutputs
 
   // RMS of Id
   real32_T Id_rms;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
-#define DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
-
-struct ControlOuterOutputs
-{
-  boolean_T vel_en;
-  boolean_T cur_en;
-  boolean_T out_en;
-  boolean_T pid_reset;
-  real32_T motorcurrent;
-  real32_T current_limiter;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_FOCSlowInputs_
-#define DEFINED_TYPEDEF_FOR_FOCSlowInputs_
-
-struct FOCSlowInputs
-{
-  GlobalConfiguration global_configuration;
-  ActuatorConfiguration actuator_configuration;
-  EstimatedData estimated_data;
-  Targets targets;
-  ControlOuterOutputs control_outer_outputs;
 };
 
 #endif
@@ -449,6 +419,35 @@ struct Flags
 
   // control mode
   ControlModes control_mode;
+};
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
+#define DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
+
+struct ControlOuterOutputs
+{
+  boolean_T vel_en;
+  boolean_T cur_en;
+  boolean_T out_en;
+  boolean_T pid_reset;
+  real32_T motorcurrent;
+  real32_T current_limiter;
+};
+
+#endif
+
+#ifndef DEFINED_TYPEDEF_FOR_FOCSlowInputs_
+#define DEFINED_TYPEDEF_FOR_FOCSlowInputs_
+
+struct FOCSlowInputs
+{
+  GlobalConfiguration global_configuration;
+  ActuatorConfiguration actuator_configuration;
+  EstimatedData estimated_data;
+  Targets targets;
+  ControlOuterOutputs control_outer_outputs;
 };
 
 #endif

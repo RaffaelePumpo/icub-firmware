@@ -3,24 +3,25 @@
 // granting, nonprofit, education, and research organizations only. Not
 // for commercial or industrial use.
 //
-// File: supervisor_private.h
+// File: Calibrator_private.h
 //
-// Code generated for Simulink model 'supervisor'.
+// Code generated for Simulink model 'Calibrator'.
 //
-// Model version                  : 4.62
+// Model version                  : 1.91
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Jul 10 16:49:25 2025
+// C/C++ source code generated on : Thu Jul 10 16:48:53 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef supervisor_private_h_
-#define supervisor_private_h_
+#ifndef Calibrator_private_h_
+#define Calibrator_private_h_
 #include "rtwtypes.h"
-#include "supervisor_types.h"
-#endif                                 // supervisor_private_h_
+#include "Calibrator_types.h"
+#include "Calibrator.h"
+#endif                                 // Calibrator_private_h_
 
 //
 // File trailer for generated code.

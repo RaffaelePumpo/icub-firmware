@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.0
+// Model version                  : 4.2
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul  9 14:16:48 2025
+// C/C++ source code generated on : Mon Jul 14 09:23:16 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -31,9 +31,13 @@ struct DW_CoreSubsys_iterative_motion_controller_T {
   MdlrefDW_motion_controller_T MotionController_InstanceData;// '<S1>/Motion Controller' 
   ActuatorConfiguration ConfigurationParameters;// '<S1>/Motion Controller'
   BUS_MESSAGES_TX MessagesTx;          // '<S1>/Model'
+  SensorsData TmpRTBAtMotionControllerInport1;
   SensorsData TmpRTBAtModelInport1_Buf0;// synthesized block
   SensorsData TmpRTBAtModelInport1_Buf1;// synthesized block
   SensorsData TmpRTBAtModelInport1_Buf2;// synthesized block
+  SensorsData TmpRTBAtMotionControllerInport1_Buf0;// synthesized block
+  SensorsData TmpRTBAtMotionControllerInport1_Buf1;// synthesized block
+  SensorsData TmpRTBAtMotionControllerInport1_Buf2;// synthesized block
   FOCOutputs MotionController_o1;      // '<S1>/Motion Controller'
   FOCOutputs TmpRTBAtModelInport4_Buf0;// synthesized block
   FOCOutputs TmpRTBAtModelInport4_Buf1;// synthesized block
@@ -41,19 +45,24 @@ struct DW_CoreSubsys_iterative_motion_controller_T {
   Flags Flags_l;                       // '<S1>/Motion Controller'
   EstimatedData MotionController_o2;   // '<S1>/Motion Controller'
   BUS_STATUS_TX Model_o2;              // '<S1>/Model'
-  void* TmpRTBAtModelInport1_SEMAPHORE;// synthesized block
   void* TmpRTBAtModelInport4_SEMAPHORE;// synthesized block
-  int8_T TmpRTBAtModelInport1_LstBufWR;// synthesized block
-  int8_T TmpRTBAtModelInport1_RDBuf;   // synthesized block
+  void* TmpRTBAtModelInport1_SEMAPHORE;// synthesized block
+  void* TmpRTBAtMotionControllerInport1_SEMAPHORE;// synthesized block
   int8_T TmpRTBAtModelInport4_LstBufWR;// synthesized block
   int8_T TmpRTBAtModelInport4_RDBuf;   // synthesized block
+  int8_T TmpRTBAtModelInport1_LstBufWR;// synthesized block
+  int8_T TmpRTBAtModelInport1_RDBuf;   // synthesized block
+  int8_T TmpRTBAtMotionControllerInport1_LstBufWR;// synthesized block
+  int8_T TmpRTBAtMotionControllerInport1_RDBuf;// synthesized block
 };
 
 // Block signals and states (default storage) for system '<Root>'
 struct DW_iterative_motion_controller_T {
   DW_CoreSubsys_iterative_motion_controller_T CoreSubsys[N_MOTORS];// '<Root>/Iterative Motion Controller' 
-  ReceivedEvents ImpSel_InsertedFor_Events_at_outport_0[MAX_EVENTS_PER_TICK];
-  ReceivedEvents M[(MAX_EVENTS_PER_TICK * N_MOTORS)];// '<Root>/Sort Events'
+  ReceivedEvents M[(MAX_EVENTS_PER_TICK * N_MOTORS)];
+  ReceivedEvents
+    rtb_ImpSel_InsertedFor_Events_at_outport_0_m[MAX_EVENTS_PER_TICK];
+  SensorsData SensorDataout_CoreSubsysCanOut;// '<S1>/Motion Controller'
 };
 
 // External inputs (root inport signals with default storage)
@@ -71,6 +80,7 @@ struct ExtY_iterative_motion_controller_T {
   ActuatorConfiguration ConfigurationParameters[N_MOTORS];// '<Root>/ConfigurationParameters' 
   BUS_MESSAGES_TX Messages[N_MOTORS];  // '<Root>/Messages'
   BUS_STATUS_TX MessagesFlags[N_MOTORS];// '<Root>/MessagesFlags'
+  SensorsData SensorDataOut[N_MOTORS]; // '<Root>/SensorDataOut'
 };
 
 // Real-time Model Data Structure
@@ -82,8 +92,8 @@ struct tag_RTM_iterative_motion_controller_T {
 
   struct {
     struct {
-      uint32_T TID[3];
-      uint32_T cLimit[3];
+      uint32_T TID[4];
+      uint32_T cLimit[4];
     } TaskCounters;
   } Timing;
 
@@ -153,6 +163,7 @@ extern "C"
   extern void AMCFOC_initialize(void);
   extern void AMCFOC_step_Time_base(void);// Sample time: [5e-06s, 0.0s]
   extern void AMCFOC_step_FOC(void);   // Sample time: [4.5e-05s, 0.0s]
+  extern void iterative_motion_controller_step2(void);// Sample time: [0.0001s, 0.0s] 
   extern void AMCFOC_step_Time_1ms(void);// Sample time: [0.001s, 0.0s]
   extern void AMCFOC_terminate(void);
 
