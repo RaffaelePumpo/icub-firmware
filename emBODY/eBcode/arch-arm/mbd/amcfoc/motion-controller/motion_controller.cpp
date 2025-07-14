@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.114
+// Model version                  : 5.115
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Mon Jul 14 09:23:00 2025
+// C/C++ source code generated on : Mon Jul 14 12:24:06 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -145,10 +145,6 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
   localB->ConfigurationParameters = localDW->ConfigurationParameters_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport19 =
-    localDW->TmpRTBAtCalibratorInport19_Buffer0;
-
-  // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport2 = localDW->TmpRTBAtCalibratorInport2_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
@@ -164,18 +160,18 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
     localDW->TmpRTBAtCalibratorInport22_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
+  localB->TmpRTBAtCalibratorInport23 =
+    localDW->TmpRTBAtCalibratorInport23_Buffer0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  localDW->TmpRTBAtCalibratorInport23_RDBuf =
-    localDW->TmpRTBAtCalibratorInport23_LstBufWR;
+  localDW->TmpRTBAtCalibratorInport24_RDBuf =
+    localDW->TmpRTBAtCalibratorInport24_LstBufWR;
   rtw_mutex_unlock();
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport23 = localDW->
-    TmpRTBAtCalibratorInport23_Buf[localDW->TmpRTBAtCalibratorInport23_RDBuf];
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport24 =
-    localDW->TmpRTBAtCalibratorInport24_Buffer0;
+  localB->TmpRTBAtCalibratorInport24 = localDW->
+    TmpRTBAtCalibratorInport24_Buf[localDW->TmpRTBAtCalibratorInport24_RDBuf];
 
   // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport25 =
@@ -213,18 +209,18 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
     localDW->TmpRTBAtCalibratorInport32_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
+  localB->TmpRTBAtCalibratorInport33 =
+    localDW->TmpRTBAtCalibratorInport33_Buffer0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  localDW->TmpRTBAtCalibratorInport33_RDBuf =
-    localDW->TmpRTBAtCalibratorInport33_LstBufWR;
+  localDW->TmpRTBAtCalibratorInport34_RDBuf =
+    localDW->TmpRTBAtCalibratorInport34_LstBufWR;
   rtw_mutex_unlock();
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport33 = localDW->
-    TmpRTBAtCalibratorInport33_Buf[localDW->TmpRTBAtCalibratorInport33_RDBuf];
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport34 =
-    localDW->TmpRTBAtCalibratorInport34_Buffer0;
+  localB->TmpRTBAtCalibratorInport34 = localDW->
+    TmpRTBAtCalibratorInport34_Buf[localDW->TmpRTBAtCalibratorInport34_RDBuf];
 
   // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport35 =
@@ -262,18 +258,18 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
     localDW->TmpRTBAtCalibratorInport42_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
+  localB->TmpRTBAtCalibratorInport43 =
+    localDW->TmpRTBAtCalibratorInport43_Buffer0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  localDW->TmpRTBAtCalibratorInport43_RDBuf =
-    localDW->TmpRTBAtCalibratorInport43_LstBufWR;
+  localDW->TmpRTBAtCalibratorInport44_RDBuf =
+    localDW->TmpRTBAtCalibratorInport44_LstBufWR;
   rtw_mutex_unlock();
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport43 = localDW->
-    TmpRTBAtCalibratorInport43_Buf[localDW->TmpRTBAtCalibratorInport43_RDBuf];
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport44 =
-    localDW->TmpRTBAtCalibratorInport44_Buffer0;
+  localB->TmpRTBAtCalibratorInport44 = localDW->
+    TmpRTBAtCalibratorInport44_Buf[localDW->TmpRTBAtCalibratorInport44_RDBuf];
 
   // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport45 =
@@ -296,14 +292,7 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
     localDW->TmpRTBAtCalibratorInport49_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
-  rtw_mutex_lock();
-  localDW->TmpRTBAtCalibratorInport5_RDBuf =
-    localDW->TmpRTBAtCalibratorInport5_LstBufWR;
-  rtw_mutex_unlock();
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport5 = localDW->
-    TmpRTBAtCalibratorInport5_Buf[localDW->TmpRTBAtCalibratorInport5_RDBuf];
+  localB->TmpRTBAtCalibratorInport5 = localDW->TmpRTBAtCalibratorInport5_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport50 =
@@ -344,6 +333,16 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
   // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport59 =
     localDW->TmpRTBAtCalibratorInport59_Buffer0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  rtw_mutex_lock();
+  localDW->TmpRTBAtCalibratorInport6_RDBuf =
+    localDW->TmpRTBAtCalibratorInport6_LstBufWR;
+  rtw_mutex_unlock();
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localB->TmpRTBAtCalibratorInport6 = localDW->
+    TmpRTBAtCalibratorInport6_Buf[localDW->TmpRTBAtCalibratorInport6_RDBuf];
 
   // RateTransition generated from: '<Root>/Calibrator'
   localB->TmpRTBAtCalibratorInport60 =
@@ -398,14 +397,18 @@ void motion_controllerTID0(B_motion_controller_c_T *localB,
     localDW->TmpRTBAtCalibratorInport72_Buffer0;
 
   // RateTransition generated from: '<Root>/Calibrator'
+  localB->TmpRTBAtCalibratorInport73 =
+    localDW->TmpRTBAtCalibratorInport73_Buffer0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  localDW->TmpRTBAtCalibratorInport73_RDBuf =
-    localDW->TmpRTBAtCalibratorInport73_LstBufWR;
+  localDW->TmpRTBAtCalibratorInport74_RDBuf =
+    localDW->TmpRTBAtCalibratorInport74_LstBufWR;
   rtw_mutex_unlock();
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport73 = localDW->
-    TmpRTBAtCalibratorInport73_Buf[localDW->TmpRTBAtCalibratorInport73_RDBuf];
+  localB->TmpRTBAtCalibratorInport74 = localDW->
+    TmpRTBAtCalibratorInport74_Buf[localDW->TmpRTBAtCalibratorInport74_RDBuf];
 
   // RateTransition generated from: '<Root>/Rate Transition1'
   rtw_mutex_lock();
@@ -1116,8 +1119,8 @@ void motion_controllerTID2(const SensorsData *rtu_SensorData,
   // End of Switch: '<S3>/Switch'
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localB->TmpRTBAtCalibratorInport18 =
-    localDW->TmpRTBAtCalibratorInport18_Buffer0;
+  localB->TmpRTBAtCalibratorInport19 =
+    localDW->TmpRTBAtCalibratorInport19_Buffer0;
 
   // RateTransition generated from: '<Root>/Bus Creator'
   rtw_mutex_lock();
@@ -1141,7 +1144,7 @@ void motion_controllerTID2(const SensorsData *rtu_SensorData,
                  &rtb_Switch.motorsensors.voltage,
                  &rtb_Switch.motorsensors.current,
                  &rtb_Switch.motorsensors.hallABC,
-                 &localB->TmpRTBAtCalibratorInport18,
+                 &localB->TmpRTBAtCalibratorInport19,
                  &rtb_TmpRTBAtBusCreatorOutport1.global_configuration.estimation.environment_temperature,
                  &rtb_TmpRTBAtBusCreatorOutport1.global_configuration.estimation.current_rms_lambda,
                  &rtb_TmpRTBAtBusCreatorOutport1.global_configuration.estimation.velocity_est_mode,
@@ -1865,38 +1868,37 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   localDW->Flags_LstBufWR = wrBufIdx;
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport18_Buffer0 =
+  localDW->TmpRTBAtCalibratorInport19_Buffer0 =
     rty_ActuatorsConfiguration->thresholds.motorNominalCurrents;
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport19_Buffer0 =
-    rty_ActuatorsConfiguration->thresholds.motorPeakCurrents;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport2_Buffer0 =
-    rty_Flags->enable_sending_msg_status;
+  localDW->TmpRTBAtCalibratorInport2_Buffer0 = rty_Flags->calibration_done;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport20_Buffer0 =
-    rty_ActuatorsConfiguration->thresholds.motorOverloadCurrents;
+    rty_ActuatorsConfiguration->thresholds.motorPeakCurrents;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport21_Buffer0 =
-    rty_ActuatorsConfiguration->thresholds.motorPwmLimit;
+    rty_ActuatorsConfiguration->thresholds.motorOverloadCurrents;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport22_Buffer0 =
+    rty_ActuatorsConfiguration->thresholds.motorPwmLimit;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport23_Buffer0 =
     rty_ActuatorsConfiguration->thresholds.motorCriticalTemperature;
 
   // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport23_LstBufWR +
+  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport24_LstBufWR +
     1);
   if (wrBufIdx == 3) {
     wrBufIdx = 0;
   }
 
-  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport23_RDBuf) {
+  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport24_RDBuf) {
     wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
     if (wrBufIdx == 3) {
       wrBufIdx = 0;
@@ -1904,58 +1906,59 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   }
 
   rtw_mutex_unlock();
-  localDW->TmpRTBAtCalibratorInport23_Buf[wrBufIdx] =
+  localDW->TmpRTBAtCalibratorInport24_Buf[wrBufIdx] =
     rty_ActuatorsConfiguration->pids.currentPID.type;
-  localDW->TmpRTBAtCalibratorInport23_LstBufWR = wrBufIdx;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport24_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.OutMax;
+  localDW->TmpRTBAtCalibratorInport24_LstBufWR = wrBufIdx;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport25_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.OutMin;
+    rty_ActuatorsConfiguration->pids.currentPID.OutMax;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport26_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.P;
+    rty_ActuatorsConfiguration->pids.currentPID.OutMin;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport27_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.I;
+    rty_ActuatorsConfiguration->pids.currentPID.P;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport28_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.D;
+    rty_ActuatorsConfiguration->pids.currentPID.I;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport29_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.N;
+    rty_ActuatorsConfiguration->pids.currentPID.D;
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport3_Buffer0 = rty_Flags->hw_faults.overcurrent;
+  localDW->TmpRTBAtCalibratorInport3_Buffer0 =
+    rty_Flags->enable_sending_msg_status;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport30_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.I0;
+    rty_ActuatorsConfiguration->pids.currentPID.N;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport31_Buffer0 =
-    rty_ActuatorsConfiguration->pids.currentPID.D0;
+    rty_ActuatorsConfiguration->pids.currentPID.I0;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport32_Buffer0 =
+    rty_ActuatorsConfiguration->pids.currentPID.D0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport33_Buffer0 =
     rty_ActuatorsConfiguration->pids.currentPID.shift_factor;
 
   // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport33_LstBufWR +
+  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport34_LstBufWR +
     1);
   if (wrBufIdx == 3) {
     wrBufIdx = 0;
   }
 
-  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport33_RDBuf) {
+  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport34_RDBuf) {
     wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
     if (wrBufIdx == 3) {
       wrBufIdx = 0;
@@ -1963,59 +1966,58 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   }
 
   rtw_mutex_unlock();
-  localDW->TmpRTBAtCalibratorInport33_Buf[wrBufIdx] =
+  localDW->TmpRTBAtCalibratorInport34_Buf[wrBufIdx] =
     rty_ActuatorsConfiguration->pids.velocityPID.type;
-  localDW->TmpRTBAtCalibratorInport33_LstBufWR = wrBufIdx;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport34_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.OutMax;
+  localDW->TmpRTBAtCalibratorInport34_LstBufWR = wrBufIdx;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport35_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.OutMin;
+    rty_ActuatorsConfiguration->pids.velocityPID.OutMax;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport36_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.P;
+    rty_ActuatorsConfiguration->pids.velocityPID.OutMin;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport37_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.I;
+    rty_ActuatorsConfiguration->pids.velocityPID.P;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport38_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.D;
+    rty_ActuatorsConfiguration->pids.velocityPID.I;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport39_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.N;
+    rty_ActuatorsConfiguration->pids.velocityPID.D;
 
   // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport4_Buffer0 =
-    rty_Flags->enable_thermal_protection;
+  localDW->TmpRTBAtCalibratorInport4_Buffer0 = rty_Flags->hw_faults.overcurrent;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport40_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.I0;
+    rty_ActuatorsConfiguration->pids.velocityPID.N;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport41_Buffer0 =
-    rty_ActuatorsConfiguration->pids.velocityPID.D0;
+    rty_ActuatorsConfiguration->pids.velocityPID.I0;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport42_Buffer0 =
+    rty_ActuatorsConfiguration->pids.velocityPID.D0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport43_Buffer0 =
     rty_ActuatorsConfiguration->pids.velocityPID.shift_factor;
 
   // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport43_LstBufWR +
+  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport44_LstBufWR +
     1);
   if (wrBufIdx == 3) {
     wrBufIdx = 0;
   }
 
-  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport43_RDBuf) {
+  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport44_RDBuf) {
     wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
     if (wrBufIdx == 3) {
       wrBufIdx = 0;
@@ -2023,42 +2025,82 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   }
 
   rtw_mutex_unlock();
-  localDW->TmpRTBAtCalibratorInport43_Buf[wrBufIdx] =
+  localDW->TmpRTBAtCalibratorInport44_Buf[wrBufIdx] =
     rty_ActuatorsConfiguration->pids.positionPID.type;
-  localDW->TmpRTBAtCalibratorInport43_LstBufWR = wrBufIdx;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport44_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.OutMax;
+  localDW->TmpRTBAtCalibratorInport44_LstBufWR = wrBufIdx;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport45_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.OutMin;
+    rty_ActuatorsConfiguration->pids.positionPID.OutMax;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport46_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.P;
+    rty_ActuatorsConfiguration->pids.positionPID.OutMin;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport47_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.I;
+    rty_ActuatorsConfiguration->pids.positionPID.P;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport48_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.D;
+    rty_ActuatorsConfiguration->pids.positionPID.I;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport49_Buffer0 =
+    rty_ActuatorsConfiguration->pids.positionPID.D;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport5_Buffer0 =
+    rty_Flags->enable_thermal_protection;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport50_Buffer0 =
     rty_ActuatorsConfiguration->pids.positionPID.N;
 
   // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport51_Buffer0 =
+    rty_ActuatorsConfiguration->pids.positionPID.I0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport52_Buffer0 =
+    rty_ActuatorsConfiguration->pids.positionPID.D0;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport53_Buffer0 =
+    rty_ActuatorsConfiguration->pids.positionPID.shift_factor;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport54_Buffer0 =
+    rty_ActuatorsConfiguration->motor.externals.enable_verbosity;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport55_Buffer0 =
+    rty_ActuatorsConfiguration->motor.externals.has_hall_sens;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport56_Buffer0 =
+    rty_ActuatorsConfiguration->motor.externals.has_quadrature_encoder;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport57_Buffer0 =
+    rty_ActuatorsConfiguration->motor.externals.has_speed_quadrature_encoder;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport58_Buffer0 =
+    rty_ActuatorsConfiguration->motor.externals.has_temperature_sens;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport59_Buffer0 =
+    rty_ActuatorsConfiguration->motor.externals.encoder_tolerance;
+
+  // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport5_LstBufWR + 1);
+  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport6_LstBufWR + 1);
   if (wrBufIdx == 3) {
     wrBufIdx = 0;
   }
 
-  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport5_RDBuf) {
+  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport6_RDBuf) {
     wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
     if (wrBufIdx == 3) {
       wrBufIdx = 0;
@@ -2066,110 +2108,74 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   }
 
   rtw_mutex_unlock();
-  localDW->TmpRTBAtCalibratorInport5_Buf[wrBufIdx] = rty_Flags->control_mode;
-  localDW->TmpRTBAtCalibratorInport5_LstBufWR = wrBufIdx;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport50_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.I0;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport51_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.D0;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport52_Buffer0 =
-    rty_ActuatorsConfiguration->pids.positionPID.shift_factor;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport53_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.enable_verbosity;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport54_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.has_hall_sens;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport55_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.has_quadrature_encoder;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport56_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.has_speed_quadrature_encoder;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport57_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.has_temperature_sens;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport58_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.encoder_tolerance;
-
-  // RateTransition generated from: '<Root>/Calibrator'
-  localDW->TmpRTBAtCalibratorInport59_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.pole_pairs;
+  localDW->TmpRTBAtCalibratorInport6_Buf[wrBufIdx] = rty_Flags->control_mode;
+  localDW->TmpRTBAtCalibratorInport6_LstBufWR = wrBufIdx;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport60_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.rotor_encoder_resolution;
+    rty_ActuatorsConfiguration->motor.externals.pole_pairs;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport61_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.rotor_index_offset;
+    rty_ActuatorsConfiguration->motor.externals.rotor_encoder_resolution;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport62_Buffer0 =
-    rty_ActuatorsConfiguration->motor.externals.use_index;
+    rty_ActuatorsConfiguration->motor.externals.rotor_index_offset;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport63_Buffer0 =
-    rty_ActuatorsConfiguration->motor.Kbemf;
+    rty_ActuatorsConfiguration->motor.externals.use_index;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport64_Buffer0 =
-    rty_ActuatorsConfiguration->motor.Rphase;
+    rty_ActuatorsConfiguration->motor.Kbemf;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport65_Buffer0 =
-    rty_ActuatorsConfiguration->motor.Imin;
+    rty_ActuatorsConfiguration->motor.Rphase;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport66_Buffer0 =
-    rty_ActuatorsConfiguration->motor.Imax;
+    rty_ActuatorsConfiguration->motor.Imin;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport67_Buffer0 =
-    rty_ActuatorsConfiguration->motor.Vmax;
+    rty_ActuatorsConfiguration->motor.Imax;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport68_Buffer0 =
-    rty_ActuatorsConfiguration->motor.resistance;
+    rty_ActuatorsConfiguration->motor.Vmax;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport69_Buffer0 =
-    rty_ActuatorsConfiguration->motor.inductance;
+    rty_ActuatorsConfiguration->motor.resistance;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport70_Buffer0 =
-    rty_ActuatorsConfiguration->motor.thermal_resistance;
+    rty_ActuatorsConfiguration->motor.inductance;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport71_Buffer0 =
-    rty_ActuatorsConfiguration->motor.thermal_time_constant;
+    rty_ActuatorsConfiguration->motor.thermal_resistance;
 
   // RateTransition generated from: '<Root>/Calibrator'
   localDW->TmpRTBAtCalibratorInport72_Buffer0 =
+    rty_ActuatorsConfiguration->motor.thermal_time_constant;
+
+  // RateTransition generated from: '<Root>/Calibrator'
+  localDW->TmpRTBAtCalibratorInport73_Buffer0 =
     rty_ActuatorsConfiguration->motor.hall_sensors_offset;
 
   // RateTransition generated from: '<Root>/Calibrator'
   rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport73_LstBufWR +
+  wrBufIdx = static_cast<int8_T>(localDW->TmpRTBAtCalibratorInport74_LstBufWR +
     1);
   if (wrBufIdx == 3) {
     wrBufIdx = 0;
   }
 
-  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport73_RDBuf) {
+  if (wrBufIdx == localDW->TmpRTBAtCalibratorInport74_RDBuf) {
     wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
     if (wrBufIdx == 3) {
       wrBufIdx = 0;
@@ -2177,9 +2183,9 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   }
 
   rtw_mutex_unlock();
-  localDW->TmpRTBAtCalibratorInport73_Buf[wrBufIdx] =
+  localDW->TmpRTBAtCalibratorInport74_Buf[wrBufIdx] =
     rty_ActuatorsConfiguration->motor.reference_encoder;
-  localDW->TmpRTBAtCalibratorInport73_LstBufWR = wrBufIdx;
+  localDW->TmpRTBAtCalibratorInport74_LstBufWR = wrBufIdx;
 
   // RateTransition generated from: '<S3>/Switch'
   localDW->ConfigurationParameters_Buffer0_m =

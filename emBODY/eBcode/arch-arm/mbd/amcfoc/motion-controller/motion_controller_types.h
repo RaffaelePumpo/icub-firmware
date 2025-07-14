@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.114
+// Model version                  : 5.115
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Mon Jul 14 09:23:00 2025
+// C/C++ source code generated on : Mon Jul 14 12:24:06 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -413,6 +413,7 @@ struct Flags
   // 1. Search Index must be done
   // 2. Full calibration must be done
   CalibrationTypes calibration_type;
+  boolean_T calibration_done;
   boolean_T enable_sending_msg_status;
   HardwareFaults hw_faults;
   boolean_T enable_thermal_protection;

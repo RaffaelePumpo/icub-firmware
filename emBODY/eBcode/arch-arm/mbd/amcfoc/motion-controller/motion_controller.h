@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.114
+// Model version                  : 5.115
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Mon Jul 14 09:23:00 2025
+// C/C++ source code generated on : Mon Jul 14 12:24:06 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -37,7 +37,7 @@ struct B_motion_controller_c_T {
   SensorsData Transitionto1ms;         // '<Root>/Transition to 1ms'
   FOCOutputs RateTransition2;          // '<Root>/Rate Transition2'
   Targets targets;                     // '<Root>/Motor Supervisor'
-  uint32_T TmpRTBAtCalibratorInport21;
+  uint32_T TmpRTBAtCalibratorInport22;
   uint32_T velocity_est_window;        // '<Root>/Calibrator'
   uint32_T motorPwmLimit;              // '<Root>/Calibrator'
   real32_T Vcc;                        // '<Root>/Calibrator'
@@ -50,10 +50,9 @@ struct B_motion_controller_c_T {
   real32_T voltage;                    // '<Root>/Calibrator'
   real32_T current;                    // '<Root>/Calibrator'
   real32_T ConfigurationParameters;
-  real32_T TmpRTBAtCalibratorInport19;
   real32_T TmpRTBAtCalibratorInport20;
-  real32_T TmpRTBAtCalibratorInport22;
-  real32_T TmpRTBAtCalibratorInport24;
+  real32_T TmpRTBAtCalibratorInport21;
+  real32_T TmpRTBAtCalibratorInport23;
   real32_T TmpRTBAtCalibratorInport25;
   real32_T TmpRTBAtCalibratorInport26;
   real32_T TmpRTBAtCalibratorInport27;
@@ -61,7 +60,7 @@ struct B_motion_controller_c_T {
   real32_T TmpRTBAtCalibratorInport29;
   real32_T TmpRTBAtCalibratorInport30;
   real32_T TmpRTBAtCalibratorInport31;
-  real32_T TmpRTBAtCalibratorInport34;
+  real32_T TmpRTBAtCalibratorInport32;
   real32_T TmpRTBAtCalibratorInport35;
   real32_T TmpRTBAtCalibratorInport36;
   real32_T TmpRTBAtCalibratorInport37;
@@ -69,7 +68,7 @@ struct B_motion_controller_c_T {
   real32_T TmpRTBAtCalibratorInport39;
   real32_T TmpRTBAtCalibratorInport40;
   real32_T TmpRTBAtCalibratorInport41;
-  real32_T TmpRTBAtCalibratorInport44;
+  real32_T TmpRTBAtCalibratorInport42;
   real32_T TmpRTBAtCalibratorInport45;
   real32_T TmpRTBAtCalibratorInport46;
   real32_T TmpRTBAtCalibratorInport47;
@@ -77,7 +76,7 @@ struct B_motion_controller_c_T {
   real32_T TmpRTBAtCalibratorInport49;
   real32_T TmpRTBAtCalibratorInport50;
   real32_T TmpRTBAtCalibratorInport51;
-  real32_T TmpRTBAtCalibratorInport63;
+  real32_T TmpRTBAtCalibratorInport52;
   real32_T TmpRTBAtCalibratorInport64;
   real32_T TmpRTBAtCalibratorInport65;
   real32_T TmpRTBAtCalibratorInport66;
@@ -87,7 +86,8 @@ struct B_motion_controller_c_T {
   real32_T TmpRTBAtCalibratorInport70;
   real32_T TmpRTBAtCalibratorInport71;
   real32_T TmpRTBAtCalibratorInport72;
-  real32_T TmpRTBAtCalibratorInport18;
+  real32_T TmpRTBAtCalibratorInport73;
+  real32_T TmpRTBAtCalibratorInport19;
   real32_T environment_temperature;    // '<Root>/Calibrator'
   real32_T current_rms_lambda;         // '<Root>/Calibrator'
   real32_T jntVelMax;                  // '<Root>/Calibrator'
@@ -141,27 +141,27 @@ struct B_motion_controller_c_T {
   real32_T current_limiter;            // '<Root>/Calibrator'
   real32_T velocity_b;                 // '<S1>/Motor Velocity Estimator'
   real32_T velocity_j;                 // '<S1>/Joint Velocity Estimator'
-  ReferenceEncoder TmpRTBAtCalibratorInport73;
+  ReferenceEncoder TmpRTBAtCalibratorInport74;
   ReferenceEncoder reference_encoder;  // '<Root>/Calibrator'
   EstimationVelocityModes velocity_est_mode;// '<Root>/Calibrator'
-  ControlModes TmpRTBAtCalibratorInport23;
-  ControlModes TmpRTBAtCalibratorInport33;
-  ControlModes TmpRTBAtCalibratorInport43;
-  ControlModes TmpRTBAtCalibratorInport5;
+  ControlModes TmpRTBAtCalibratorInport24;
+  ControlModes TmpRTBAtCalibratorInport34;
+  ControlModes TmpRTBAtCalibratorInport44;
+  ControlModes TmpRTBAtCalibratorInport6;
   ControlModes type;                   // '<Root>/Calibrator'
   ControlModes type_i;                 // '<Root>/Calibrator'
   ControlModes type_n;                 // '<Root>/Calibrator'
   CalibrationTypes Flags_k;
-  int16_T TmpRTBAtCalibratorInport60;
   int16_T TmpRTBAtCalibratorInport61;
+  int16_T TmpRTBAtCalibratorInport62;
   int16_T rotor_encoder_resolution;    // '<Root>/Calibrator'
   int16_T rotor_index_offset;          // '<Root>/Calibrator'
   uint8_T hallABC;                     // '<Root>/Calibrator'
-  uint8_T TmpRTBAtCalibratorInport32;
-  uint8_T TmpRTBAtCalibratorInport42;
-  uint8_T TmpRTBAtCalibratorInport52;
-  uint8_T TmpRTBAtCalibratorInport58;
+  uint8_T TmpRTBAtCalibratorInport33;
+  uint8_T TmpRTBAtCalibratorInport43;
+  uint8_T TmpRTBAtCalibratorInport53;
   uint8_T TmpRTBAtCalibratorInport59;
+  uint8_T TmpRTBAtCalibratorInport60;
   uint8_T shift_factor;                // '<Root>/Calibrator'
   uint8_T shift_factor_c;              // '<Root>/Calibrator'
   uint8_T shift_factor_k;              // '<Root>/Calibrator'
@@ -170,12 +170,13 @@ struct B_motion_controller_c_T {
   boolean_T TmpRTBAtCalibratorInport2;
   boolean_T TmpRTBAtCalibratorInport3;
   boolean_T TmpRTBAtCalibratorInport4;
-  boolean_T TmpRTBAtCalibratorInport53;
+  boolean_T TmpRTBAtCalibratorInport5;
   boolean_T TmpRTBAtCalibratorInport54;
   boolean_T TmpRTBAtCalibratorInport55;
   boolean_T TmpRTBAtCalibratorInport56;
   boolean_T TmpRTBAtCalibratorInport57;
-  boolean_T TmpRTBAtCalibratorInport62;
+  boolean_T TmpRTBAtCalibratorInport58;
+  boolean_T TmpRTBAtCalibratorInport63;
   boolean_T finish;                    // '<Root>/Calibrator'
   boolean_T enable_verbosity;          // '<Root>/Calibrator'
   boolean_T has_hall_sens;             // '<Root>/Calibrator'
@@ -199,11 +200,11 @@ struct DW_motion_controller_f_T {
   FOCOutputs RateTransition2_Buf0;     // '<Root>/Rate Transition2'
   FOCOutputs RateTransition2_Buf1;     // '<Root>/Rate Transition2'
   FOCOutputs RateTransition2_Buf2;     // '<Root>/Rate Transition2'
-  void* TmpRTBAtCalibratorInport23_SEMAPHORE;// synthesized block
-  void* TmpRTBAtCalibratorInport33_SEMAPHORE;// synthesized block
-  void* TmpRTBAtCalibratorInport43_SEMAPHORE;// synthesized block
-  void* TmpRTBAtCalibratorInport5_SEMAPHORE;// synthesized block
-  void* TmpRTBAtCalibratorInport73_SEMAPHORE;// synthesized block
+  void* TmpRTBAtCalibratorInport24_SEMAPHORE;// synthesized block
+  void* TmpRTBAtCalibratorInport34_SEMAPHORE;// synthesized block
+  void* TmpRTBAtCalibratorInport44_SEMAPHORE;// synthesized block
+  void* TmpRTBAtCalibratorInport6_SEMAPHORE;// synthesized block
+  void* TmpRTBAtCalibratorInport74_SEMAPHORE;// synthesized block
   void* RateTransition1_6_SEMAPHORE;   // '<Root>/Rate Transition1'
   void* RateTransition3_6_SEMAPHORE;   // '<Root>/Rate Transition3'
   void* RateTransition_3_SEMAPHORE;    // '<Root>/Rate Transition'
@@ -217,10 +218,9 @@ struct DW_motion_controller_f_T {
   void* TmpRTBAtBusCreatorOutport1_SEMAPHORE;// synthesized block
   void* Transitionto1ms_SEMAPHORE;     // '<Root>/Transition to 1ms'
   volatile real32_T ConfigurationParameters_Buffer0;// synthesized block
-  volatile real32_T TmpRTBAtCalibratorInport19_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport20_Buffer0;// synthesized block
-  volatile real32_T TmpRTBAtCalibratorInport22_Buffer0;// synthesized block
-  volatile real32_T TmpRTBAtCalibratorInport24_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport21_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport23_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport25_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport26_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport27_Buffer0;// synthesized block
@@ -228,7 +228,7 @@ struct DW_motion_controller_f_T {
   volatile real32_T TmpRTBAtCalibratorInport29_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport30_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport31_Buffer0;// synthesized block
-  volatile real32_T TmpRTBAtCalibratorInport34_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport32_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport35_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport36_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport37_Buffer0;// synthesized block
@@ -236,7 +236,7 @@ struct DW_motion_controller_f_T {
   volatile real32_T TmpRTBAtCalibratorInport39_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport40_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport41_Buffer0;// synthesized block
-  volatile real32_T TmpRTBAtCalibratorInport44_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport42_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport45_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport46_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport47_Buffer0;// synthesized block
@@ -244,7 +244,7 @@ struct DW_motion_controller_f_T {
   volatile real32_T TmpRTBAtCalibratorInport49_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport50_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport51_Buffer0;// synthesized block
-  volatile real32_T TmpRTBAtCalibratorInport63_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport52_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport64_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport65_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport66_Buffer0;// synthesized block
@@ -254,6 +254,7 @@ struct DW_motion_controller_f_T {
   volatile real32_T TmpRTBAtCalibratorInport70_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport71_Buffer0;// synthesized block
   volatile real32_T TmpRTBAtCalibratorInport72_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport73_Buffer0;// synthesized block
   real32_T RateTransition1_6_Buf0[3];  // '<Root>/Rate Transition1'
   real32_T RateTransition1_6_Buf1[3];  // '<Root>/Rate Transition1'
   real32_T RateTransition1_6_Buf2[3];  // '<Root>/Rate Transition1'
@@ -311,36 +312,36 @@ struct DW_motion_controller_f_T {
   volatile real32_T RateTransition_69_Buffer0;// '<Root>/Rate Transition'
   volatile real32_T RateTransition_74_Buffer0;// '<Root>/Rate Transition'
   volatile real32_T RateTransition_75_Buffer0;// '<Root>/Rate Transition'
-  volatile real32_T TmpRTBAtCalibratorInport18_Buffer0;// synthesized block
-  volatile uint32_T TmpRTBAtCalibratorInport21_Buffer0;// synthesized block
+  volatile real32_T TmpRTBAtCalibratorInport19_Buffer0;// synthesized block
+  volatile uint32_T TmpRTBAtCalibratorInport22_Buffer0;// synthesized block
   volatile uint32_T RateTransition_4_Buffer0;// '<Root>/Rate Transition'
   volatile uint32_T RateTransition_9_Buffer0;// '<Root>/Rate Transition'
-  ControlModes TmpRTBAtCalibratorInport23_Buf[3];// synthesized block
-  ControlModes TmpRTBAtCalibratorInport33_Buf[3];// synthesized block
-  ControlModes TmpRTBAtCalibratorInport43_Buf[3];// synthesized block
-  ControlModes TmpRTBAtCalibratorInport5_Buf[3];// synthesized block
+  ControlModes TmpRTBAtCalibratorInport24_Buf[3];// synthesized block
+  ControlModes TmpRTBAtCalibratorInport34_Buf[3];// synthesized block
+  ControlModes TmpRTBAtCalibratorInport44_Buf[3];// synthesized block
+  ControlModes TmpRTBAtCalibratorInport6_Buf[3];// synthesized block
   ControlModes RateTransition_11_Buf[3];// '<Root>/Rate Transition'
   ControlModes RateTransition_21_Buf[3];// '<Root>/Rate Transition'
   ControlModes RateTransition_31_Buf[3];// '<Root>/Rate Transition'
-  ReferenceEncoder TmpRTBAtCalibratorInport73_Buf[3];// synthesized block
+  ReferenceEncoder TmpRTBAtCalibratorInport74_Buf[3];// synthesized block
   ReferenceEncoder RateTransition_61_Buf[3];// '<Root>/Rate Transition'
   EstimationVelocityModes RateTransition_3_Buf[3];// '<Root>/Rate Transition'
   CalibrationTypes Flags_Buf[3];       // synthesized block
-  volatile int16_T TmpRTBAtCalibratorInport60_Buffer0;// synthesized block
   volatile int16_T TmpRTBAtCalibratorInport61_Buffer0;// synthesized block
+  volatile int16_T TmpRTBAtCalibratorInport62_Buffer0;// synthesized block
   volatile int16_T RateTransition_48_Buffer0;// '<Root>/Rate Transition'
   volatile int16_T RateTransition_49_Buffer0;// '<Root>/Rate Transition'
   volatile int16_T ConfigurationParameters_Buffer0_a;// synthesized block
-  int8_T TmpRTBAtCalibratorInport23_LstBufWR;// synthesized block
-  int8_T TmpRTBAtCalibratorInport23_RDBuf;// synthesized block
-  int8_T TmpRTBAtCalibratorInport33_LstBufWR;// synthesized block
-  int8_T TmpRTBAtCalibratorInport33_RDBuf;// synthesized block
-  int8_T TmpRTBAtCalibratorInport43_LstBufWR;// synthesized block
-  int8_T TmpRTBAtCalibratorInport43_RDBuf;// synthesized block
-  int8_T TmpRTBAtCalibratorInport5_LstBufWR;// synthesized block
-  int8_T TmpRTBAtCalibratorInport5_RDBuf;// synthesized block
-  int8_T TmpRTBAtCalibratorInport73_LstBufWR;// synthesized block
-  int8_T TmpRTBAtCalibratorInport73_RDBuf;// synthesized block
+  int8_T TmpRTBAtCalibratorInport24_LstBufWR;// synthesized block
+  int8_T TmpRTBAtCalibratorInport24_RDBuf;// synthesized block
+  int8_T TmpRTBAtCalibratorInport34_LstBufWR;// synthesized block
+  int8_T TmpRTBAtCalibratorInport34_RDBuf;// synthesized block
+  int8_T TmpRTBAtCalibratorInport44_LstBufWR;// synthesized block
+  int8_T TmpRTBAtCalibratorInport44_RDBuf;// synthesized block
+  int8_T TmpRTBAtCalibratorInport6_LstBufWR;// synthesized block
+  int8_T TmpRTBAtCalibratorInport6_RDBuf;// synthesized block
+  int8_T TmpRTBAtCalibratorInport74_LstBufWR;// synthesized block
+  int8_T TmpRTBAtCalibratorInport74_RDBuf;// synthesized block
   int8_T RateTransition1_6_LstBufWR;   // '<Root>/Rate Transition1'
   int8_T RateTransition1_6_RDBuf;      // '<Root>/Rate Transition1'
   int8_T RateTransition3_6_LstBufWR;   // '<Root>/Rate Transition3'
@@ -365,11 +366,11 @@ struct DW_motion_controller_f_T {
   int8_T TmpRTBAtBusCreatorOutport1_RDBuf;// synthesized block
   int8_T Transitionto1ms_LstBufWR;     // '<Root>/Transition to 1ms'
   int8_T Transitionto1ms_RDBuf;        // '<Root>/Transition to 1ms'
-  volatile uint8_T TmpRTBAtCalibratorInport32_Buffer0;// synthesized block
-  volatile uint8_T TmpRTBAtCalibratorInport42_Buffer0;// synthesized block
-  volatile uint8_T TmpRTBAtCalibratorInport52_Buffer0;// synthesized block
-  volatile uint8_T TmpRTBAtCalibratorInport58_Buffer0;// synthesized block
+  volatile uint8_T TmpRTBAtCalibratorInport33_Buffer0;// synthesized block
+  volatile uint8_T TmpRTBAtCalibratorInport43_Buffer0;// synthesized block
+  volatile uint8_T TmpRTBAtCalibratorInport53_Buffer0;// synthesized block
   volatile uint8_T TmpRTBAtCalibratorInport59_Buffer0;// synthesized block
+  volatile uint8_T TmpRTBAtCalibratorInport60_Buffer0;// synthesized block
   volatile uint8_T RateTransition_20_Buffer0;// '<Root>/Rate Transition'
   volatile uint8_T RateTransition_30_Buffer0;// '<Root>/Rate Transition'
   volatile uint8_T RateTransition_40_Buffer0;// '<Root>/Rate Transition'
@@ -379,12 +380,13 @@ struct DW_motion_controller_f_T {
   volatile boolean_T TmpRTBAtCalibratorInport2_Buffer0;// synthesized block
   volatile boolean_T TmpRTBAtCalibratorInport3_Buffer0;// synthesized block
   volatile boolean_T TmpRTBAtCalibratorInport4_Buffer0;// synthesized block
-  volatile boolean_T TmpRTBAtCalibratorInport53_Buffer0;// synthesized block
+  volatile boolean_T TmpRTBAtCalibratorInport5_Buffer0;// synthesized block
   volatile boolean_T TmpRTBAtCalibratorInport54_Buffer0;// synthesized block
   volatile boolean_T TmpRTBAtCalibratorInport55_Buffer0;// synthesized block
   volatile boolean_T TmpRTBAtCalibratorInport56_Buffer0;// synthesized block
   volatile boolean_T TmpRTBAtCalibratorInport57_Buffer0;// synthesized block
-  volatile boolean_T TmpRTBAtCalibratorInport62_Buffer0;// synthesized block
+  volatile boolean_T TmpRTBAtCalibratorInport58_Buffer0;// synthesized block
+  volatile boolean_T TmpRTBAtCalibratorInport63_Buffer0;// synthesized block
   volatile boolean_T RateTransition_41_Buffer0;// '<Root>/Rate Transition'
   volatile boolean_T RateTransition_42_Buffer0;// '<Root>/Rate Transition'
   volatile boolean_T RateTransition_43_Buffer0;// '<Root>/Rate Transition'
