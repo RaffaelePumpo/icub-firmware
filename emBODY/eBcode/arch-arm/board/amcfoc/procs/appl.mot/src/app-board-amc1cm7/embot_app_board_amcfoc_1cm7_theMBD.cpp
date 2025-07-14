@@ -1080,6 +1080,10 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::loadCurrents(embot::hw::MOTOR
 
 void embot::app::board::amcfoc::cm7::theMBD::Impl::updatePosition(embot::hw::MOTOR m)
 {
+    #warning TODO: fill in _items teh values of counter and indexcounter
+    // must be retrieved by embot::hw::motor::bldc::something(counter, indexcounter)
+    // probably there is one already
+    // if not we add it
     _items[embot::core::tointegral(m)].hallstatus = embot::hw::motor::bldc::hall(m);    
     // the following two must be verified carefully. previous implementation used the following:
     // - electical angle uses number of poles, so: BE SURE WE USE THEM ....
@@ -1131,8 +1135,10 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::FOC(embot::hw::MOTOR m)
         uint8_t hall = _items[embot::core::tointegral(m)].hallstatus;
         float electricalangle = _items[embot::core::tointegral(m)].electricalangle;
         float mechanicalangle = _items[embot::core::tointegral(m)].position;
-        
-        input[embot::core::tointegral(m)].load(electricalangle, _items[embot::core::tointegral(m)].currents, mechanicalangle, hall); 
+        embot::app::bldc::mbd::interface::IO2::Qenc qe {1, 2};
+            #warning TODO: fill Qenc
+            
+        input[embot::core::tointegral(m)].load(electricalangle, _items[embot::core::tointegral(m)].currents, mechanicalangle, hall, qe); 
     }
     
     embot::app::bldc::mbd::interface::foc(input, output);

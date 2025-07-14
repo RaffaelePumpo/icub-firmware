@@ -513,6 +513,9 @@ namespace embot::app::bldc::mbd::interface {
         input->SensorData[motor].motorsensors.Iabc[2] = i.currents.w;
         input->SensorData[motor].motorsensors.qencoder.rotor_angle = i.mechanicalangle;
         input->SensorData[motor].motorsensors.hallABC = i.hall;
+        input->SensorData[motor].motorsensors.qencoder.counter = i.qenc.counter;
+        input->SensorData[motor].motorsensors.qencoder.Idx_counter = i.qenc.indexcounter;
+        //input->SensorData[motor].motorsensors.qencoder.offset = 0; // stays 0 because it is actually a value coing from motor_config message
     }
     
     void IO2::get(FOCoutput &o, uint8_t motor)
@@ -550,6 +553,7 @@ namespace embot::app::bldc::mbd::interface {
             } break; 
             case embot::prot::can::motor::periodic::CMD::ADDITIONAL_STATUS:
             {
+                #warning TODO: verify why ADDITIONAL_STATUS is not sent.......................
                 r = false;
             } break;                
         }
