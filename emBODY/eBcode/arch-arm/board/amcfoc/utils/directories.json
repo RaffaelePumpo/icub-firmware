@@ -106,6 +106,15 @@
                 "*.h"
             ]
         },
+                {
+            "source_directory": "Calibrator",
+            "source_directory_parent": "ert",
+            "target_directory": "Calibrator",
+            "files": [
+                "*.cpp",
+                "*.h"
+            ]
+        },
         {
             "source_directory": "src",
             "source_directory_parent": "code_replacement",
