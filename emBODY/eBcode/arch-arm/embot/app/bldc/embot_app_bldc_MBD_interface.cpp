@@ -558,7 +558,11 @@ namespace embot::app::bldc::mbd::interface {
             } break;   
             case embot::prot::can::motor::periodic::CMD::DEBUG:
             {
+#if defined(DEBUG_canQENCemission)
+                r = true;
+#else
                 r = output->Flags_d[motor].calibration_done;
+#endif                
             } break;             
         }
         
@@ -617,9 +621,13 @@ namespace embot::app::bldc::mbd::interface {
 
     void IO2::get(canDEBUGqenccalibresult &info, uint8_t motor) const
     {
+#if defined(DEBUG_canQENCemission)
+        info.calibrationdone = true;
+        info.offset = 255 + 3;
+#else        
         info.calibrationdone = get_output()->Flags_d[motor].calibration_done;
-        info.offset = get_output()->SensorDataOut[motor].motorsensors.qencoder.offset;
-        
+        info.offset = get_output()->SensorDataOut[motor].motorsensors.qencoder.offset;   
+#endif        
     }   
     
     

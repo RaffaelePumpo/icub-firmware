@@ -285,13 +285,13 @@ bool embot::app::bldc::theMC2agent::Impl::loadSIG(std::vector<embot::prot::can::
             if(true == cc.calibrationdone)
             {
                 // ok, we can emit. but we should do it every 1 sec.
-                static size_t count {0};
-                constexpr size_t decimation {1000};
+                static std::array<size_t, 2> counts {0};
+                constexpr size_t decimation {5000};
                 
-                count++;
-                if(count >= decimation)
+                counts[embot::core::tointegral(m)]++;
+                if(counts[embot::core::tointegral(m)] >= decimation)
                 {
-                    count = 0;
+                    counts[embot::core::tointegral(m)] = 0;
                     
                     // we can surely emit                   
                     emitted = true;                    
