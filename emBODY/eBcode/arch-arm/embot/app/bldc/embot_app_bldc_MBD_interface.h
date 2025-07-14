@@ -86,6 +86,13 @@ namespace embot::app::bldc::mbd::interface {
             uint32_t motorfaultstate {0};
             canADDITIONALSTATUSinfo() = default;            
         };
+        
+        struct canDEBUGqenccalibresult
+        {
+            int16_t offset {0};
+            bool calibrationdone {false};
+            canDEBUGqenccalibresult() = default;            
+        };        
 
         struct Qenc
         {
@@ -166,7 +173,8 @@ namespace embot::app::bldc::mbd::interface {
         void get(canFOCinfo &info, uint8_t motor) const;
         void get(canSTATUSinfo &info, uint8_t motor) const;        
         float get_temperature(uint8_t motor) const;
-        void get(FOCoutput &o, uint8_t motor);
+        void get(FOCoutput &o, uint8_t motor) const;
+        void get(canDEBUGqenccalibresult &info, uint8_t motor) const;
 
         void get_current_limits(uint8_t motor, embot::app::bldc::mbd::interface::SupervisorInputLimits &cl);
         void get_current_pid(uint8_t motor, embot::app::bldc::mbd::interface::PID &pid);

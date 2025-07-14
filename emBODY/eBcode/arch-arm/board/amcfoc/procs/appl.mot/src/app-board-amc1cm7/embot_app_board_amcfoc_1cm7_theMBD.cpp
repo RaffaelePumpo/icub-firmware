@@ -346,6 +346,8 @@ struct embot::app::board::amcfoc::cm7::theMBD::Impl
         embot::hw::motor::bldc::HallStatus hallstatus {}; 
         embot::hw::motor::bldc::Angle electricalangle {}; 
         embot::hw::motor::bldc::Angle position {};  
+        embot::hw::motor::bldc::Angle qencangle {0};
+        embot::hw::motor::bldc::Angle qencangleoflastindex {0};
         bool currOK {false};            
     }; 
 
@@ -1080,16 +1082,15 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::loadCurrents(embot::hw::MOTOR
 
 void embot::app::board::amcfoc::cm7::theMBD::Impl::updatePosition(embot::hw::MOTOR m)
 {
-    #warning TODO: fill in _items teh values of counter and indexcounter
-    // must be retrieved by embot::hw::motor::bldc::something(counter, indexcounter)
-    // probably there is one already
-    // if not we add it
     _items[embot::core::tointegral(m)].hallstatus = embot::hw::motor::bldc::hall(m);    
     // the following two must be verified carefully. previous implementation used the following:
     // - electical angle uses number of poles, so: BE SURE WE USE THEM ....
     // - position is computed incrementally, so: KEEP a static variable for it ....        
     _items[embot::core::tointegral(m)].electricalangle = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::hall_electrical);
     _items[embot::core::tointegral(m)].position = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::hall_mechanical);   
+
+    _items[embot::core::tointegral(m)].qencangle = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::quadenc_mechanical);
+    _items[embot::core::tointegral(m)].qencangleoflastindex = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::quadenc_mechanical_lastindex);
 }
 
 void embot::app::board::amcfoc::cm7::theMBD::Impl::FOC(embot::hw::MOTOR m)
@@ -1135,8 +1136,9 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::FOC(embot::hw::MOTOR m)
         uint8_t hall = _items[embot::core::tointegral(m)].hallstatus;
         float electricalangle = _items[embot::core::tointegral(m)].electricalangle;
         float mechanicalangle = _items[embot::core::tointegral(m)].position;
-        embot::app::bldc::mbd::interface::IO2::Qenc qe {1, 2};
-            #warning TODO: fill Qenc
+        embot::app::bldc::mbd::interface::IO2::Qenc qe {0};
+        qe.counter = _items[embot::core::tointegral(m)].qencangle;
+        qe.indexcounter = _items[embot::core::tointegral(m)].qencangleoflastindex;
             
         input[embot::core::tointegral(m)].load(electricalangle, _items[embot::core::tointegral(m)].currents, mechanicalangle, hall, qe); 
     }
