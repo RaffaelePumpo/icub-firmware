@@ -35,8 +35,10 @@
 //#include "embot_app_application_theCANtracer.h"
 
 
-// #define DEBUG_print_decoded_CAN_frames
+ #define DEBUG_print_decoded_CAN_frames
 // #define DEBUG_print_decoded_CAN_frames_periodic
+ #define DEBUG_print_decoded_CAN_frames_periodic_only_settarget
+
 
 // --------------------------------------------------------------------------------------------------------------------
 // - pimpl: private implementation (see scott meyers: item 22 of effective modern c++, item 31 of effective c++
@@ -334,8 +336,13 @@ bool embot::app::bldc::theMC2agent::Impl::loadSIG(std::vector<embot::prot::can::
 bool embot::app::bldc::theMC2agent::Impl::get(const embot::prot::can::motor::periodic::Message_EMSTO2FOC_DESIRED_CURRENT::Info &info)
 {
     
-#if defined(DEBUG_print_decoded_CAN_frames_periodic)
+#if defined(DEBUG_print_decoded_CAN_frames_periodic_only_settarget)
+	  static size_t n {0};
+	  if(n<10)
+		{
     embot::core::print(info.to_string());
+		}
+		n++;
 #endif
     
     // 1. we have info about all motors, so i must extract the targets of the two motors i need according to the address   

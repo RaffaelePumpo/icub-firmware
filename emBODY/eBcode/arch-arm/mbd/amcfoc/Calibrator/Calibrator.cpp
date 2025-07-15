@@ -33,6 +33,7 @@ const uint8_T Calibrator_IN_velocity_check = 6U;
 // System initialize for referenced model: 'Calibrator'
 void Calibrator_Init(void)
 {
+	return;
   // Start for RateTransition generated from: '<Root>/Merge1'
   rtw_mutex_init();
 }
@@ -56,6 +57,7 @@ void CalibratorTID0(real32_T *rty_SensorDataCalibration_driversensors_Vcc,
                     uint8_T *rty_SensorDataCalibration_motorsensors_hallABC,
                     DW_Calibrator_f_T *localDW)
 {
+	return;
   int32_T tmp;
 
   // RateTransition generated from: '<Root>/Merge1'
@@ -401,6 +403,7 @@ void CalibratorTID1(const CalibrationTypes *rtu_Flags_calibration_type, const
                     *rty_FocInputsCalibration_control_outer_outputs_current_limit,
                     B_Calibrator_c_T *localB, DW_Calibrator_f_T *localDW)
 {
+	return;
   int32_T tmp_1;
   real32_T Idx_counter;
   real32_T Vcc;
@@ -1331,6 +1334,7 @@ void CalibratorTID1(const CalibrationTypes *rtu_Flags_calibration_type, const
 // Termination for referenced model: 'Calibrator'
 void Calibrator_Term(void)
 {
+	return;
   // Terminate for RateTransition generated from: '<Root>/Merge1'
   rtw_mutex_destroy();
 }
