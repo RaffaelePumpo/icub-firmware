@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 3.14
+// Model version                  : 4.2
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Fri Jun  6 14:55:37 2025
+// C/C++ source code generated on : Thu Jul 10 11:56:46 2025
 //
 #include "mul_s32_sat.h"
 #include "mul_wide_s32.h"
