@@ -3,21 +3,21 @@
 // granting, nonprofit, education, and research organizations only. Not
 // for commercial or industrial use.
 //
-// File: calibrator_types.h
+// File: Calibrator_types.h
 //
-// Code generated for Simulink model 'calibrator'.
+// Code generated for Simulink model 'Calibrator'.
 //
-// Model version                  : 1.99
+// Model version                  : 1.110
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 14:12:13 2025
+// C/C++ source code generated on : Wed Jul 16 15:20:31 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef calibrator_types_h_
-#define calibrator_types_h_
+#ifndef Calibrator_types_h_
+#define Calibrator_types_h_
 #include "rtwtypes.h"
 #ifndef DEFINED_TYPEDEF_FOR_DriverSensors_
 #define DEFINED_TYPEDEF_FOR_DriverSensors_
@@ -359,7 +359,7 @@ struct FOCSlowInputs
 };
 
 #endif
-#endif                                 // calibrator_types_h_
+#endif                                 // Calibrator_types_h_
 
 //
 // File trailer for generated code.

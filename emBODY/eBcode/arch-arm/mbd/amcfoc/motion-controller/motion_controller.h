@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.37
+// Model version                  : 5.40
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 14:12:22 2025
+// C/C++ source code generated on : Wed Jul 16 15:20:43 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,7 +20,7 @@
 #define motion_controller_h_
 #include "rtwtypes.h"
 #include "motion_controller_types.h"
-#include "calibrator.h"
+#include "Calibrator.h"
 #include "control_foc.h"
 #include "estimation_velocity.h"
 #include "filter_current.h"
@@ -39,7 +39,6 @@ struct B_motion_controller_c_T {
   Targets targets;                     // '<Root>/Motor Supervisor'
   real32_T velocity;                   // '<S1>/Motor Velocity Estimator'
   real32_T velocity_g;                 // '<S1>/Joint Velocity Estimator'
-  boolean_T finish;                    // '<Root>/Model'
 };
 
 // Block states (default storage) for model 'motion_controller'
@@ -60,24 +59,25 @@ struct DW_motion_controller_f_T {
   void* RateTransition4_SEMAPHORE;     // '<Root>/Rate Transition4'
   void* Flags_SEMAPHORE;               // synthesized block
   void* RateTransition5_SEMAPHORE;     // '<Root>/Rate Transition5'
+  void* RateTransition3_SEMAPHORE;     // '<Root>/Rate Transition3'
   void* RateTransition2_SEMAPHORE;     // '<Root>/Rate Transition2'
   void* RateTransition1_SEMAPHORE;     // '<Root>/Rate Transition1'
   void* Transitionto1ms_SEMAPHORE;     // '<Root>/Transition to 1ms'
-  void* RateTransition3_SEMAPHORE;     // '<Root>/Rate Transition3'
   int8_T RateTransition4_LstBufWR;     // '<Root>/Rate Transition4'
   int8_T RateTransition4_RDBuf;        // '<Root>/Rate Transition4'
   int8_T Flags_LstBufWR;               // synthesized block
   int8_T Flags_RDBuf;                  // synthesized block
   int8_T RateTransition5_LstBufWR;     // '<Root>/Rate Transition5'
   int8_T RateTransition5_RDBuf;        // '<Root>/Rate Transition5'
+  int8_T RateTransition3_LstBufWR;     // '<Root>/Rate Transition3'
+  int8_T RateTransition3_RDBuf;        // '<Root>/Rate Transition3'
   int8_T RateTransition2_LstBufWR;     // '<Root>/Rate Transition2'
   int8_T RateTransition2_RDBuf;        // '<Root>/Rate Transition2'
   int8_T RateTransition1_LstBufWR;     // '<Root>/Rate Transition1'
   int8_T RateTransition1_RDBuf;        // '<Root>/Rate Transition1'
   int8_T Transitionto1ms_LstBufWR;     // '<Root>/Transition to 1ms'
   int8_T Transitionto1ms_RDBuf;        // '<Root>/Transition to 1ms'
-  int8_T RateTransition3_LstBufWR;     // '<Root>/Rate Transition3'
-  int8_T RateTransition3_RDBuf;        // '<Root>/Rate Transition3'
+  MdlrefDW_Calibrator_T Model_InstanceData;// '<Root>/Model'
   MdlrefDW_control_foc_T FOC_InstanceData;// '<Root>/FOC'
   MdlrefDW_estimation_velocity_T MotorVelocityEstimator_InstanceData;// '<S1>/Motor Velocity Estimator' 
   MdlrefDW_filter_current_T CurrentFilter_InstanceData;// '<S1>/Current Filter'

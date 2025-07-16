@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.37
+// Model version                  : 5.40
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 14:12:22 2025
+// C/C++ source code generated on : Wed Jul 16 15:20:43 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -22,7 +22,7 @@
 #include <cmath>
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
-#include "calibrator.h"
+#include "Calibrator.h"
 #include "control_foc.h"
 #include "estimation_velocity.h"
 #include "filter_current.h"
@@ -43,6 +43,9 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   // Start for RateTransition: '<Root>/Rate Transition5'
   rtw_mutex_init();
 
+  // Start for RateTransition: '<Root>/Rate Transition3'
+  rtw_mutex_init();
+
   // Start for RateTransition: '<Root>/Rate Transition2'
   rtw_mutex_init();
 
@@ -50,9 +53,6 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   rtw_mutex_init();
 
   // Start for RateTransition: '<Root>/Transition to 1ms'
-  rtw_mutex_init();
-
-  // Start for RateTransition: '<Root>/Rate Transition3'
   rtw_mutex_init();
 
   // SystemInitialize for ModelReference: '<S1>/Current Filter'
@@ -66,6 +66,9 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
 
   // SystemInitialize for ModelReference: '<Root>/FOC'
   control_foc_Init(&(localDW->FOC_InstanceData.rtdw));
+
+  // SystemInitialize for ModelReference generated from: '<Root>/Model'
+  Calibrator_Init(&(localDW->Model_InstanceData.rtdw));
 
   // SystemInitialize for ModelReference generated from: '<Root>/Motor Supervisor' 
   supervisor_Init(&localB->targets, rty_ActuatorsConfiguration, rty_Flags,
@@ -87,6 +90,9 @@ void motion_controller_Enable(DW_motion_controller_f_T *localDW)
 // Disable for referenced model: 'motion_controller'
 void motion_controller_Disable(DW_motion_controller_f_T *localDW)
 {
+  // Disable for ModelReference generated from: '<Root>/Model'
+  Calibrator_Disable(&(localDW->Model_InstanceData.rtdw));
+
   // Disable for ModelReference generated from: '<Root>/Position velocity cascade' 
   position_velocity_cascade_Disable
     (&(localDW->Positionvelocitycascade_InstanceData.rtb),
@@ -105,6 +111,8 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
 {
   // local block i/o variables
   SensorsData rtb_Model_o2;
+  boolean_T rtb_Model_o1;
+  ActuatorConfiguration rtb_RateTransition3;
   FOCSlowInputs rtb_RateTransition5;
   Flags rtb_Flags;
   SensorsData rtb_BusAssignment;
@@ -258,12 +266,21 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   rtb_RateTransition5 = localDW->RateTransition5_Buf
     [localDW->RateTransition5_RDBuf];
 
+  // RateTransition: '<Root>/Rate Transition3'
+  rtw_mutex_lock();
+  localDW->RateTransition3_RDBuf = localDW->RateTransition3_LstBufWR;
+  rtw_mutex_unlock();
+  rtb_RateTransition3 = localDW->RateTransition3_Buf
+    [localDW->RateTransition3_RDBuf];
+
   // ModelReference generated from: '<Root>/Model'
-  calibrator(&rtb_Flags, &rtb_BusAssignment, &rtb_RateTransition5, &rtb_Model_o2,
-             &localB->Model_o3);
+  Calibrator(&rtb_Flags, &rtb_BusAssignment, &rtb_RateTransition5,
+             &rtb_RateTransition3, &rtb_Model_o1, &rtb_Model_o2,
+             &localB->Model_o3, &(localDW->Model_InstanceData.rtb),
+             &(localDW->Model_InstanceData.rtdw));
 
   // ModelReference: '<Root>/FOC'
-  control_foc(&rtb_Model_o2, &localB->Model_o3, &localB->finish, rty_FOCOutputs,
+  control_foc(&rtb_Model_o2, &localB->Model_o3, &rtb_Model_o1, rty_FOCOutputs,
               &(localDW->FOC_InstanceData.rtb), &(localDW->FOC_InstanceData.rtdw),
               &(localDW->FOC_InstanceData.rtzce));
 
@@ -365,11 +382,6 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   localDW->Transitionto1ms_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Transition to 1ms'
-
-  // RateTransition: '<Root>/Rate Transition3'
-  rtw_mutex_lock();
-  localDW->RateTransition3_RDBuf = localDW->RateTransition3_LstBufWR;
-  rtw_mutex_unlock();
 }
 
 // Output and update for referenced model: 'motion_controller'
@@ -614,6 +626,9 @@ void motion_controller_Term(DW_motion_controller_f_T *localDW)
   // Terminate for RateTransition: '<Root>/Rate Transition5'
   rtw_mutex_destroy();
 
+  // Terminate for RateTransition: '<Root>/Rate Transition3'
+  rtw_mutex_destroy();
+
   // Terminate for RateTransition: '<Root>/Rate Transition2'
   rtw_mutex_destroy();
 
@@ -621,9 +636,6 @@ void motion_controller_Term(DW_motion_controller_f_T *localDW)
   rtw_mutex_destroy();
 
   // Terminate for RateTransition: '<Root>/Transition to 1ms'
-  rtw_mutex_destroy();
-
-  // Terminate for RateTransition: '<Root>/Rate Transition3'
   rtw_mutex_destroy();
 
   // Terminate for ModelReference: '<S1>/Current Filter'
