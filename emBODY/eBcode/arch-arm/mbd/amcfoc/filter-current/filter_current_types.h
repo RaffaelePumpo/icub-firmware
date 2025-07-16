@@ -9,7 +9,7 @@
 //
 // Model version                  : 8.0
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 09:46:26 2025
+// C/C++ source code generated on : Wed Jul 16 11:07:11 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -24,6 +24,8 @@
 
 struct FOCOutputs
 {
+  boolean_T calibrationdone;
+
   // control effort (quadrature)
   real32_T Vq;
 

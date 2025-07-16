@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'control_foc'.
 //
-// Model version                  : 9.2
+// Model version                  : 9.3
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 09:46:13 2025
+// C/C++ source code generated on : Wed Jul 16 11:06:55 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -490,14 +490,9 @@ void FOCInnerLoop(const SensorsData *rtu_Sensors_Inport_1, const
 
     // Saturate: '<S1>/Saturation1'
     if (DProdOut > 100.0F) {
-      // BusCreator: '<S1>/Bus Creator'
-      rty_FOCOutputs->Vq = 100.0F;
+      DProdOut = 100.0F;
     } else if (DProdOut < -100.0F) {
-      // BusCreator: '<S1>/Bus Creator'
-      rty_FOCOutputs->Vq = -100.0F;
-    } else {
-      // BusCreator: '<S1>/Bus Creator'
-      rty_FOCOutputs->Vq = DProdOut;
+      DProdOut = -100.0F;
     }
 
     // End of Saturate: '<S1>/Saturation1'
@@ -530,14 +525,14 @@ void FOCInnerLoop(const SensorsData *rtu_Sensors_Inport_1, const
     //   Product: '<S1>/Divide'
     //   Sum: '<S1>/Sum4'
 
-    DProdOut = (rtb_SinCos_o1 - rtb_SinCos_o2) /
+    rtb_SinCos_o1 = (rtb_SinCos_o1 - rtb_SinCos_o2) /
       rtu_Sensors_Inport_1->driversensors.Vcc * 100.0F + 5.0F;
 
     // Saturate: '<S1>/Saturation'
-    if (DProdOut > 100.0F) {
-      DProdOut = 100.0F;
-    } else if (DProdOut < 0.0F) {
-      DProdOut = 0.0F;
+    if (rtb_SinCos_o1 > 100.0F) {
+      rtb_SinCos_o1 = 100.0F;
+    } else if (rtb_SinCos_o1 < 0.0F) {
+      rtb_SinCos_o1 = 0.0F;
     }
 
     // Sum: '<S1>/Sum1' incorporates:
@@ -557,12 +552,9 @@ void FOCInnerLoop(const SensorsData *rtu_Sensors_Inport_1, const
       rtb_Product = 0.0F;
     }
   } else {
-    // BusCreator: '<S1>/Bus Creator' incorporates:
-    //   Constant: '<S1>/Constant1'
-
-    rty_FOCOutputs->Vq = 0.0F;
-    rtb_Switch_c_idx_0 = 0.0F;
     DProdOut = 0.0F;
+    rtb_Switch_c_idx_0 = 0.0F;
+    rtb_SinCos_o1 = 0.0F;
     rtb_Product = 0.0F;
   }
 
@@ -573,8 +565,10 @@ void FOCInnerLoop(const SensorsData *rtu_Sensors_Inport_1, const
   //   Constant: '<S18>/Constant'
   //   Constant: '<S18>/Constant1'
 
+  rty_FOCOutputs->calibrationdone = true;
+  rty_FOCOutputs->Vq = DProdOut;
   rty_FOCOutputs->Vabc[0] = rtb_Switch_c_idx_0;
-  rty_FOCOutputs->Vabc[1] = DProdOut;
+  rty_FOCOutputs->Vabc[1] = rtb_SinCos_o1;
   rty_FOCOutputs->Vabc[2] = rtb_Product;
 
   // Outputs for Atomic SubSystem: '<S144>/Two inputs CRL'

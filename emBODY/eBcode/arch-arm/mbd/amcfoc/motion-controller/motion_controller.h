@@ -9,7 +9,7 @@
 //
 // Model version                  : 5.32
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 09:46:47 2025
+// C/C++ source code generated on : Wed Jul 16 10:20:29 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -25,8 +25,10 @@
 #include "filter_current.h"
 #include "supervisor.h"
 #include "position_velocity_cascade.h"
-#include "rtw_defines.h"
 #include "zero_crossing_types.h"
+
+// Includes for objects with custom storage classes
+#include "rtw_defines.h"
 
 // Block signals for model 'motion_controller'
 struct B_motion_controller_c_T {
@@ -81,11 +83,10 @@ extern void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs 
   rty_FOCOutputs, B_motion_controller_c_T *localB, DW_motion_controller_f_T
   *localDW);
 extern void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const
-  ReceivedEvents rtu_Events[MAX_EVENTS_PER_TICK], const ActuatorConfiguration
-  *rtu_InitConf, const JointData *rtu_JointData, EstimatedData
-  *rty_EstimatedData, Flags *rty_Flags, ActuatorConfiguration
-  *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
-  DW_motion_controller_f_T *localDW);
+  ReceivedEvents rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
+  JointData *rtu_JointData, EstimatedData *rty_EstimatedData, Flags *rty_Flags,
+  ActuatorConfiguration *rty_ActuatorsConfiguration, B_motion_controller_c_T
+  *localB, DW_motion_controller_f_T *localDW);
 extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 
 //-

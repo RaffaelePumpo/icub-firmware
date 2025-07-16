@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'control_foc'.
 //
-// Model version                  : 9.2
+// Model version                  : 9.3
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 09:46:13 2025
+// C/C++ source code generated on : Wed Jul 16 11:06:55 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,6 +20,7 @@
 #define control_foc_private_h_
 #include "rtwtypes.h"
 #include "zero_crossing_types.h"
+#include "control_foc.h"
 #include "control_foc_types.h"
 
 extern const real32_T rtCP_pooled_IgamRjjg0YgF[6];

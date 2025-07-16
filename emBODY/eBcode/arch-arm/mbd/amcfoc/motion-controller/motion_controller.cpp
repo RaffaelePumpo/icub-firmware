@@ -9,7 +9,7 @@
 //
 // Model version                  : 5.32
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 09:46:47 2025
+// C/C++ source code generated on : Wed Jul 16 10:20:29 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -21,7 +21,6 @@
 #include "rtw_mutex.h"
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
-#include "rtw_defines.h"
 #include "control_foc.h"
 #include "estimation_velocity.h"
 #include "filter_current.h"
@@ -175,9 +174,9 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
 
 // Output and update for referenced model: 'motion_controller'
 void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
-                 rtu_Events[MAX_EVENTS_PER_TICK], const ActuatorConfiguration
-                 *rtu_InitConf, const JointData *rtu_JointData, EstimatedData
-                 *rty_EstimatedData, Flags *rty_Flags, ActuatorConfiguration
+                 rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
+                 JointData *rtu_JointData, EstimatedData *rty_EstimatedData,
+                 Flags *rty_Flags, ActuatorConfiguration
                  *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
                  DW_motion_controller_f_T *localDW)
 {
