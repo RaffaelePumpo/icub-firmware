@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 4.71
+// Model version                  : 4.73
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 11:36:35 2025
+// C/C++ source code generated on : Wed Jul 16 15:45:08 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -73,10 +73,11 @@ static void supervisor_hardwareConfigMotor(uint8_T b_motor_id,
   ActuatorConfiguration *rty_ConfigurationParameters);
 static void supervisor_SetTarget(real32_T tg_velocity, real32_T tg_current,
   real32_T tg_voltage, Targets *rty_targets, DW_supervisor_f_T *localDW);
-static void supervisor_CheckCalibration(int16_T motor_config_rotor_index_offset,
-  boolean_T motor_config_use_index, const EstimatedData *rtu_EstimatedData,
-  const FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData,
-  Targets *rty_targets, Flags *rty_Flags, DW_supervisor_f_T *localDW);
+static void supervisor_CheckCalibration(boolean_T
+  motor_config_has_quadrature_encoder, int16_T motor_config_rotor_index_offset,
+  const EstimatedData *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs,
+  const SensorsData *rtu_SensorsData, Targets *rty_targets, Flags *rty_Flags,
+  DW_supervisor_f_T *localDW);
 
 // Function for Chart: '<Root>/Supervisor'
 static void supervisor_ResetTargets(Targets *rty_targets)
@@ -924,13 +925,14 @@ static void supervisor_SetTarget(real32_T tg_velocity, real32_T tg_current,
 }
 
 // Function for Chart: '<Root>/Supervisor'
-static void supervisor_CheckCalibration(int16_T motor_config_rotor_index_offset,
-  boolean_T motor_config_use_index, const EstimatedData *rtu_EstimatedData,
-  const FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData,
-  Targets *rty_targets, Flags *rty_Flags, DW_supervisor_f_T *localDW)
+static void supervisor_CheckCalibration(boolean_T
+  motor_config_has_quadrature_encoder, int16_T motor_config_rotor_index_offset,
+  const EstimatedData *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs,
+  const SensorsData *rtu_SensorsData, Targets *rty_targets, Flags *rty_Flags,
+  DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
-  if (motor_config_use_index) {
+  if (motor_config_has_quadrature_encoder) {
     // Chart: '<Root>/Supervisor'
     rty_Flags->calibration_done = false;
     if (motor_config_rotor_index_offset == -1) {
@@ -1093,9 +1095,9 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
         supervisor_hardwareConfigMotor(rtu_ReceivedEvents[ei].motor_id,
           rty_ConfigurationParameters);
         supervisor_CheckCalibration(rtu_ReceivedEvents[ei].
-          motor_config_content.rotor_index_offset, rtu_ReceivedEvents[ei].
-          motor_config_content.use_index, rtu_EstimatedData, rtu_ControlOutputs,
-          rtu_SensorsData, rty_targets, rty_Flags, localDW);
+          motor_config_content.has_quadrature_encoder, rtu_ReceivedEvents[ei].
+          motor_config_content.rotor_index_offset, rtu_EstimatedData,
+          rtu_ControlOutputs, rtu_SensorsData, rty_targets, rty_Flags, localDW);
         break;
 
        case EventTypes_SetTarget:
@@ -1214,8 +1216,8 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
           supervisor_hardwareConfigMotor(rtu_ReceivedEvents[ei].motor_id,
             rty_ConfigurationParameters);
           supervisor_CheckCalibration(rtu_ReceivedEvents[ei].
-            motor_config_content.rotor_index_offset, rtu_ReceivedEvents[ei].
-            motor_config_content.use_index, rtu_EstimatedData,
+            motor_config_content.has_quadrature_encoder, rtu_ReceivedEvents[ei].
+            motor_config_content.rotor_index_offset, rtu_EstimatedData,
             rtu_ControlOutputs, rtu_SensorsData, rty_targets, rty_Flags, localDW);
           break;
 
