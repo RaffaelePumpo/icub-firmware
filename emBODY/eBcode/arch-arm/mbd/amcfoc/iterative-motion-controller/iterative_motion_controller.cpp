@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.1
+// Model version                  : 4.4
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 11:23:44 2025
+// C/C++ source code generated on : Wed Jul 16 14:12:29 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -523,6 +523,8 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].Flags_l,
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                 ConfigurationParameters,
+                &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+                MotionController_o5,
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                   MotionController_InstanceData.rtb),
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].

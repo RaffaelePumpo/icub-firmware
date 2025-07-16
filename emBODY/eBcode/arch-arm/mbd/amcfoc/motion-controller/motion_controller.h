@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.34
+// Model version                  : 5.37
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 11:36:42 2025
+// C/C++ source code generated on : Wed Jul 16 14:12:22 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,6 +20,7 @@
 #define motion_controller_h_
 #include "rtwtypes.h"
 #include "motion_controller_types.h"
+#include "calibrator.h"
 #include "control_foc.h"
 #include "estimation_velocity.h"
 #include "filter_current.h"
@@ -32,36 +33,51 @@
 
 // Block signals for model 'motion_controller'
 struct B_motion_controller_c_T {
-  FOCSlowInputs RateTransition;        // '<Root>/Rate Transition'
+  FOCSlowInputs Model_o3;              // '<Root>/Model'
   SensorsData Transitionto1ms;         // '<Root>/Transition to 1ms'
   FOCOutputs RateTransition2;          // '<Root>/Rate Transition2'
   Targets targets;                     // '<Root>/Motor Supervisor'
   real32_T velocity;                   // '<S1>/Motor Velocity Estimator'
-  real32_T velocity_j;                 // '<S1>/Joint Velocity Estimator'
+  real32_T velocity_g;                 // '<S1>/Joint Velocity Estimator'
+  boolean_T finish;                    // '<Root>/Model'
 };
 
 // Block states (default storage) for model 'motion_controller'
 struct DW_motion_controller_f_T {
-  FOCSlowInputs RateTransition_Buf[3]; // '<Root>/Rate Transition'
+  FOCSlowInputs RateTransition5_Buf[3];// '<Root>/Rate Transition5'
   ActuatorConfiguration RateTransition4_Buf[3];// '<Root>/Rate Transition4'
+  ActuatorConfiguration RateTransition3_Buf[3];// '<Root>/Rate Transition3'
+  SensorsData RateTransition1_Buf0;    // '<Root>/Rate Transition1'
+  SensorsData RateTransition1_Buf1;    // '<Root>/Rate Transition1'
+  SensorsData RateTransition1_Buf2;    // '<Root>/Rate Transition1'
   SensorsData Transitionto1ms_Buf0;    // '<Root>/Transition to 1ms'
   SensorsData Transitionto1ms_Buf1;    // '<Root>/Transition to 1ms'
   SensorsData Transitionto1ms_Buf2;    // '<Root>/Transition to 1ms'
   FOCOutputs RateTransition2_Buf0;     // '<Root>/Rate Transition2'
   FOCOutputs RateTransition2_Buf1;     // '<Root>/Rate Transition2'
   FOCOutputs RateTransition2_Buf2;     // '<Root>/Rate Transition2'
+  Flags Flags_Buf[3];                  // synthesized block
   void* RateTransition4_SEMAPHORE;     // '<Root>/Rate Transition4'
-  void* RateTransition_SEMAPHORE;      // '<Root>/Rate Transition'
+  void* Flags_SEMAPHORE;               // synthesized block
+  void* RateTransition5_SEMAPHORE;     // '<Root>/Rate Transition5'
   void* RateTransition2_SEMAPHORE;     // '<Root>/Rate Transition2'
+  void* RateTransition1_SEMAPHORE;     // '<Root>/Rate Transition1'
   void* Transitionto1ms_SEMAPHORE;     // '<Root>/Transition to 1ms'
+  void* RateTransition3_SEMAPHORE;     // '<Root>/Rate Transition3'
   int8_T RateTransition4_LstBufWR;     // '<Root>/Rate Transition4'
   int8_T RateTransition4_RDBuf;        // '<Root>/Rate Transition4'
-  int8_T RateTransition_LstBufWR;      // '<Root>/Rate Transition'
-  int8_T RateTransition_RDBuf;         // '<Root>/Rate Transition'
+  int8_T Flags_LstBufWR;               // synthesized block
+  int8_T Flags_RDBuf;                  // synthesized block
+  int8_T RateTransition5_LstBufWR;     // '<Root>/Rate Transition5'
+  int8_T RateTransition5_RDBuf;        // '<Root>/Rate Transition5'
   int8_T RateTransition2_LstBufWR;     // '<Root>/Rate Transition2'
   int8_T RateTransition2_RDBuf;        // '<Root>/Rate Transition2'
+  int8_T RateTransition1_LstBufWR;     // '<Root>/Rate Transition1'
+  int8_T RateTransition1_RDBuf;        // '<Root>/Rate Transition1'
   int8_T Transitionto1ms_LstBufWR;     // '<Root>/Transition to 1ms'
   int8_T Transitionto1ms_RDBuf;        // '<Root>/Transition to 1ms'
+  int8_T RateTransition3_LstBufWR;     // '<Root>/Rate Transition3'
+  int8_T RateTransition3_RDBuf;        // '<Root>/Rate Transition3'
   MdlrefDW_control_foc_T FOC_InstanceData;// '<Root>/FOC'
   MdlrefDW_estimation_velocity_T MotorVelocityEstimator_InstanceData;// '<S1>/Motor Velocity Estimator' 
   MdlrefDW_filter_current_T CurrentFilter_InstanceData;// '<S1>/Current Filter'
@@ -89,8 +105,9 @@ extern void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs 
 extern void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const
   ReceivedEvents rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
   JointData *rtu_JointData, EstimatedData *rty_EstimatedData, Flags *rty_Flags,
-  ActuatorConfiguration *rty_ActuatorsConfiguration, B_motion_controller_c_T
-  *localB, DW_motion_controller_f_T *localDW);
+  ActuatorConfiguration *rty_ActuatorsConfiguration, SensorsData
+  *rty_SensorData_out, B_motion_controller_c_T *localB, DW_motion_controller_f_T
+  *localDW);
 extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 
 //-

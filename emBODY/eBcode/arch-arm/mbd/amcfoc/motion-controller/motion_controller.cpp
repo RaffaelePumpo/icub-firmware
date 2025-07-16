@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.34
+// Model version                  : 5.37
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 11:36:42 2025
+// C/C++ source code generated on : Wed Jul 16 14:12:22 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -22,6 +22,7 @@
 #include <cmath>
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
+#include "calibrator.h"
 #include "control_foc.h"
 #include "estimation_velocity.h"
 #include "filter_current.h"
@@ -36,13 +37,22 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   // Start for RateTransition: '<Root>/Rate Transition4'
   rtw_mutex_init();
 
-  // Start for RateTransition: '<Root>/Rate Transition'
+  // Start for RateTransition generated from: '<Root>/Model'
+  rtw_mutex_init();
+
+  // Start for RateTransition: '<Root>/Rate Transition5'
   rtw_mutex_init();
 
   // Start for RateTransition: '<Root>/Rate Transition2'
   rtw_mutex_init();
 
+  // Start for RateTransition: '<Root>/Rate Transition1'
+  rtw_mutex_init();
+
   // Start for RateTransition: '<Root>/Transition to 1ms'
+  rtw_mutex_init();
+
+  // Start for RateTransition: '<Root>/Rate Transition3'
   rtw_mutex_init();
 
   // SystemInitialize for ModelReference: '<S1>/Current Filter'
@@ -93,6 +103,10 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   *rty_FOCOutputs, B_motion_controller_c_T *localB, DW_motion_controller_f_T
   *localDW)
 {
+  // local block i/o variables
+  SensorsData rtb_Model_o2;
+  FOCSlowInputs rtb_RateTransition5;
+  Flags rtb_Flags;
   SensorsData rtb_BusAssignment;
   int32_T rtb_Product;
   real32_T rtb_Add;
@@ -231,17 +245,25 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   // End of Switch: '<S3>/Switch'
   // End of Outputs for SubSystem: '<Root>/Process Sensors'
 
-  // RateTransition: '<Root>/Rate Transition'
+  // RateTransition generated from: '<Root>/Model'
   rtw_mutex_lock();
-  localDW->RateTransition_RDBuf = localDW->RateTransition_LstBufWR;
+  localDW->Flags_RDBuf = localDW->Flags_LstBufWR;
   rtw_mutex_unlock();
+  rtb_Flags = localDW->Flags_Buf[localDW->Flags_RDBuf];
 
-  // RateTransition: '<Root>/Rate Transition'
-  localB->RateTransition = localDW->RateTransition_Buf
-    [localDW->RateTransition_RDBuf];
+  // RateTransition: '<Root>/Rate Transition5'
+  rtw_mutex_lock();
+  localDW->RateTransition5_RDBuf = localDW->RateTransition5_LstBufWR;
+  rtw_mutex_unlock();
+  rtb_RateTransition5 = localDW->RateTransition5_Buf
+    [localDW->RateTransition5_RDBuf];
+
+  // ModelReference generated from: '<Root>/Model'
+  calibrator(&rtb_Flags, &rtb_BusAssignment, &rtb_RateTransition5, &rtb_Model_o2,
+             &localB->Model_o3);
 
   // ModelReference: '<Root>/FOC'
-  control_foc(&rtb_BusAssignment, &localB->RateTransition, rty_FOCOutputs,
+  control_foc(&rtb_Model_o2, &localB->Model_o3, &localB->finish, rty_FOCOutputs,
               &(localDW->FOC_InstanceData.rtb), &(localDW->FOC_InstanceData.rtdw),
               &(localDW->FOC_InstanceData.rtzce));
 
@@ -278,6 +300,39 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
 
   // End of RateTransition: '<Root>/Rate Transition2'
 
+  // RateTransition: '<Root>/Rate Transition1'
+  rtw_mutex_lock();
+  wrBufIdx = static_cast<int8_T>(localDW->RateTransition1_LstBufWR + 1);
+  if (wrBufIdx == 3) {
+    wrBufIdx = 0;
+  }
+
+  if (wrBufIdx == localDW->RateTransition1_RDBuf) {
+    wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
+    if (wrBufIdx == 3) {
+      wrBufIdx = 0;
+    }
+  }
+
+  rtw_mutex_unlock();
+  switch (wrBufIdx) {
+   case 0:
+    localDW->RateTransition1_Buf0 = rtb_Model_o2;
+    break;
+
+   case 1:
+    localDW->RateTransition1_Buf1 = rtb_Model_o2;
+    break;
+
+   case 2:
+    localDW->RateTransition1_Buf2 = rtb_Model_o2;
+    break;
+  }
+
+  localDW->RateTransition1_LstBufWR = wrBufIdx;
+
+  // End of RateTransition: '<Root>/Rate Transition1'
+
   // RateTransition: '<Root>/Transition to 1ms'
   rtw_mutex_lock();
   wrBufIdx = static_cast<int8_T>(localDW->Transitionto1ms_LstBufWR + 1);
@@ -310,6 +365,11 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   localDW->Transitionto1ms_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Transition to 1ms'
+
+  // RateTransition: '<Root>/Rate Transition3'
+  rtw_mutex_lock();
+  localDW->RateTransition3_RDBuf = localDW->RateTransition3_LstBufWR;
+  rtw_mutex_unlock();
 }
 
 // Output and update for referenced model: 'motion_controller'
@@ -317,8 +377,9 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
                  rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
                  JointData *rtu_JointData, EstimatedData *rty_EstimatedData,
                  Flags *rty_Flags, ActuatorConfiguration
-                 *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
-                 DW_motion_controller_f_T *localDW)
+                 *rty_ActuatorsConfiguration, SensorsData *rty_SensorData_out,
+                 B_motion_controller_c_T *localB, DW_motion_controller_f_T
+                 *localDW)
 {
   ControlOuterOutputs rtb_Positionvelocitycascade;
   int8_T wrBufIdx;
@@ -388,13 +449,13 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
 
   estimation_velocity(&motion_controller_ConstP.Constant_Value,
                       &rtu_JointData->position,
-                      &rtCP_Velocityestimationwindow_Value, &localB->velocity_j,
+                      &rtCP_Velocityestimationwindow_Value, &localB->velocity_g,
                       &(localDW->JointVelocityEstimator_InstanceData.rtdw));
 
   // BusCreator generated from: '<S1>/Estimation_BusCreator'
   rty_EstimatedData->rotor_velocity = localB->velocity;
   rty_EstimatedData->motor_temperature = 0.0F;
-  rty_EstimatedData->joint_velocity = localB->velocity_j;
+  rty_EstimatedData->joint_velocity = localB->velocity_g;
 
   // ModelReference generated from: '<Root>/Motor Supervisor'
   supervisor(rtu_ExternalFlags, rty_EstimatedData, &localB->RateTransition2,
@@ -424,16 +485,16 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
     &(localDW->Positionvelocitycascade_InstanceData.rtdw),
     &(localDW->Positionvelocitycascade_InstanceData.rtzce));
 
-  // RateTransition: '<Root>/Rate Transition' incorporates:
+  // RateTransition: '<Root>/Rate Transition5' incorporates:
   //   BusCreator: '<Root>/Bus Creator'
   //
   rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->RateTransition_LstBufWR + 1);
+  wrBufIdx = static_cast<int8_T>(localDW->RateTransition5_LstBufWR + 1);
   if (wrBufIdx == 3) {
     wrBufIdx = 0;
   }
 
-  if (wrBufIdx == localDW->RateTransition_RDBuf) {
+  if (wrBufIdx == localDW->RateTransition5_RDBuf) {
     wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
     if (wrBufIdx == 3) {
       wrBufIdx = 0;
@@ -441,24 +502,64 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   }
 
   rtw_mutex_unlock();
-  localDW->RateTransition_Buf[wrBufIdx].
+  localDW->RateTransition5_Buf[wrBufIdx].
     global_configuration.estimation.environment_temperature = 25.0F;
-  localDW->RateTransition_Buf[wrBufIdx].
+  localDW->RateTransition5_Buf[wrBufIdx].
     global_configuration.estimation.current_rms_lambda = 0.995F;
-  localDW->RateTransition_Buf[wrBufIdx].
+  localDW->RateTransition5_Buf[wrBufIdx].
     global_configuration.estimation.velocity_est_mode =
     EstimationVelocityModes_MovingAverage;
-  localDW->RateTransition_Buf[wrBufIdx].
+  localDW->RateTransition5_Buf[wrBufIdx].
     global_configuration.estimation.velocity_est_window = 64U;
-  localDW->RateTransition_Buf[wrBufIdx].actuator_configuration =
+  localDW->RateTransition5_Buf[wrBufIdx].actuator_configuration =
     *rty_ActuatorsConfiguration;
-  localDW->RateTransition_Buf[wrBufIdx].estimated_data = *rty_EstimatedData;
-  localDW->RateTransition_Buf[wrBufIdx].targets = localB->targets;
-  localDW->RateTransition_Buf[wrBufIdx].control_outer_outputs =
+  localDW->RateTransition5_Buf[wrBufIdx].estimated_data = *rty_EstimatedData;
+  localDW->RateTransition5_Buf[wrBufIdx].targets = localB->targets;
+  localDW->RateTransition5_Buf[wrBufIdx].control_outer_outputs =
     rtb_Positionvelocitycascade;
-  localDW->RateTransition_LstBufWR = wrBufIdx;
+  localDW->RateTransition5_LstBufWR = wrBufIdx;
 
-  // End of RateTransition: '<Root>/Rate Transition'
+  // End of RateTransition: '<Root>/Rate Transition5'
+
+  // RateTransition generated from: '<Root>/Model'
+  rtw_mutex_lock();
+  wrBufIdx = static_cast<int8_T>(localDW->Flags_LstBufWR + 1);
+  if (wrBufIdx == 3) {
+    wrBufIdx = 0;
+  }
+
+  if (wrBufIdx == localDW->Flags_RDBuf) {
+    wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
+    if (wrBufIdx == 3) {
+      wrBufIdx = 0;
+    }
+  }
+
+  rtw_mutex_unlock();
+  localDW->Flags_Buf[wrBufIdx] = *rty_Flags;
+  localDW->Flags_LstBufWR = wrBufIdx;
+
+  // End of RateTransition generated from: '<Root>/Model'
+
+  // RateTransition: '<Root>/Rate Transition3'
+  rtw_mutex_lock();
+  wrBufIdx = static_cast<int8_T>(localDW->RateTransition3_LstBufWR + 1);
+  if (wrBufIdx == 3) {
+    wrBufIdx = 0;
+  }
+
+  if (wrBufIdx == localDW->RateTransition3_RDBuf) {
+    wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
+    if (wrBufIdx == 3) {
+      wrBufIdx = 0;
+    }
+  }
+
+  rtw_mutex_unlock();
+  localDW->RateTransition3_Buf[wrBufIdx] = *rty_ActuatorsConfiguration;
+  localDW->RateTransition3_LstBufWR = wrBufIdx;
+
+  // End of RateTransition: '<Root>/Rate Transition3'
 
   // RateTransition: '<Root>/Rate Transition4'
   rtw_mutex_lock();
@@ -479,6 +580,26 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   localDW->RateTransition4_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Rate Transition4'
+
+  // RateTransition: '<Root>/Rate Transition1'
+  rtw_mutex_lock();
+  localDW->RateTransition1_RDBuf = localDW->RateTransition1_LstBufWR;
+  rtw_mutex_unlock();
+  switch (localDW->RateTransition1_RDBuf) {
+   case 0:
+    *rty_SensorData_out = localDW->RateTransition1_Buf0;
+    break;
+
+   case 1:
+    *rty_SensorData_out = localDW->RateTransition1_Buf1;
+    break;
+
+   case 2:
+    *rty_SensorData_out = localDW->RateTransition1_Buf2;
+    break;
+  }
+
+  // End of RateTransition: '<Root>/Rate Transition1'
 }
 
 // Termination for referenced model: 'motion_controller'
@@ -487,13 +608,22 @@ void motion_controller_Term(DW_motion_controller_f_T *localDW)
   // Terminate for RateTransition: '<Root>/Rate Transition4'
   rtw_mutex_destroy();
 
-  // Terminate for RateTransition: '<Root>/Rate Transition'
+  // Terminate for RateTransition generated from: '<Root>/Model'
+  rtw_mutex_destroy();
+
+  // Terminate for RateTransition: '<Root>/Rate Transition5'
   rtw_mutex_destroy();
 
   // Terminate for RateTransition: '<Root>/Rate Transition2'
   rtw_mutex_destroy();
 
+  // Terminate for RateTransition: '<Root>/Rate Transition1'
+  rtw_mutex_destroy();
+
   // Terminate for RateTransition: '<Root>/Transition to 1ms'
+  rtw_mutex_destroy();
+
+  // Terminate for RateTransition: '<Root>/Rate Transition3'
   rtw_mutex_destroy();
 
   // Terminate for ModelReference: '<S1>/Current Filter'
