@@ -169,12 +169,12 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
 
   rtb_Sum3 = static_cast<uint16_T>(static_cast<uint16_T>(rtb_Add) - static_cast<
     uint16_T>(rtu_SensorData->motorsensors.qencoder.Idx_counter));
-  if (rtb_Sum3 <= static_cast<uint16_T>(rtb_Sum3 + 360)) {
+  if (rtb_Sum3 <= static_cast<uint16_T>(rtb_Sum3 + 16000)) {
     // Product: '<S7>/Product'
     rtb_Product = rtb_Sum3;
   } else {
     // Product: '<S7>/Product'
-    rtb_Product = static_cast<uint16_T>(rtb_Sum3 + 360);
+    rtb_Product = static_cast<uint16_T>(rtb_Sum3 + 16000);
   }
 
   // End of Outputs for SubSystem: '<S7>/PositionNoReset'

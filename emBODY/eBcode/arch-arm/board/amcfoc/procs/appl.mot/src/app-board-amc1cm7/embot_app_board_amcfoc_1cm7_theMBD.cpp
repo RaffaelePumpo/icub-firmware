@@ -1087,7 +1087,7 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::updatePosition(embot::hw::MOT
     // - electical angle uses number of poles, so: BE SURE WE USE THEM ....
     // - position is computed incrementally, so: KEEP a static variable for it ....        
     _items[embot::core::tointegral(m)].electricalangle = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::hall_electrical);
-    _items[embot::core::tointegral(m)].position = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::hall_mechanical);   
+    _items[embot::core::tointegral(m)].position = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::quadenc_mechanical);   
 
     _items[embot::core::tointegral(m)].qencangle = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::quadenc_mechanical);
     _items[embot::core::tointegral(m)].qencangleoflastindex = embot::hw::motor::bldc::angle(m, embot::hw::motor::bldc::AngleType::quadenc_mechanical_lastindex);

@@ -95,7 +95,7 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
 
     // Chart: '<S2>/calibrator'
     if (localDW->temporalCounter_i1 < MAX_uint32_T) {
-      localDW->temporalCounter_i1++;
+      localDW->temporalCounter_i1 = localDW->temporalCounter_i1 +10;
     }
 
     if (localDW->is_active_c1_Calibrator == 0) {
@@ -104,8 +104,8 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
       localB->finish = false;
       localDW->p_index = rtu_Sensors->motorsensors.qencoder.Idx_counter;
       localDW->diff_index = 0.0F;
-      localDW->tzeroalign = 10;
-      localDW->talign = 5;
+      localDW->tzeroalign = 2;
+      localDW->talign = 0.5;
       localDW->v_threshold = 2.0;
       localDW->count = 0.0F;
       localB->target_angle = 0.0F;
