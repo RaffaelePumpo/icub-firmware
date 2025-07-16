@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.32
+// Model version                  : 5.34
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 10:20:29 2025
+// C/C++ source code generated on : Wed Jul 16 11:22:14 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,6 +19,7 @@
 #include "motion_controller.h"
 #include "motion_controller_types.h"
 #include "rtw_mutex.h"
+#include <cmath>
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
 #include "control_foc.h"
@@ -32,6 +33,9 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
   DW_motion_controller_f_T *localDW)
 {
+  // Start for RateTransition: '<Root>/Rate Transition4'
+  rtw_mutex_init();
+
   // Start for RateTransition: '<Root>/Rate Transition'
   rtw_mutex_init();
 
@@ -89,7 +93,143 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   *rty_FOCOutputs, B_motion_controller_c_T *localB, DW_motion_controller_f_T
   *localDW)
 {
+  SensorsData rtb_BusAssignment;
+  int32_T rtb_Product;
+  real32_T rtb_Add;
+  int16_T rtb_RateTransition4_motor_externals_rotor_index_offset;
+  uint16_T rtb_Sum3;
   int8_T wrBufIdx;
+  uint8_T rtb_RateTransition4_motor_externals_pole_pairs;
+  boolean_T rtb_RateTransition4_motor_externals_use_index;
+
+  // RateTransition: '<Root>/Rate Transition4'
+  rtw_mutex_lock();
+  localDW->RateTransition4_RDBuf = localDW->RateTransition4_LstBufWR;
+  rtw_mutex_unlock();
+  rtb_RateTransition4_motor_externals_pole_pairs = localDW->
+    RateTransition4_Buf[localDW->RateTransition4_RDBuf].
+    motor.externals.pole_pairs;
+  rtb_RateTransition4_motor_externals_rotor_index_offset =
+    localDW->RateTransition4_Buf[localDW->RateTransition4_RDBuf].
+    motor.externals.rotor_index_offset;
+  rtb_RateTransition4_motor_externals_use_index = localDW->
+    RateTransition4_Buf[localDW->RateTransition4_RDBuf].
+    motor.externals.use_index;
+
+  // Outputs for Atomic SubSystem: '<Root>/Process Sensors'
+  // DataTypeConversion: '<S3>/Data Type Conversion'
+  rtb_Add = std::abs(rtu_SensorData->motorsensors.qencoder.counter);
+
+  // BusAssignment: '<S3>/Bus Assignment'
+  rtb_BusAssignment = *rtu_SensorData;
+
+  // DataTypeConversion: '<S3>/Data Type Conversion'
+  if (rtb_Add < 8.388608E+6F) {
+    if (rtb_Add >= 0.5F) {
+      rtb_Add = std::floor(rtu_SensorData->motorsensors.qencoder.counter + 0.5F);
+    } else {
+      rtb_Add = 0.0F;
+    }
+  } else {
+    rtb_Add = rtu_SensorData->motorsensors.qencoder.counter;
+  }
+
+  // Outputs for IfAction SubSystem: '<S7>/PositionNoReset' incorporates:
+  //   ActionPort: '<S17>/Action Port'
+
+  // If: '<S7>/If1' incorporates:
+  //   Constant: '<S22>/Constant'
+  //   DataTypeConversion: '<S3>/Data Type Conversion'
+  //   DataTypeConversion: '<S3>/Data Type Conversion1'
+  //   MinMax: '<S17>/MinMax'
+  //   Sum: '<S17>/Sum3'
+  //   Sum: '<S17>/Sum7'
+
+  rtb_Sum3 = static_cast<uint16_T>(static_cast<uint16_T>(rtb_Add) - static_cast<
+    uint16_T>(rtu_SensorData->motorsensors.qencoder.Idx_counter));
+  if (rtb_Sum3 <= static_cast<uint16_T>(rtb_Sum3 + 360)) {
+    // Product: '<S7>/Product'
+    rtb_Product = rtb_Sum3;
+  } else {
+    // Product: '<S7>/Product'
+    rtb_Product = static_cast<uint16_T>(rtb_Sum3 + 360);
+  }
+
+  // End of Outputs for SubSystem: '<S7>/PositionNoReset'
+
+  // If: '<S10>/If' incorporates:
+  //   Constant: '<S12>/Constant'
+  //   Product: '<S15>/Product'
+  //   RateTransition: '<Root>/Rate Transition4'
+  //   Sum: '<S12>/Add'
+  //   Sum: '<S13>/Add'
+  //   Switch: '<S9>/Switch'
+
+  if (rtb_Product <= rtb_RateTransition4_motor_externals_rotor_index_offset) {
+    // Outputs for IfAction SubSystem: '<S10>/If Action Subsystem' incorporates:
+    //   ActionPort: '<S12>/Action Port'
+
+    rtb_Add = (static_cast<real32_T>(rtb_Product) + 360.0F) -
+      static_cast<real32_T>
+      (rtb_RateTransition4_motor_externals_rotor_index_offset);
+
+    // End of Outputs for SubSystem: '<S10>/If Action Subsystem'
+  } else {
+    // Outputs for IfAction SubSystem: '<S10>/If Action Subsystem1' incorporates:
+    //   ActionPort: '<S13>/Action Port'
+
+    rtb_Add = static_cast<real32_T>(rtb_Product) - static_cast<real32_T>
+      (rtb_RateTransition4_motor_externals_rotor_index_offset);
+
+    // End of Outputs for SubSystem: '<S10>/If Action Subsystem1'
+  }
+
+  rtb_Add *= static_cast<real32_T>
+    (rtb_RateTransition4_motor_externals_pole_pairs);
+
+  // End of If: '<S10>/If'
+
+  // Outputs for IfAction SubSystem: '<S7>/PositionNoReset' incorporates:
+  //   ActionPort: '<S17>/Action Port'
+
+  // If: '<S7>/If1' incorporates:
+  //   Constant: '<S22>/Constant'
+  //   MinMax: '<S17>/MinMax'
+  //   Sum: '<S17>/Sum7'
+
+  if (rtb_Sum3 <= static_cast<uint16_T>(rtb_Sum3 + 360)) {
+    // BusAssignment: '<S3>/Bus Assignment' incorporates:
+    //   DataTypeConversion: '<S20>/DTC'
+
+    rtb_BusAssignment.motorsensors.qencoder.rotor_angle = rtb_Sum3;
+  } else {
+    // BusAssignment: '<S3>/Bus Assignment' incorporates:
+    //   DataTypeConversion: '<S20>/DTC'
+
+    rtb_BusAssignment.motorsensors.qencoder.rotor_angle = static_cast<uint16_T>
+      (rtb_Sum3 + 360);
+  }
+
+  // End of Outputs for SubSystem: '<S7>/PositionNoReset'
+
+  // BusAssignment: '<S3>/Bus Assignment' incorporates:
+  //   Gain: '<S11>/Multiply'
+  //   Gain: '<S11>/Multiply1'
+  //   Rounding: '<S11>/Floor'
+  //   Sum: '<S11>/Add'
+
+  rtb_BusAssignment.motorsensors.electrical_angle = rtb_Add - std::floor
+    (0.00277777785F * rtb_Add) * 360.0F;
+
+  // Switch: '<S3>/Switch' incorporates:
+  //   RateTransition: '<Root>/Rate Transition4'
+
+  if (!rtb_RateTransition4_motor_externals_use_index) {
+    rtb_BusAssignment = *rtu_SensorData;
+  }
+
+  // End of Switch: '<S3>/Switch'
+  // End of Outputs for SubSystem: '<Root>/Process Sensors'
 
   // RateTransition: '<Root>/Rate Transition'
   rtw_mutex_lock();
@@ -101,7 +241,7 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
     [localDW->RateTransition_RDBuf];
 
   // ModelReference: '<Root>/FOC'
-  control_foc(rtu_SensorData, &localB->RateTransition, rty_FOCOutputs,
+  control_foc(&rtb_BusAssignment, &localB->RateTransition, rty_FOCOutputs,
               &(localDW->FOC_InstanceData.rtb), &(localDW->FOC_InstanceData.rtdw),
               &(localDW->FOC_InstanceData.rtzce));
 
@@ -155,15 +295,15 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   rtw_mutex_unlock();
   switch (wrBufIdx) {
    case 0:
-    localDW->Transitionto1ms_Buf0 = *rtu_SensorData;
+    localDW->Transitionto1ms_Buf0 = rtb_BusAssignment;
     break;
 
    case 1:
-    localDW->Transitionto1ms_Buf1 = *rtu_SensorData;
+    localDW->Transitionto1ms_Buf1 = rtb_BusAssignment;
     break;
 
    case 2:
-    localDW->Transitionto1ms_Buf2 = *rtu_SensorData;
+    localDW->Transitionto1ms_Buf2 = rtb_BusAssignment;
     break;
   }
 
@@ -319,11 +459,34 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   localDW->RateTransition_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Rate Transition'
+
+  // RateTransition: '<Root>/Rate Transition4'
+  rtw_mutex_lock();
+  wrBufIdx = static_cast<int8_T>(localDW->RateTransition4_LstBufWR + 1);
+  if (wrBufIdx == 3) {
+    wrBufIdx = 0;
+  }
+
+  if (wrBufIdx == localDW->RateTransition4_RDBuf) {
+    wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
+    if (wrBufIdx == 3) {
+      wrBufIdx = 0;
+    }
+  }
+
+  rtw_mutex_unlock();
+  localDW->RateTransition4_Buf[wrBufIdx] = *rty_ActuatorsConfiguration;
+  localDW->RateTransition4_LstBufWR = wrBufIdx;
+
+  // End of RateTransition: '<Root>/Rate Transition4'
 }
 
 // Termination for referenced model: 'motion_controller'
 void motion_controller_Term(DW_motion_controller_f_T *localDW)
 {
+  // Terminate for RateTransition: '<Root>/Rate Transition4'
+  rtw_mutex_destroy();
+
   // Terminate for RateTransition: '<Root>/Rate Transition'
   rtw_mutex_destroy();
 
