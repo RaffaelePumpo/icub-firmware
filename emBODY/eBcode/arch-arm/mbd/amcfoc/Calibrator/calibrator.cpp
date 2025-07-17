@@ -21,6 +21,8 @@
 #include "rtwtypes.h"
 #include <cmath>
 
+#include "embot_core.h"
+
 // Named constants for Chart: '<S2>/calibrator'
 const uint8_T Calibrator_IN_Finish = 1U;
 const uint8_T Calibrator_IN_Idx_found = 2U;
@@ -95,7 +97,7 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
 
     // Chart: '<S2>/calibrator'
     if (localDW->temporalCounter_i1 < MAX_uint32_T) {
-      localDW->temporalCounter_i1 = localDW->temporalCounter_i1 +10;
+      localDW->temporalCounter_i1++;
     }
 
     if (localDW->is_active_c1_Calibrator == 0) {
@@ -104,8 +106,8 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
       localB->finish = false;
       localDW->p_index = rtu_Sensors->motorsensors.qencoder.Idx_counter;
       localDW->diff_index = 0.0F;
-      localDW->tzeroalign = 2;
-      localDW->talign = 0.5;
+      localDW->tzeroalign = 0.7;
+      localDW->talign = 0.1;
       localDW->v_threshold = 2.0;
       localDW->count = 0.0F;
       localB->target_angle = 0.0F;
@@ -247,7 +249,17 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
     rty_SensorDataCalibration->motorsensors.electrical_angle =
       localB->target_angle;
     rty_SensorDataCalibration->motorsensors.qencoder.offset = localB->offset;
-
+		
+		static bool hasPrinted = false;
+		
+		if(localB->finish && !hasPrinted)
+		{
+			hasPrinted = true;
+			embot::core::print("OFFSET: "  + std::to_string(localB->offset) + 
+												 "TG ANGLE: "  + std::to_string(localB->target_angle));
+			
+		}
+		
     // SignalConversion generated from: '<S2>/CalibrationDone'
     *rty_CalibrationDone = localB->finish;
 

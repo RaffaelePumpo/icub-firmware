@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.4
+// Model version                  : 4.5
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 14:23:25 2025
+// C/C++ source code generated on : Thu Jul 17 09:58:21 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -31,7 +31,6 @@ struct DW_CoreSubsys_iterative_motion_controller_T {
   MdlrefDW_motion_controller_T MotionController_InstanceData;// '<S1>/Motion Controller' 
   ActuatorConfiguration ConfigurationParameters;// '<S1>/Motion Controller'
   BUS_MESSAGES_TX MessagesTx;          // '<S1>/Model'
-  SensorsData MotionController_o5;     // '<S1>/Motion Controller'
   SensorsData TmpRTBAtModelInport1_Buf0;// synthesized block
   SensorsData TmpRTBAtModelInport1_Buf1;// synthesized block
   SensorsData TmpRTBAtModelInport1_Buf2;// synthesized block
@@ -55,6 +54,7 @@ struct DW_iterative_motion_controller_T {
   DW_CoreSubsys_iterative_motion_controller_T CoreSubsys[N_MOTORS];// '<Root>/Iterative Motion Controller' 
   ReceivedEvents ImpSel_InsertedFor_Events_at_outport_0[MAX_EVENTS_PER_TICK];
   ReceivedEvents M[(MAX_EVENTS_PER_TICK * N_MOTORS)];// '<Root>/Sort Events'
+  SensorsData SensorDataOut_CoreSubsysCanOut;// '<S1>/Motion Controller'
 };
 
 // External inputs (root inport signals with default storage)
@@ -72,6 +72,7 @@ struct ExtY_iterative_motion_controller_T {
   ActuatorConfiguration ConfigurationParameters[N_MOTORS];// '<Root>/ConfigurationParameters' 
   BUS_MESSAGES_TX Messages[N_MOTORS];  // '<Root>/Messages'
   BUS_STATUS_TX MessagesFlags[N_MOTORS];// '<Root>/MessagesFlags'
+  SensorsData SensorDataOut[N_MOTORS]; // '<Root>/SensorDataOut'
 };
 
 // Real-time Model Data Structure

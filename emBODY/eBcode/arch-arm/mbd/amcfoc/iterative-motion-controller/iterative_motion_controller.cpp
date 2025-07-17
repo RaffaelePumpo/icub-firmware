@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.4
+// Model version                  : 4.5
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 14:23:25 2025
+// C/C++ source code generated on : Thu Jul 17 09:58:21 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -408,6 +408,7 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
   FOCOutputs rtb_TmpRTBAtModelInport4;
   Flags rtb_ImpAsg_InsertedFor_Flags_at_inport_0[N_MOTORS];
   ReceivedEvents struct_temp;
+  SensorsData rtb_ImpAsg_InsertedFor_SensorDataOut_at_inport_0[N_MOTORS];
   SensorsData rtb_TmpRTBAtModelInport1;
   int32_T i;
   uint8_T counter_motor_1;
@@ -523,8 +524,7 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].Flags_l,
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                 ConfigurationParameters,
-                &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
-                MotionController_o5,
+                &iterative_motion_controller_DW.SensorDataOut_CoreSubsysCanOut,
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                   MotionController_InstanceData.rtb),
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
@@ -602,6 +602,10 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
                      &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                        Model_InstanceData.rtdw));
 
+    // ForEachSliceAssignment generated from: '<S1>/SensorDataOut'
+    rtb_ImpAsg_InsertedFor_SensorDataOut_at_inport_0[ForEach_itr] =
+      iterative_motion_controller_DW.SensorDataOut_CoreSubsysCanOut;
+
     // ForEachSliceAssignment generated from: '<S1>/Messages' incorporates:
     //   ModelReference generated from: '<S1>/Model'
 
@@ -643,6 +647,11 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
   std::memcpy(&iterative_motion_controller_Y.Messages[0],
               &rtb_ImpAsg_InsertedFor_Messages_at_inport_0[0],
               static_cast<uint32_T>(N_MOTORS) * sizeof(BUS_MESSAGES_TX));
+
+  // Outport: '<Root>/SensorDataOut'
+  std::memcpy(&iterative_motion_controller_Y.SensorDataOut[0],
+              &rtb_ImpAsg_InsertedFor_SensorDataOut_at_inport_0[0], static_cast<
+              uint32_T>(N_MOTORS) * sizeof(SensorsData));
   for (i = 0; i < N_MOTORS; i++) {
     // Outport: '<Root>/Estimates'
     iterative_motion_controller_Y.Estimates[i] =

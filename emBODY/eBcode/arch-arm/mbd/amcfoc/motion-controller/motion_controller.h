@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.40
+// Model version                  : 5.44
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 15:20:43 2025
+// C/C++ source code generated on : Thu Jul 17 09:58:15 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -114,8 +114,6 @@ extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 //  These blocks were eliminated from the model due to optimizations:
 //
 //  Block '<S9>/Data Type Duplicate' : Unused code path elimination
-//  Block '<S7>/ReplaceInport_CountsPerRev' : Unused code path elimination
-//  Block '<S7>/ReplaceInport_OneByCountsPerRev' : Unused code path elimination
 
 
 //-
@@ -154,8 +152,8 @@ extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 //  '<S19>'  : 'motion_controller/Process Sensors/Quadrature Decoder/Variant Subsystem'
 //  '<S20>'  : 'motion_controller/Process Sensors/Quadrature Decoder/DT_Handle/floating-point'
 //  '<S21>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionNoReset/Variant Subsystem'
-//  '<S22>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionNoReset/Variant Subsystem/Dialog'
-//  '<S23>'  : 'motion_controller/Process Sensors/Quadrature Decoder/Variant Subsystem/Dialog'
+//  '<S22>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionNoReset/Variant Subsystem/Input Port'
+//  '<S23>'  : 'motion_controller/Process Sensors/Quadrature Decoder/Variant Subsystem/Input Port'
 
 #endif                                 // motion_controller_h_
 
