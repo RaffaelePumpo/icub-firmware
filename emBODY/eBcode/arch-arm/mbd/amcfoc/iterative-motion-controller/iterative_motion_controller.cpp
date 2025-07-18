@@ -9,7 +9,7 @@
 //
 // Model version                  : 4.10
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Fri Jul 18 09:38:04 2025
+// C/C++ source code generated on : Fri Jul 18 14:55:06 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -179,7 +179,7 @@ ActuatorConfiguration AmcfocInitConf[2] = { {
       0.0F,
       0.0F,
       0.0F,
-      0.0F,
+      30.0F,
       ReferenceEncoder_Motor
     }
   } } ;                                // Variable: AmcfocInitConf
@@ -374,8 +374,8 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
     }
 #else  
     #warning MBD_foc_keep_degenerated_code is undefined
-#endif
-    // ForEachSliceSelector generated from: '<S1>/InitConf' incorporates:
+#endif    
+// ForEachSliceSelector generated from: '<S1>/InitConf' incorporates:
     //   Constant: '<Root>/Constant'
 
     rtb_ImpSel_InsertedFor_InitConf_at_outport_0 = AmcfocInitConf[ForEach_itr];

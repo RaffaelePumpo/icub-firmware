@@ -255,8 +255,8 @@ namespace embot::hw::motor::bldc::bsp {
         }
         else if(type == AngleType::quadenc_mechanical)
         {   
-            //only mechanical angle at the moment
-            r = embot::hw::motor::enc::angle(m);
+            //only mechanical angle at the moment in degrees
+          r = embot::hw::motor::enc::angle(m);
         }
         else if(type == AngleType::quadenc_mechanical_lastindex)
         {

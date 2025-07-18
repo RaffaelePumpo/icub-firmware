@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.47
+// Model version                  : 5.52
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Fri Jul 18 09:37:24 2025
+// C/C++ source code generated on : Fri Jul 18 14:54:59 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,7 +19,6 @@
 #include "motion_controller.h"
 #include "motion_controller_types.h"
 #include "rtw_mutex.h"
-#include <cmath>
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
 #include "Calibrator.h"
@@ -28,7 +27,6 @@
 #include "filter_current.h"
 #include "supervisor.h"
 #include "position_velocity_cascade.h"
-#include "embot_core.h"
 
 // System initialize for referenced model: 'motion_controller'
 void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
@@ -114,7 +112,6 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   Flags rtb_Flags;
   SensorsData rtb_BusAssignment;
   real32_T rtb_Add;
-  real32_T rtb_Add_o;
   int16_T rtb_RateTransition4_motor_externals_rotor_index_offset;
   int8_T wrBufIdx;
   uint8_T rtb_RateTransition4_motor_externals_pole_pairs;
@@ -139,71 +136,16 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   rtb_Add = rtu_SensorData->motorsensors.qencoder.counter -
     rtu_SensorData->motorsensors.qencoder.Idx_counter;
 
-  // BusAssignment: '<S3>/Bus Assignment'
-  rtb_BusAssignment = *rtu_SensorData;
-
-  // If: '<S9>/If' incorporates:
-  //   Constant: '<S11>/Constant'
-  //   Product: '<S14>/Product'
-  //   RateTransition: '<Root>/Rate Transition4'
-  //   Sum: '<S11>/Add'
-  //   Sum: '<S12>/Add'
-  //   Switch: '<S8>/Switch'
-
-  if (rtb_Add <= rtb_RateTransition4_motor_externals_rotor_index_offset) {
-    // Outputs for IfAction SubSystem: '<S9>/If Action Subsystem' incorporates:
-    //   ActionPort: '<S11>/Action Port'
-
-    rtb_Add_o = (rtb_Add + 360.0F) - static_cast<real32_T>
-      (rtb_RateTransition4_motor_externals_rotor_index_offset);
-
-    // End of Outputs for SubSystem: '<S9>/If Action Subsystem'
-  } else {
-    // Outputs for IfAction SubSystem: '<S9>/If Action Subsystem1' incorporates:
-    //   ActionPort: '<S12>/Action Port'
-
-    rtb_Add_o = rtb_Add - static_cast<real32_T>
-      (rtb_RateTransition4_motor_externals_rotor_index_offset);
-
-    // End of Outputs for SubSystem: '<S9>/If Action Subsystem1'
-  }
-
-  rtb_Add_o *= static_cast<real32_T>
-    (rtb_RateTransition4_motor_externals_pole_pairs);
-
-  // End of If: '<S9>/If'
-
   // BusAssignment: '<S3>/Bus Assignment' incorporates:
-  //   Gain: '<S10>/Multiply'
-  //   Gain: '<S10>/Multiply1'
-  //   Rounding: '<S10>/Floor'
-  //   Sum: '<S10>/Add'
+  //   Product: '<S3>/Product'
+  //   RateTransition: '<Root>/Rate Transition4'
+  //   Sum: '<S3>/Add1'
 
+  rtb_BusAssignment = *rtu_SensorData;
   rtb_BusAssignment.motorsensors.qencoder.rotor_angle = rtb_Add;
-  rtb_BusAssignment.motorsensors.electrical_angle = rtb_Add_o - std::floor
-    (0.00277777785F * rtb_Add_o) * 360.0F;
-	
-	
-	
-	
-	/////////////// Print Data 
-	      static bool hasPrinted2 = false;
-        static uint32_t cnt = 0;
-    
-        
-    
-        if(rtb_RateTransition4_motor_externals_rotor_index_offset!=0 && (++cnt % 3000) == 0)
-        {
-            
-            hasPrinted2 = true;
-            embot::core::print("N" + std::to_string(cnt) + " OFFSET in process: "  + std::to_string(rtb_RateTransition4_motor_externals_rotor_index_offset) + 
-                                                 " Elec Angle decoded: "  + std::to_string(rtb_BusAssignment.motorsensors.electrical_angle) +
-            " Mech Angle decoded: "  + std::to_string(rtb_BusAssignment.motorsensors.qencoder.rotor_angle)+ " Counter angle: "  + std::to_string(rtu_SensorData->motorsensors.qencoder.counter)+ " Index: "  + std::to_string(rtu_SensorData->motorsensors.qencoder.Idx_counter));
-        cnt = 0;    
-        }
-//////////////////////
-				
-				
+  rtb_BusAssignment.motorsensors.electrical_angle = rtb_Add *
+    static_cast<real32_T>(rtb_RateTransition4_motor_externals_pole_pairs) -
+    static_cast<real32_T>(rtb_RateTransition4_motor_externals_rotor_index_offset);
 
   // Switch: '<S3>/Switch' incorporates:
   //   RateTransition: '<Root>/Rate Transition4'
