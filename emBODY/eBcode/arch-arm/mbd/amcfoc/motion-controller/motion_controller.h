@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.44
+// Model version                  : 5.47
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Jul 17 09:58:15 2025
+// C/C++ source code generated on : Fri Jul 18 09:37:24 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -34,11 +34,13 @@
 // Block signals for model 'motion_controller'
 struct B_motion_controller_c_T {
   FOCSlowInputs Model_o3;              // '<Root>/Model'
+  SensorsData Model_o2;                // '<Root>/Model'
   SensorsData Transitionto1ms;         // '<Root>/Transition to 1ms'
   FOCOutputs RateTransition2;          // '<Root>/Rate Transition2'
   Targets targets;                     // '<Root>/Motor Supervisor'
   real32_T velocity;                   // '<S1>/Motor Velocity Estimator'
   real32_T velocity_g;                 // '<S1>/Joint Velocity Estimator'
+  real32_T TmpRTBAtMotorSupervisorInport8;
 };
 
 // Block states (default storage) for model 'motion_controller'
@@ -46,9 +48,6 @@ struct DW_motion_controller_f_T {
   FOCSlowInputs RateTransition5_Buf[3];// '<Root>/Rate Transition5'
   ActuatorConfiguration RateTransition4_Buf[3];// '<Root>/Rate Transition4'
   ActuatorConfiguration RateTransition3_Buf[3];// '<Root>/Rate Transition3'
-  SensorsData RateTransition1_Buf0;    // '<Root>/Rate Transition1'
-  SensorsData RateTransition1_Buf1;    // '<Root>/Rate Transition1'
-  SensorsData RateTransition1_Buf2;    // '<Root>/Rate Transition1'
   SensorsData Transitionto1ms_Buf0;    // '<Root>/Transition to 1ms'
   SensorsData Transitionto1ms_Buf1;    // '<Root>/Transition to 1ms'
   SensorsData Transitionto1ms_Buf2;    // '<Root>/Transition to 1ms'
@@ -61,7 +60,6 @@ struct DW_motion_controller_f_T {
   void* RateTransition5_SEMAPHORE;     // '<Root>/Rate Transition5'
   void* RateTransition3_SEMAPHORE;     // '<Root>/Rate Transition3'
   void* RateTransition2_SEMAPHORE;     // '<Root>/Rate Transition2'
-  void* RateTransition1_SEMAPHORE;     // '<Root>/Rate Transition1'
   void* Transitionto1ms_SEMAPHORE;     // '<Root>/Transition to 1ms'
   int8_T RateTransition4_LstBufWR;     // '<Root>/Rate Transition4'
   int8_T RateTransition4_RDBuf;        // '<Root>/Rate Transition4'
@@ -73,8 +71,6 @@ struct DW_motion_controller_f_T {
   int8_T RateTransition3_RDBuf;        // '<Root>/Rate Transition3'
   int8_T RateTransition2_LstBufWR;     // '<Root>/Rate Transition2'
   int8_T RateTransition2_RDBuf;        // '<Root>/Rate Transition2'
-  int8_T RateTransition1_LstBufWR;     // '<Root>/Rate Transition1'
-  int8_T RateTransition1_RDBuf;        // '<Root>/Rate Transition1'
   int8_T Transitionto1ms_LstBufWR;     // '<Root>/Transition to 1ms'
   int8_T Transitionto1ms_RDBuf;        // '<Root>/Transition to 1ms'
   MdlrefDW_Calibrator_T Model_InstanceData;// '<Root>/Model'
@@ -105,15 +101,14 @@ extern void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs 
 extern void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const
   ReceivedEvents rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
   JointData *rtu_JointData, EstimatedData *rty_EstimatedData, Flags *rty_Flags,
-  ActuatorConfiguration *rty_ActuatorsConfiguration, SensorsData
-  *rty_SensorData_out, B_motion_controller_c_T *localB, DW_motion_controller_f_T
-  *localDW);
+  ActuatorConfiguration *rty_ActuatorsConfiguration, B_motion_controller_c_T
+  *localB, DW_motion_controller_f_T *localDW);
 extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 
 //-
 //  These blocks were eliminated from the model due to optimizations:
 //
-//  Block '<S9>/Data Type Duplicate' : Unused code path elimination
+//  Block '<S8>/Data Type Duplicate' : Unused code path elimination
 
 
 //-
@@ -137,23 +132,14 @@ extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 //  '<S4>'   : 'motion_controller/Estimation/Thermal model'
 //  '<S5>'   : 'motion_controller/Estimation/Thermal model/Thermal model OFF'
 //  '<S6>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position'
-//  '<S7>'   : 'motion_controller/Process Sensors/Quadrature Decoder'
-//  '<S8>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec'
-//  '<S9>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point'
-//  '<S10>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset'
-//  '<S11>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec'
-//  '<S12>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset/If Action Subsystem'
-//  '<S13>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset/If Action Subsystem1'
-//  '<S14>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec/Variant Subsystem'
-//  '<S15>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec/Variant Subsystem/Input Port'
-//  '<S16>'  : 'motion_controller/Process Sensors/Quadrature Decoder/DT_Handle'
-//  '<S17>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionNoReset'
-//  '<S18>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionResetAtIndex'
-//  '<S19>'  : 'motion_controller/Process Sensors/Quadrature Decoder/Variant Subsystem'
-//  '<S20>'  : 'motion_controller/Process Sensors/Quadrature Decoder/DT_Handle/floating-point'
-//  '<S21>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionNoReset/Variant Subsystem'
-//  '<S22>'  : 'motion_controller/Process Sensors/Quadrature Decoder/PositionNoReset/Variant Subsystem/Input Port'
-//  '<S23>'  : 'motion_controller/Process Sensors/Quadrature Decoder/Variant Subsystem/Input Port'
+//  '<S7>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec'
+//  '<S8>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point'
+//  '<S9>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset'
+//  '<S10>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec'
+//  '<S11>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset/If Action Subsystem'
+//  '<S12>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset/If Action Subsystem1'
+//  '<S13>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec/Variant Subsystem'
+//  '<S14>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec/Variant Subsystem/Input Port'
 
 #endif                                 // motion_controller_h_
 

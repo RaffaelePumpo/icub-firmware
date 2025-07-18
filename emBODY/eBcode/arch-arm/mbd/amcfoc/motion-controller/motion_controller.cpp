@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.44
+// Model version                  : 5.47
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Jul 17 09:58:15 2025
+// C/C++ source code generated on : Fri Jul 18 09:37:24 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -48,9 +48,6 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   rtw_mutex_init();
 
   // Start for RateTransition: '<Root>/Rate Transition2'
-  rtw_mutex_init();
-
-  // Start for RateTransition: '<Root>/Rate Transition1'
   rtw_mutex_init();
 
   // Start for RateTransition: '<Root>/Transition to 1ms'
@@ -111,18 +108,14 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   *localDW)
 {
   // local block i/o variables
-  SensorsData rtb_Model_o2;
   boolean_T rtb_Model_o1;
   ActuatorConfiguration rtb_RateTransition3;
   FOCSlowInputs rtb_RateTransition5;
   Flags rtb_Flags;
   SensorsData rtb_BusAssignment;
   real32_T rtb_Add;
-  real32_T rtb_Product;
-  int16_T rtb_RateTransition4_motor_externals_rotor_encoder_resolution;
+  real32_T rtb_Add_o;
   int16_T rtb_RateTransition4_motor_externals_rotor_index_offset;
-  uint16_T rtb_Sum3;
-  uint16_T u1;
   int8_T wrBufIdx;
   uint8_T rtb_RateTransition4_motor_externals_pole_pairs;
   boolean_T rtb_RateTransition4_motor_externals_has_quadrature_encoder;
@@ -137,119 +130,80 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   rtb_RateTransition4_motor_externals_pole_pairs = localDW->
     RateTransition4_Buf[localDW->RateTransition4_RDBuf].
     motor.externals.pole_pairs;
-  rtb_RateTransition4_motor_externals_rotor_encoder_resolution =
-    localDW->RateTransition4_Buf[localDW->RateTransition4_RDBuf].
-    motor.externals.rotor_encoder_resolution;
   rtb_RateTransition4_motor_externals_rotor_index_offset =
     localDW->RateTransition4_Buf[localDW->RateTransition4_RDBuf].
     motor.externals.rotor_index_offset;
 
   // Outputs for Atomic SubSystem: '<Root>/Process Sensors'
-  // DataTypeConversion: '<S3>/Data Type Conversion'
-  rtb_Product = std::abs(rtu_SensorData->motorsensors.qencoder.counter);
+  // Sum: '<S3>/Add'
+  rtb_Add = rtu_SensorData->motorsensors.qencoder.counter -
+    rtu_SensorData->motorsensors.qencoder.Idx_counter;
 
   // BusAssignment: '<S3>/Bus Assignment'
   rtb_BusAssignment = *rtu_SensorData;
-	
 
-  // DataTypeConversion: '<S3>/Data Type Conversion'
-  if (rtb_Product < 8.388608E+6F) {
-    if (rtb_Product >= 0.5F) {
-      rtb_Add = std::floor(rtu_SensorData->motorsensors.qencoder.counter + 0.5F);
-    } else {
-      rtb_Add = 0.0F;
-    }
-  } else {
-    rtb_Add = rtu_SensorData->motorsensors.qencoder.counter;
-  }
-
-  // Outputs for IfAction SubSystem: '<S7>/PositionNoReset' incorporates:
-  //   ActionPort: '<S17>/Action Port'
-
-  // If: '<S7>/If1' incorporates:
-  //   DataTypeConversion: '<S20>/DTC'
-  //   DataTypeConversion: '<S22>/Data Type Conversion'
-  //   DataTypeConversion: '<S3>/Data Type Conversion'
-  //   DataTypeConversion: '<S3>/Data Type Conversion1'
-  //   Gain: '<S23>/Gain'
-  //   MinMax: '<S17>/MinMax'
-  //   Product: '<S3>/Reciprocal'
-  //   Product: '<S7>/Product'
+  // If: '<S9>/If' incorporates:
+  //   Constant: '<S11>/Constant'
+  //   Product: '<S14>/Product'
   //   RateTransition: '<Root>/Rate Transition4'
-  //   Sum: '<S17>/Sum3'
-  //   Sum: '<S17>/Sum7'
-
-  //rtb_Sum3 = static_cast<uint16_T>(static_cast<uint16_T>(rtb_Add) - static_cast<
-    //uint16_T>(rtu_SensorData->motorsensors.qencoder.Idx_counter));
-  //u1 = static_cast<uint16_T>(rtb_Sum3 + static_cast<uint16_T>
-   // (rtb_RateTransition4_motor_externals_rotor_encoder_resolution));
-  //if (rtb_Sum3 <= u1) {
-    //u1 = rtb_Sum3;
-  //}
-
- // rtb_Product = 1.0F / static_cast<real32_T>
-    //(rtb_RateTransition4_motor_externals_rotor_encoder_resolution) * 360.0F *
-		rtb_Product = rtb_Add - static_cast<uint16_T>(rtu_SensorData->motorsensors.qencoder.Idx_counter);
-
-  // End of If: '<S7>/If1'
-  // End of Outputs for SubSystem: '<S7>/PositionNoReset'
-
-  // If: '<S10>/If' incorporates:
-  //   Constant: '<S12>/Constant'
-  //   Product: '<S15>/Product'
-  //   RateTransition: '<Root>/Rate Transition4'
+  //   Sum: '<S11>/Add'
   //   Sum: '<S12>/Add'
-  //   Sum: '<S13>/Add'
-  //   Switch: '<S9>/Switch'
+  //   Switch: '<S8>/Switch'
 
-  if (rtb_Product <= rtb_RateTransition4_motor_externals_rotor_index_offset) {
-    // Outputs for IfAction SubSystem: '<S10>/If Action Subsystem' incorporates:
+  if (rtb_Add <= rtb_RateTransition4_motor_externals_rotor_index_offset) {
+    // Outputs for IfAction SubSystem: '<S9>/If Action Subsystem' incorporates:
+    //   ActionPort: '<S11>/Action Port'
+
+    rtb_Add_o = (rtb_Add + 360.0F) - static_cast<real32_T>
+      (rtb_RateTransition4_motor_externals_rotor_index_offset);
+
+    // End of Outputs for SubSystem: '<S9>/If Action Subsystem'
+  } else {
+    // Outputs for IfAction SubSystem: '<S9>/If Action Subsystem1' incorporates:
     //   ActionPort: '<S12>/Action Port'
 
-    rtb_Add = (rtb_Product + 360.0F) - static_cast<real32_T>
+    rtb_Add_o = rtb_Add - static_cast<real32_T>
       (rtb_RateTransition4_motor_externals_rotor_index_offset);
 
-    // End of Outputs for SubSystem: '<S10>/If Action Subsystem'
-  } else {
-    // Outputs for IfAction SubSystem: '<S10>/If Action Subsystem1' incorporates:
-    //   ActionPort: '<S13>/Action Port'
-
-    rtb_Add = rtb_Product - static_cast<real32_T>
-      (rtb_RateTransition4_motor_externals_rotor_index_offset);
-
-    // End of Outputs for SubSystem: '<S10>/If Action Subsystem1'
+    // End of Outputs for SubSystem: '<S9>/If Action Subsystem1'
   }
 
-	
-  rtb_Add *= static_cast<real32_T>
+  rtb_Add_o *= static_cast<real32_T>
     (rtb_RateTransition4_motor_externals_pole_pairs);
 
-  // End of If: '<S10>/If'
+  // End of If: '<S9>/If'
 
   // BusAssignment: '<S3>/Bus Assignment' incorporates:
-  //   Gain: '<S11>/Multiply'
-  //   Gain: '<S11>/Multiply1'
-  //   Rounding: '<S11>/Floor'
-  //   Sum: '<S11>/Add'
+  //   Gain: '<S10>/Multiply'
+  //   Gain: '<S10>/Multiply1'
+  //   Rounding: '<S10>/Floor'
+  //   Sum: '<S10>/Add'
 
-  rtb_BusAssignment.motorsensors.qencoder.rotor_angle = rtb_Product;
-  rtb_BusAssignment.motorsensors.electrical_angle = rtb_Add - std::floor
-    (0.00277777785F * rtb_Add) * 360.0F;
+  rtb_BusAssignment.motorsensors.qencoder.rotor_angle = rtb_Add;
+  rtb_BusAssignment.motorsensors.electrical_angle = rtb_Add_o - std::floor
+    (0.00277777785F * rtb_Add_o) * 360.0F;
 	
-		static bool hasPrinted2 = false;
-		static uint32_t cnt = 0;
 	
-		
 	
-		if(rtb_RateTransition4_motor_externals_rotor_index_offset!=0 && (++cnt % 3000) == 0)
-		{
-			
-			hasPrinted2 = true;
-			embot::core::print("N" + std::to_string(cnt) + " OFFSET in process: "  + std::to_string(rtb_RateTransition4_motor_externals_rotor_index_offset) + 
-												 " Elec Angle decoded: "  + std::to_string(rtb_BusAssignment.motorsensors.electrical_angle) +
-			" Mech Angle decoded: "  + std::to_string(rtb_BusAssignment.motorsensors.qencoder.rotor_angle)+ " Counter angle: "  + std::to_string(rtu_SensorData->motorsensors.qencoder.counter)+ " Index: "  + std::to_string(rtu_SensorData->motorsensors.qencoder.Idx_counter));
-		cnt = 0;	
-		}
+	
+	/////////////// Print Data 
+	      static bool hasPrinted2 = false;
+        static uint32_t cnt = 0;
+    
+        
+    
+        if(rtb_RateTransition4_motor_externals_rotor_index_offset!=0 && (++cnt % 3000) == 0)
+        {
+            
+            hasPrinted2 = true;
+            embot::core::print("N" + std::to_string(cnt) + " OFFSET in process: "  + std::to_string(rtb_RateTransition4_motor_externals_rotor_index_offset) + 
+                                                 " Elec Angle decoded: "  + std::to_string(rtb_BusAssignment.motorsensors.electrical_angle) +
+            " Mech Angle decoded: "  + std::to_string(rtb_BusAssignment.motorsensors.qencoder.rotor_angle)+ " Counter angle: "  + std::to_string(rtu_SensorData->motorsensors.qencoder.counter)+ " Index: "  + std::to_string(rtu_SensorData->motorsensors.qencoder.Idx_counter));
+        cnt = 0;    
+        }
+//////////////////////
+				
+				
 
   // Switch: '<S3>/Switch' incorporates:
   //   RateTransition: '<Root>/Rate Transition4'
@@ -283,13 +237,14 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
 
   // ModelReference generated from: '<Root>/Model'
   Calibrator(&rtb_Flags, &rtb_BusAssignment, &rtb_RateTransition5,
-             &rtb_RateTransition3, &rtb_Model_o1, &rtb_Model_o2,
+             &rtb_RateTransition3, &rtb_Model_o1, &localB->Model_o2,
              &localB->Model_o3, &(localDW->Model_InstanceData.rtb),
              &(localDW->Model_InstanceData.rtdw));
 
   // ModelReference: '<Root>/FOC'
-  control_foc(&rtb_Model_o2, &localB->Model_o3, &rtb_Model_o1, rty_FOCOutputs,
-              &(localDW->FOC_InstanceData.rtb), &(localDW->FOC_InstanceData.rtdw),
+  control_foc(&localB->Model_o2, &localB->Model_o3, &rtb_Model_o1,
+              rty_FOCOutputs, &(localDW->FOC_InstanceData.rtb),
+              &(localDW->FOC_InstanceData.rtdw),
               &(localDW->FOC_InstanceData.rtzce));
 
   // RateTransition: '<Root>/Rate Transition2'
@@ -324,39 +279,6 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   localDW->RateTransition2_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Rate Transition2'
-
-  // RateTransition: '<Root>/Rate Transition1'
-  rtw_mutex_lock();
-  wrBufIdx = static_cast<int8_T>(localDW->RateTransition1_LstBufWR + 1);
-  if (wrBufIdx == 3) {
-    wrBufIdx = 0;
-  }
-
-  if (wrBufIdx == localDW->RateTransition1_RDBuf) {
-    wrBufIdx = static_cast<int8_T>(wrBufIdx + 1);
-    if (wrBufIdx == 3) {
-      wrBufIdx = 0;
-    }
-  }
-
-  rtw_mutex_unlock();
-  switch (wrBufIdx) {
-   case 0:
-    localDW->RateTransition1_Buf0 = rtb_Model_o2;
-    break;
-
-   case 1:
-    localDW->RateTransition1_Buf1 = rtb_Model_o2;
-    break;
-
-   case 2:
-    localDW->RateTransition1_Buf2 = rtb_Model_o2;
-    break;
-  }
-
-  localDW->RateTransition1_LstBufWR = wrBufIdx;
-
-  // End of RateTransition: '<Root>/Rate Transition1'
 
   // RateTransition: '<Root>/Transition to 1ms'
   rtw_mutex_lock();
@@ -397,9 +319,8 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
                  rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
                  JointData *rtu_JointData, EstimatedData *rty_EstimatedData,
                  Flags *rty_Flags, ActuatorConfiguration
-                 *rty_ActuatorsConfiguration, SensorsData *rty_SensorData_out,
-                 B_motion_controller_c_T *localB, DW_motion_controller_f_T
-                 *localDW)
+                 *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
+                 DW_motion_controller_f_T *localDW)
 {
   ControlOuterOutputs rtb_Positionvelocitycascade;
   int8_T wrBufIdx;
@@ -477,10 +398,15 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   rty_EstimatedData->motor_temperature = 0.0F;
   rty_EstimatedData->joint_velocity = localB->velocity_g;
 
+  // RateTransition generated from: '<Root>/Motor Supervisor'
+  localB->TmpRTBAtMotorSupervisorInport8 =
+    localB->Model_o2.motorsensors.qencoder.offset;
+
   // ModelReference generated from: '<Root>/Motor Supervisor'
   supervisor(rtu_ExternalFlags, rty_EstimatedData, &localB->RateTransition2,
              &localB->Transitionto1ms, &rtu_Events[0], rtu_InitConf,
-             &localB->targets, rty_ActuatorsConfiguration, rty_Flags,
+             &localB->TmpRTBAtMotorSupervisorInport8, &localB->targets,
+             rty_ActuatorsConfiguration, rty_Flags,
              &(localDW->MotorSupervisor_InstanceData.rtdw));
 
   // ModelReference generated from: '<Root>/Position velocity cascade'
@@ -600,26 +526,6 @@ void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const ReceivedEvents
   localDW->RateTransition4_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Rate Transition4'
-
-  // RateTransition: '<Root>/Rate Transition1'
-  rtw_mutex_lock();
-  localDW->RateTransition1_RDBuf = localDW->RateTransition1_LstBufWR;
-  rtw_mutex_unlock();
-  switch (localDW->RateTransition1_RDBuf) {
-   case 0:
-    *rty_SensorData_out = localDW->RateTransition1_Buf0;
-    break;
-
-   case 1:
-    *rty_SensorData_out = localDW->RateTransition1_Buf1;
-    break;
-
-   case 2:
-    *rty_SensorData_out = localDW->RateTransition1_Buf2;
-    break;
-  }
-
-  // End of RateTransition: '<Root>/Rate Transition1'
 }
 
 // Termination for referenced model: 'motion_controller'
@@ -638,9 +544,6 @@ void motion_controller_Term(DW_motion_controller_f_T *localDW)
   rtw_mutex_destroy();
 
   // Terminate for RateTransition: '<Root>/Rate Transition2'
-  rtw_mutex_destroy();
-
-  // Terminate for RateTransition: '<Root>/Rate Transition1'
   rtw_mutex_destroy();
 
   // Terminate for RateTransition: '<Root>/Transition to 1ms'

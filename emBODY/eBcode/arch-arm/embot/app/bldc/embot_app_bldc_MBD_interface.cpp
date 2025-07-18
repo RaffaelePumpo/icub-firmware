@@ -513,7 +513,8 @@ namespace embot::app::bldc::mbd::interface {
         input->SensorData[motor].motorsensors.Iabc[2] = i.currents.w;
         input->SensorData[motor].motorsensors.qencoder.rotor_angle = i.mechanicalangle;
         input->SensorData[motor].motorsensors.hallABC = i.hall;
-        input->SensorData[motor].motorsensors.qencoder.counter = i.qenc.counter;
+        //input->SensorData[motor].motorsensors.qencoder.counter = i.qenc.counter;
+			input->SensorData[motor].motorsensors.qencoder.counter = i.mechanicalangle;
         input->SensorData[motor].motorsensors.qencoder.Idx_counter = i.qenc.indexcounter;
         //input->SensorData[motor].motorsensors.qencoder.offset = 0; // stays 0 because it is actually a value coing from motor_config message
     }
@@ -630,8 +631,11 @@ namespace embot::app::bldc::mbd::interface {
         info.calibrationdone = false;
         info.offset = 0;
 #else        
-        info.calibrationdone = get_output()->Flags_d[motor].calibration_done;
-        info.offset = get_output()->SensorDataOut[motor].motorsensors.qencoder.offset;   
+
+				embot::core::print("DONE : "  + std::to_string(get_output()->Flags_d[motor].calibration_done) + 
+												 " OFFSET SENT VIA CAN: "  + std::to_string(get_output()->ConfigurationParameters[motor].motor.externals.rotor_index_offset));
+				info.calibrationdone = get_output()->Flags_d[motor].calibration_done;
+        info.offset = get_output()->ConfigurationParameters[motor].motor.externals.rotor_index_offset;   
 #endif        
     }   
     

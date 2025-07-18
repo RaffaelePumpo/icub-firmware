@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 4.73
+// Model version                  : 4.75
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 15:45:08 2025
+// C/C++ source code generated on : Fri Jul 18 09:37:15 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -60,12 +60,13 @@ static void supervisor_Velocity(const EstimatedData *rtu_EstimatedData, const
 static boolean_T supervisor_isConfigurationSet(DW_supervisor_f_T *localDW);
 static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData,
   const FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData,
-  Targets *rty_targets, Flags *rty_Flags, DW_supervisor_f_T *localDW);
+  const real32_T *rtu_offset_calib, Targets *rty_targets, ActuatorConfiguration *
+  rty_ConfigurationParameters, Flags *rty_Flags, DW_supervisor_f_T *localDW);
 static void supervisor_SetLimits(real32_T limits_overload, real32_T limits_peak,
   real32_T limits_nominal, const EstimatedData *rtu_EstimatedData, const
-  FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData, Targets
-  *rty_targets, ActuatorConfiguration *rty_ConfigurationParameters, Flags
-  *rty_Flags, DW_supervisor_f_T *localDW);
+  FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData, const
+  real32_T *rtu_offset_calib, Targets *rty_targets, ActuatorConfiguration
+  *rty_ConfigurationParameters, Flags *rty_Flags, DW_supervisor_f_T *localDW);
 static void supervisor_SetPid(ControlModes pid_type, real32_T pid_P, real32_T
   pid_I, real32_T pid_D, uint8_T pid_shift_factor, ActuatorConfiguration
   *rty_ConfigurationParameters);
@@ -76,8 +77,9 @@ static void supervisor_SetTarget(real32_T tg_velocity, real32_T tg_current,
 static void supervisor_CheckCalibration(boolean_T
   motor_config_has_quadrature_encoder, int16_T motor_config_rotor_index_offset,
   const EstimatedData *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs,
-  const SensorsData *rtu_SensorsData, Targets *rty_targets, Flags *rty_Flags,
-  DW_supervisor_f_T *localDW);
+  const SensorsData *rtu_SensorsData, const real32_T *rtu_offset_calib, Targets *
+  rty_targets, ActuatorConfiguration *rty_ConfigurationParameters, Flags
+  *rty_Flags, DW_supervisor_f_T *localDW);
 
 // Function for Chart: '<Root>/Supervisor'
 static void supervisor_ResetTargets(Targets *rty_targets)
@@ -442,7 +444,8 @@ static boolean_T supervisor_isConfigurationSet(DW_supervisor_f_T *localDW)
 // Function for Chart: '<Root>/Supervisor'
 static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData,
   const FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData,
-  Targets *rty_targets, Flags *rty_Flags, DW_supervisor_f_T *localDW)
+  const real32_T *rtu_offset_calib, Targets *rty_targets, ActuatorConfiguration *
+  rty_ConfigurationParameters, Flags *rty_Flags, DW_supervisor_f_T *localDW)
 {
   int32_T g_previousEvent;
   boolean_T guard1;
@@ -471,6 +474,19 @@ static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData
       // Chart: '<Root>/Supervisor'
       rty_Flags->calibration_type = CalibrationTypes_None;
       rty_Flags->calibration_done = true;
+      if (*rtu_offset_calib < 32768.0F) {
+        if (*rtu_offset_calib >= -32768.0F) {
+          rty_ConfigurationParameters->motor.externals.rotor_index_offset =
+            static_cast<int16_T>(*rtu_offset_calib);
+        } else {
+          rty_ConfigurationParameters->motor.externals.rotor_index_offset =
+            MIN_int16_T;
+        }
+      } else {
+        rty_ConfigurationParameters->motor.externals.rotor_index_offset =
+          MAX_int16_T;
+      }
+
       guard1 = true;
     }
     break;
@@ -795,9 +811,9 @@ static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData
 // Function for Chart: '<Root>/Supervisor'
 static void supervisor_SetLimits(real32_T limits_overload, real32_T limits_peak,
   real32_T limits_nominal, const EstimatedData *rtu_EstimatedData, const
-  FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData, Targets
-  *rty_targets, ActuatorConfiguration *rty_ConfigurationParameters, Flags
-  *rty_Flags, DW_supervisor_f_T *localDW)
+  FOCOutputs *rtu_ControlOutputs, const SensorsData *rtu_SensorsData, const
+  real32_T *rtu_offset_calib, Targets *rty_targets, ActuatorConfiguration
+  *rty_ConfigurationParameters, Flags *rty_Flags, DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
 
@@ -815,7 +831,8 @@ static void supervisor_SetLimits(real32_T limits_overload, real32_T limits_peak,
     if (localDW->is_active_ControlModeHandler != 0) {
       // Chart: '<Root>/Supervisor'
       supervisor_ControlModeHandler(rtu_EstimatedData, rtu_ControlOutputs,
-        rtu_SensorsData, rty_targets, rty_Flags, localDW);
+        rtu_SensorsData, rtu_offset_calib, rty_targets,
+        rty_ConfigurationParameters, rty_Flags, localDW);
     }
 
     localDW->sfEvent = b_previousEvent;
@@ -928,8 +945,9 @@ static void supervisor_SetTarget(real32_T tg_velocity, real32_T tg_current,
 static void supervisor_CheckCalibration(boolean_T
   motor_config_has_quadrature_encoder, int16_T motor_config_rotor_index_offset,
   const EstimatedData *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs,
-  const SensorsData *rtu_SensorsData, Targets *rty_targets, Flags *rty_Flags,
-  DW_supervisor_f_T *localDW)
+  const SensorsData *rtu_SensorsData, const real32_T *rtu_offset_calib, Targets *
+  rty_targets, ActuatorConfiguration *rty_ConfigurationParameters, Flags
+  *rty_Flags, DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
   if (motor_config_has_quadrature_encoder) {
@@ -948,7 +966,8 @@ static void supervisor_CheckCalibration(boolean_T
     if (localDW->is_active_ControlModeHandler != 0) {
       // Chart: '<Root>/Supervisor'
       supervisor_ControlModeHandler(rtu_EstimatedData, rtu_ControlOutputs,
-        rtu_SensorsData, rty_targets, rty_Flags, localDW);
+        rtu_SensorsData, rtu_offset_calib, rty_targets,
+        rty_ConfigurationParameters, rty_Flags, localDW);
     }
 
     localDW->sfEvent = b_previousEvent;
@@ -1039,9 +1058,9 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
                 *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs, const
                 SensorsData *rtu_SensorsData, const ReceivedEvents
                 rtu_ReceivedEvents[4], const ActuatorConfiguration *rtu_InitConf,
-                Targets *rty_targets, ActuatorConfiguration
-                *rty_ConfigurationParameters, Flags *rty_Flags,
-                DW_supervisor_f_T *localDW)
+                const real32_T *rtu_offset_calib, Targets *rty_targets,
+                ActuatorConfiguration *rty_ConfigurationParameters, Flags
+                *rty_Flags, DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
   int32_T ei;
@@ -1076,7 +1095,7 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
                              rtu_ReceivedEvents[ei].limits_content.peak,
                              rtu_ReceivedEvents[ei].limits_content.nominal,
                              rtu_EstimatedData, rtu_ControlOutputs,
-                             rtu_SensorsData, rty_targets,
+                             rtu_SensorsData, rtu_offset_calib, rty_targets,
                              rty_ConfigurationParameters, rty_Flags, localDW);
         break;
 
@@ -1097,7 +1116,8 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
         supervisor_CheckCalibration(rtu_ReceivedEvents[ei].
           motor_config_content.has_quadrature_encoder, rtu_ReceivedEvents[ei].
           motor_config_content.rotor_index_offset, rtu_EstimatedData,
-          rtu_ControlOutputs, rtu_SensorsData, rty_targets, rty_Flags, localDW);
+          rtu_ControlOutputs, rtu_SensorsData, rtu_offset_calib, rty_targets,
+          rty_ConfigurationParameters, rty_Flags, localDW);
         break;
 
        case EventTypes_SetTarget:
@@ -1115,7 +1135,8 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
         localDW->sfEvent = supervisor_event_SetCtrlMode;
         if (localDW->is_active_ControlModeHandler != 0) {
           supervisor_ControlModeHandler(rtu_EstimatedData, rtu_ControlOutputs,
-            rtu_SensorsData, rty_targets, rty_Flags, localDW);
+            rtu_SensorsData, rtu_offset_calib, rty_targets,
+            rty_ConfigurationParameters, rty_Flags, localDW);
         }
 
         localDW->sfEvent = b_previousEvent;
@@ -1184,7 +1205,8 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
 
     if (localDW->is_active_ControlModeHandler != 0) {
       supervisor_ControlModeHandler(rtu_EstimatedData, rtu_ControlOutputs,
-        rtu_SensorsData, rty_targets, rty_Flags, localDW);
+        rtu_SensorsData, rtu_offset_calib, rty_targets,
+        rty_ConfigurationParameters, rty_Flags, localDW);
     }
 
     if ((localDW->is_active_InputsDispatcher != 0) &&
@@ -1197,7 +1219,7 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
                                rtu_ReceivedEvents[ei].limits_content.peak,
                                rtu_ReceivedEvents[ei].limits_content.nominal,
                                rtu_EstimatedData, rtu_ControlOutputs,
-                               rtu_SensorsData, rty_targets,
+                               rtu_SensorsData, rtu_offset_calib, rty_targets,
                                rty_ConfigurationParameters, rty_Flags, localDW);
           break;
 
@@ -1218,7 +1240,8 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
           supervisor_CheckCalibration(rtu_ReceivedEvents[ei].
             motor_config_content.has_quadrature_encoder, rtu_ReceivedEvents[ei].
             motor_config_content.rotor_index_offset, rtu_EstimatedData,
-            rtu_ControlOutputs, rtu_SensorsData, rty_targets, rty_Flags, localDW);
+            rtu_ControlOutputs, rtu_SensorsData, rtu_offset_calib, rty_targets,
+            rty_ConfigurationParameters, rty_Flags, localDW);
           break;
 
          case EventTypes_SetTarget:
@@ -1236,7 +1259,8 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
           localDW->sfEvent = supervisor_event_SetCtrlMode;
           if (localDW->is_active_ControlModeHandler != 0) {
             supervisor_ControlModeHandler(rtu_EstimatedData, rtu_ControlOutputs,
-              rtu_SensorsData, rty_targets, rty_Flags, localDW);
+              rtu_SensorsData, rtu_offset_calib, rty_targets,
+              rty_ConfigurationParameters, rty_Flags, localDW);
           }
 
           localDW->sfEvent = b_previousEvent;
