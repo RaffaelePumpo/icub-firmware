@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Calibrator'.
 //
-// Model version                  : 1.110
+// Model version                  : 1.111
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 15:20:31 2025
+// C/C++ source code generated on : Fri Jul 18 15:38:00 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -71,7 +71,7 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
     // SignalConversion generated from: '<S1>/CalibrationDone' incorporates:
     //   Constant: '<S1>/Constant'
 
-    *rty_CalibrationDone = true;
+    *rty_CalibrationDone = false;
 
     // End of Outputs for SubSystem: '<Root>/If Action Subsystem2'
   } else {

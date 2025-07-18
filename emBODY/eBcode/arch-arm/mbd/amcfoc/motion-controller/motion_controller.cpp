@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.52
+// Model version                  : 5.60
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Fri Jul 18 14:54:59 2025
+// C/C++ source code generated on : Fri Jul 18 16:27:28 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,8 +19,10 @@
 #include "motion_controller.h"
 #include "motion_controller_types.h"
 #include "rtw_mutex.h"
+#include <cmath>
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
+#include "zero_crossing_types.h"
 #include "Calibrator.h"
 #include "control_foc.h"
 #include "estimation_velocity.h"
@@ -73,6 +75,14 @@ void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   // SystemInitialize for ModelReference generated from: '<Root>/Position velocity cascade' 
   position_velocity_cascade_Init
     (&(localDW->Positionvelocitycascade_InstanceData.rtdw));
+
+  // SystemInitialize for Atomic SubSystem: '<Root>/Process Sensors'
+  // SystemInitialize for Triggered SubSystem: '<S3>/Enabled Subsystem'
+  // InitializeConditions for S-Function (sdspunwrap2): '<S7>/Unwrap'
+  localDW->Unwrap_FirstStep = true;
+
+  // End of SystemInitialize for SubSystem: '<S3>/Enabled Subsystem'
+  // End of SystemInitialize for SubSystem: '<Root>/Process Sensors'
 }
 
 // Enable for referenced model: 'motion_controller'
@@ -103,18 +113,21 @@ void motion_controllerTID0(void)
 // Output and update for referenced model: 'motion_controller'
 void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   *rty_FOCOutputs, B_motion_controller_c_T *localB, DW_motion_controller_f_T
-  *localDW)
+  *localDW, ZCE_motion_controller_T *localZCE)
 {
-  // local block i/o variables
-  boolean_T rtb_Model_o1;
   ActuatorConfiguration rtb_RateTransition3;
   FOCSlowInputs rtb_RateTransition5;
   Flags rtb_Flags;
   SensorsData rtb_BusAssignment;
+  real32_T dp;
+  real32_T dpShift;
   real32_T rtb_Add;
+  real32_T rtb_electrical_angle;
   int16_T rtb_RateTransition4_motor_externals_rotor_index_offset;
   int8_T wrBufIdx;
   uint8_T rtb_RateTransition4_motor_externals_pole_pairs;
+  boolean_T rtb_Compare;
+  boolean_T rtb_FixPtRelationalOperator;
   boolean_T rtb_RateTransition4_motor_externals_has_quadrature_encoder;
 
   // RateTransition: '<Root>/Rate Transition4'
@@ -136,12 +149,74 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   rtb_Add = rtu_SensorData->motorsensors.qencoder.counter -
     rtu_SensorData->motorsensors.qencoder.Idx_counter;
 
+  // RelationalOperator: '<S8>/Compare' incorporates:
+  //   UnitDelay: '<S3>/Unit Delay1'
+
+  rtb_Compare = localDW->UnitDelay1_DSTATE;
+
+  // RelationalOperator: '<S6>/FixPt Relational Operator' incorporates:
+  //   UnitDelay: '<S3>/Unit Delay1'
+  //   UnitDelay: '<S6>/Delay Input1'
+  //
+  //  Block description for '<S6>/Delay Input1':
+  //
+  //   Store in Global RAM
+
+  rtb_FixPtRelationalOperator = (static_cast<int32_T>(localDW->UnitDelay1_DSTATE)
+    > static_cast<int32_T>(localDW->DelayInput1_DSTATE));
+
+  // BusAssignment: '<S3>/Bus Assignment'
+  rtb_BusAssignment = *rtu_SensorData;
+
+  // Outputs for Triggered SubSystem: '<S3>/Enabled Subsystem' incorporates:
+  //   TriggerPort: '<S7>/Trigger'
+
+  if (rtb_FixPtRelationalOperator && (localZCE->EnabledSubsystem_Trig_ZCE !=
+       POS_ZCSIG)) {
+    // Gain: '<S9>/Gain1'
+    rtb_electrical_angle = 0.0174532924F * rtb_Add;
+
+    // S-Function (sdspunwrap2): '<S7>/Unwrap'
+    if (localDW->Unwrap_FirstStep) {
+      localDW->Unwrap_Prev = rtb_electrical_angle;
+      localDW->Unwrap_FirstStep = false;
+    }
+
+    dp = rtb_electrical_angle - localDW->Unwrap_Prev;
+    dpShift = dp - std::floor((dp + 3.14159274F) / 6.28318548F) * 6.28318548F;
+    if ((dpShift == -3.14159274F) && (dp > 0.0F)) {
+      dpShift = 3.14159274F;
+    }
+
+    dp = dpShift - dp;
+    if (std::abs(dp) > 6.28318548F) {
+      localDW->Unwrap_Cumsum += dp;
+    }
+
+    localDW->Unwrap_Prev = rtb_electrical_angle;
+
+    // Gain: '<S10>/Gain' incorporates:
+    //   S-Function (sdspunwrap2): '<S7>/Unwrap'
+
+    localB->Gain = (rtb_electrical_angle + localDW->Unwrap_Cumsum) * 57.2957802F;
+  }
+
+  localZCE->EnabledSubsystem_Trig_ZCE = rtb_FixPtRelationalOperator;
+
+  // End of Outputs for SubSystem: '<S3>/Enabled Subsystem'
+
+  // Switch: '<S3>/Switch2'
+  if (rtb_FixPtRelationalOperator) {
+    rtb_Add = localB->Gain;
+  }
+
+  // End of Switch: '<S3>/Switch2'
+
   // BusAssignment: '<S3>/Bus Assignment' incorporates:
   //   Product: '<S3>/Product'
   //   RateTransition: '<Root>/Rate Transition4'
   //   Sum: '<S3>/Add1'
 
-  rtb_BusAssignment = *rtu_SensorData;
   rtb_BusAssignment.motorsensors.qencoder.rotor_angle = rtb_Add;
   rtb_BusAssignment.motorsensors.electrical_angle = rtb_Add *
     static_cast<real32_T>(rtb_RateTransition4_motor_externals_pole_pairs) -
@@ -153,7 +228,7 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   if (!rtb_RateTransition4_motor_externals_has_quadrature_encoder) {
     rtb_BusAssignment = *rtu_SensorData;
   }
-
+       
   // End of Switch: '<S3>/Switch'
   // End of Outputs for SubSystem: '<Root>/Process Sensors'
 
@@ -177,14 +252,19 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   rtb_RateTransition3 = localDW->RateTransition3_Buf
     [localDW->RateTransition3_RDBuf];
 
-  // ModelReference generated from: '<Root>/Model'
+  // ModelReference generated from: '<Root>/Model' incorporates:
+  //   UnitDelay: '<S3>/Unit Delay1'
+
   Calibrator(&rtb_Flags, &rtb_BusAssignment, &rtb_RateTransition5,
-             &rtb_RateTransition3, &rtb_Model_o1, &localB->Model_o2,
-             &localB->Model_o3, &(localDW->Model_InstanceData.rtb),
+             &rtb_RateTransition3, &localDW->UnitDelay1_DSTATE,
+             &localB->Model_o2, &localB->Model_o3,
+             &(localDW->Model_InstanceData.rtb),
              &(localDW->Model_InstanceData.rtdw));
 
-  // ModelReference: '<Root>/FOC'
-  control_foc(&localB->Model_o2, &localB->Model_o3, &rtb_Model_o1,
+  // ModelReference: '<Root>/FOC' incorporates:
+  //   UnitDelay: '<S3>/Unit Delay1'
+
+  control_foc(&localB->Model_o2, &localB->Model_o3, &localDW->UnitDelay1_DSTATE,
               rty_FOCOutputs, &(localDW->FOC_InstanceData.rtb),
               &(localDW->FOC_InstanceData.rtdw),
               &(localDW->FOC_InstanceData.rtzce));
@@ -254,6 +334,17 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   localDW->Transitionto1ms_LstBufWR = wrBufIdx;
 
   // End of RateTransition: '<Root>/Transition to 1ms'
+
+  // Update for Atomic SubSystem: '<Root>/Process Sensors'
+  // Update for UnitDelay: '<S6>/Delay Input1'
+  //
+  //  Block description for '<S6>/Delay Input1':
+  //
+  //   Store in Global RAM
+
+  localDW->DelayInput1_DSTATE = rtb_Compare;
+
+  // End of Update for SubSystem: '<Root>/Process Sensors'
 }
 
 // Output and update for referenced model: 'motion_controller'
@@ -496,7 +587,8 @@ void motion_controller_Term(DW_motion_controller_f_T *localDW)
 }
 
 // Model initialize function
-void motion_controller_initialize(DW_motion_controller_f_T *localDW)
+void motion_controller_initialize(DW_motion_controller_f_T *localDW,
+  ZCE_motion_controller_T *localZCE)
 {
   // Model Initialize function for ModelReference Block: '<Root>/FOC'
   control_foc_initialize(&(localDW->FOC_InstanceData.rtzce));
@@ -504,6 +596,7 @@ void motion_controller_initialize(DW_motion_controller_f_T *localDW)
   // Model Initialize function for ModelReference Block: '<Root>/Position velocity cascade' 
   position_velocity_cascade_initialize
     (&(localDW->Positionvelocitycascade_InstanceData.rtzce));
+  localZCE->EnabledSubsystem_Trig_ZCE = POS_ZCSIG;
 }
 
 //

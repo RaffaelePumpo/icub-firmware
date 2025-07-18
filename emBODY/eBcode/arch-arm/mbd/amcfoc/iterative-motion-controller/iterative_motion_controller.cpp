@@ -9,7 +9,7 @@
 //
 // Model version                  : 4.10
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Fri Jul 18 14:55:06 2025
+// C/C++ source code generated on : Fri Jul 18 16:27:35 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -179,7 +179,7 @@ ActuatorConfiguration AmcfocInitConf[2] = { {
       0.0F,
       0.0F,
       0.0F,
-      30.0F,
+      0.0F,
       ReferenceEncoder_Motor
     }
   } } ;                                // Variable: AmcfocInitConf
@@ -271,7 +271,9 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
                           &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
       .MotionController_InstanceData.rtb),
                           &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
-      .MotionController_InstanceData.rtdw));
+      .MotionController_InstanceData.rtdw),
+                          &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
+      .MotionController_InstanceData.rtzce));
 
     // RateTransition generated from: '<S1>/Model'
     rtw_mutex_lock();
@@ -672,7 +674,9 @@ void AMCFOC_initialize(void)
     for (i_1 = 0; i_1 < 2; i_1++) {
       motion_controller_initialize
         (&(iterative_motion_controller_DW.CoreSubsys[i_1].
-           MotionController_InstanceData.rtdw));
+           MotionController_InstanceData.rtdw),
+         &(iterative_motion_controller_DW.CoreSubsys[i_1].
+           MotionController_InstanceData.rtzce));
     }
   }
 
