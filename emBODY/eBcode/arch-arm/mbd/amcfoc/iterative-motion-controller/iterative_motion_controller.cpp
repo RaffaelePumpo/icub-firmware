@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.10
+// Model version                  : 4.12
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Mon Jul 21 11:20:58 2025
+// C/C++ source code generated on : Mon Jul 21 16:25:16 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -179,7 +179,7 @@ ActuatorConfiguration AmcfocInitConf[2] = { {
       0.0F,
       0.0F,
       0.0F,
-      30.0F,
+      0.0F,
       ReferenceEncoder_Motor
     }
   } } ;                                // Variable: AmcfocInitConf
@@ -268,10 +268,14 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
     motion_controllerTID1(&rtb_ImpSel_InsertedFor_SensorData_at_outport_0,
                           &iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
                           .MotionController_o1,
+                          &iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
+                          .MotionController_o5,
                           &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
       .MotionController_InstanceData.rtb),
                           &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
-      .MotionController_InstanceData.rtdw));
+      .MotionController_InstanceData.rtdw),
+                          &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
+      .MotionController_InstanceData.rtzce));
 
     // RateTransition generated from: '<S1>/Model'
     rtw_mutex_lock();
@@ -295,19 +299,22 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
      case 0:
       iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
         TmpRTBAtModelInport1_Buf0 =
-        rtb_ImpSel_InsertedFor_SensorData_at_outport_0;
+        iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+        MotionController_o5;
       break;
 
      case 1:
       iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
         TmpRTBAtModelInport1_Buf1 =
-        rtb_ImpSel_InsertedFor_SensorData_at_outport_0;
+        iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+        MotionController_o5;
       break;
 
      case 2:
       iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
         TmpRTBAtModelInport1_Buf2 =
-        rtb_ImpSel_InsertedFor_SensorData_at_outport_0;
+        iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+        MotionController_o5;
       break;
     }
 
@@ -672,7 +679,9 @@ void AMCFOC_initialize(void)
     for (i_1 = 0; i_1 < 2; i_1++) {
       motion_controller_initialize
         (&(iterative_motion_controller_DW.CoreSubsys[i_1].
-           MotionController_InstanceData.rtdw));
+           MotionController_InstanceData.rtdw),
+         &(iterative_motion_controller_DW.CoreSubsys[i_1].
+           MotionController_InstanceData.rtzce));
     }
   }
 

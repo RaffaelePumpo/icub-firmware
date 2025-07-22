@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.64
+// Model version                  : 5.77
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Mon Jul 21 11:20:26 2025
+// C/C++ source code generated on : Tue Jul 22 14:51:13 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -41,7 +41,7 @@ struct B_motion_controller_c_T {
   real32_T velocity;                   // '<S1>/Motor Velocity Estimator'
   real32_T velocity_g;                 // '<S1>/Joint Velocity Estimator'
   real32_T TmpRTBAtMotorSupervisorInport8;
-  real32_T unwrapped_angle;            // '<S7>/MATLAB Function'
+  real32_T In;                         // '<S6>/In'
 };
 
 // Block states (default storage) for model 'motion_controller'
@@ -62,9 +62,7 @@ struct DW_motion_controller_f_T {
   void* RateTransition3_SEMAPHORE;     // '<Root>/Rate Transition3'
   void* RateTransition2_SEMAPHORE;     // '<Root>/Rate Transition2'
   void* Transitionto1ms_SEMAPHORE;     // '<Root>/Transition to 1ms'
-  real32_T previous_unwrapped;         // '<S7>/MATLAB Function'
   boolean_T UnitDelay1_DSTATE;         // '<S3>/Unit Delay1'
-  boolean_T DelayInput1_DSTATE;        // '<S6>/Delay Input1'
   int8_T RateTransition4_LstBufWR;     // '<Root>/Rate Transition4'
   int8_T RateTransition4_RDBuf;        // '<Root>/Rate Transition4'
   int8_T Flags_LstBufWR;               // synthesized block
@@ -77,7 +75,6 @@ struct DW_motion_controller_f_T {
   int8_T RateTransition2_RDBuf;        // '<Root>/Rate Transition2'
   int8_T Transitionto1ms_LstBufWR;     // '<Root>/Transition to 1ms'
   int8_T Transitionto1ms_RDBuf;        // '<Root>/Transition to 1ms'
-  boolean_T first_call_not_empty;      // '<S7>/MATLAB Function'
   MdlrefDW_Calibrator_T Model_InstanceData;// '<Root>/Model'
   MdlrefDW_control_foc_T FOC_InstanceData;// '<Root>/FOC'
   MdlrefDW_estimation_velocity_T MotorVelocityEstimator_InstanceData;// '<S1>/Motor Velocity Estimator' 
@@ -87,13 +84,20 @@ struct DW_motion_controller_f_T {
   MdlrefDW_position_velocity_cascade_T Positionvelocitycascade_InstanceData;// '<Root>/Position velocity cascade' 
 };
 
+// Zero-crossing (trigger) state for model 'motion_controller'
+struct ZCE_motion_controller_T {
+  ZCSigState SampleandHold_Trig_ZCE;   // '<S3>/Sample and Hold'
+};
+
 struct MdlrefDW_motion_controller_T {
   B_motion_controller_c_T rtb;
   DW_motion_controller_f_T rtdw;
+  ZCE_motion_controller_T rtzce;
 };
 
 // Model reference registration function
-extern void motion_controller_initialize(DW_motion_controller_f_T *localDW);
+extern void motion_controller_initialize(DW_motion_controller_f_T *localDW,
+  ZCE_motion_controller_T *localZCE);
 extern void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
   DW_motion_controller_f_T *localDW);
@@ -101,8 +105,8 @@ extern void motion_controller_Enable(DW_motion_controller_f_T *localDW);
 extern void motion_controller_Disable(DW_motion_controller_f_T *localDW);
 extern void motion_controllerTID0(void);
 extern void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs *
-  rty_FOCOutputs, B_motion_controller_c_T *localB, DW_motion_controller_f_T
-  *localDW);
+  rty_FOCOutputs, SensorsData *rty_SensorData_decoded, B_motion_controller_c_T
+  *localB, DW_motion_controller_f_T *localDW, ZCE_motion_controller_T *localZCE);
 extern void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const
   ReceivedEvents rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
   JointData *rtu_JointData, EstimatedData *rty_EstimatedData, Flags *rty_Flags,
@@ -130,10 +134,7 @@ extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 //  '<S3>'   : 'motion_controller/Process Sensors'
 //  '<S4>'   : 'motion_controller/Estimation/Thermal model'
 //  '<S5>'   : 'motion_controller/Estimation/Thermal model/Thermal model OFF'
-//  '<S6>'   : 'motion_controller/Process Sensors/Detect Rise Positive'
-//  '<S7>'   : 'motion_controller/Process Sensors/Enabled Subsystem'
-//  '<S8>'   : 'motion_controller/Process Sensors/Detect Rise Positive/Positive'
-//  '<S9>'   : 'motion_controller/Process Sensors/Enabled Subsystem/MATLAB Function'
+//  '<S6>'   : 'motion_controller/Process Sensors/Sample and Hold'
 
 #endif                                 // motion_controller_h_
 

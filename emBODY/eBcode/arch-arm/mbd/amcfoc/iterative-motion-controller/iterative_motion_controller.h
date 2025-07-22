@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.10
+// Model version                  : 4.12
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Mon Jul 21 11:20:58 2025
+// C/C++ source code generated on : Mon Jul 21 16:25:16 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -31,6 +31,7 @@ struct DW_CoreSubsys_iterative_motion_controller_T {
   MdlrefDW_motion_controller_T MotionController_InstanceData;// '<S1>/Motion Controller' 
   ActuatorConfiguration ConfigurationParameters;// '<S1>/Motion Controller'
   BUS_MESSAGES_TX MessagesTx;          // '<S1>/Model'
+  SensorsData MotionController_o5;     // '<S1>/Motion Controller'
   SensorsData TmpRTBAtModelInport1_Buf0;// synthesized block
   SensorsData TmpRTBAtModelInport1_Buf1;// synthesized block
   SensorsData TmpRTBAtModelInport1_Buf2;// synthesized block

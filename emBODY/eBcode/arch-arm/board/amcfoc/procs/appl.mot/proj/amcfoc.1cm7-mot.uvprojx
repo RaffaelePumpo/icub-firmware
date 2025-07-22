@@ -1118,6 +1118,11 @@
               <FileType>8</FileType>
               <FilePath>..\..\..\..\..\mbd\amcfoc\sharedutils\rt_remf.cpp</FilePath>
             </File>
+            <File>
+              <FileName>rt_roundd.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\mbd\amcfoc\sharedutils\rt_roundd.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
