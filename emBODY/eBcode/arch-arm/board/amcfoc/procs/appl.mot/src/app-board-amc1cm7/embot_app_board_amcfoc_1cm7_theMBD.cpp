@@ -1138,8 +1138,8 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::FOC(embot::hw::MOTOR m)
         float electricalangle = _items[embot::core::tointegral(m)].electricalangle;
         float mechanicalangle = _items[embot::core::tointegral(m)].position;
         embot::app::bldc::mbd::interface::IO2::Qenc qe {0};
-        qe.counter = _items[embot::core::tointegral(m)].qencangle*4.0;
-        qe.indexcounter = _items[embot::core::tointegral(m)].qencangleoflastindex*4.0;
+        qe.counter = _items[embot::core::tointegral(m)].qencangle;
+        qe.indexcounter = _items[embot::core::tointegral(m)].qencangleoflastindex;
             
         input[embot::core::tointegral(m)].load(electricalangle, _items[embot::core::tointegral(m)].currents, mechanicalangle, hall, qe); 
     }
