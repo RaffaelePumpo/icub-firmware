@@ -9,7 +9,7 @@
 //
 // Model version                  : 4.16
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 23 11:46:24 2025
+// C/C++ source code generated on : Wed Jul 23 15:53:14 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -273,7 +273,9 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
                           &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
       .MotionController_InstanceData.rtb),
                           &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
-      .MotionController_InstanceData.rtdw));
+      .MotionController_InstanceData.rtdw),
+                          &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr]
+      .MotionController_InstanceData.rtzce));
 
     // RateTransition generated from: '<S1>/Model'
     rtw_mutex_lock();
@@ -379,7 +381,8 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
     }
 #else  
     #warning MBD_foc_keep_degenerated_code is undefined
-#endif    // ForEachSliceSelector generated from: '<S1>/InitConf' incorporates:
+#endif    
+// ForEachSliceSelector generated from: '<S1>/InitConf' incorporates:
     //   Constant: '<Root>/Constant'
 
     rtb_ImpSel_InsertedFor_InitConf_at_outport_0 = AmcfocInitConf[ForEach_itr];
@@ -676,7 +679,9 @@ void AMCFOC_initialize(void)
     for (i_1 = 0; i_1 < 2; i_1++) {
       motion_controller_initialize
         (&(iterative_motion_controller_DW.CoreSubsys[i_1].
-           MotionController_InstanceData.rtdw));
+           MotionController_InstanceData.rtdw),
+         &(iterative_motion_controller_DW.CoreSubsys[i_1].
+           MotionController_InstanceData.rtzce));
     }
   }
 

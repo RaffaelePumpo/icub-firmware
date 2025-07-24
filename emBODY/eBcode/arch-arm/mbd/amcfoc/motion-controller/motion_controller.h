@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.79
+// Model version                  : 5.90
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 23 11:46:18 2025
+// C/C++ source code generated on : Wed Jul 23 16:40:35 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -41,6 +41,8 @@ struct B_motion_controller_c_T {
   real32_T velocity;                   // '<S1>/Motor Velocity Estimator'
   real32_T velocity_g;                 // '<S1>/Joint Velocity Estimator'
   real32_T TmpRTBAtMotorSupervisorInport8;
+  real32_T In;                         // '<S7>/In'
+  real32_T In_g;                       // '<S6>/In'
 };
 
 // Block states (default storage) for model 'motion_controller'
@@ -61,6 +63,7 @@ struct DW_motion_controller_f_T {
   void* RateTransition3_SEMAPHORE;     // '<Root>/Rate Transition3'
   void* RateTransition2_SEMAPHORE;     // '<Root>/Rate Transition2'
   void* Transitionto1ms_SEMAPHORE;     // '<Root>/Transition to 1ms'
+  boolean_T UnitDelay1_DSTATE;         // '<S3>/Unit Delay1'
   int8_T RateTransition4_LstBufWR;     // '<Root>/Rate Transition4'
   int8_T RateTransition4_RDBuf;        // '<Root>/Rate Transition4'
   int8_T Flags_LstBufWR;               // synthesized block
@@ -82,13 +85,21 @@ struct DW_motion_controller_f_T {
   MdlrefDW_position_velocity_cascade_T Positionvelocitycascade_InstanceData;// '<Root>/Position velocity cascade' 
 };
 
+// Zero-crossing (trigger) state for model 'motion_controller'
+struct ZCE_motion_controller_T {
+  ZCSigState SampleandHold1_Trig_ZCE;  // '<S3>/Sample and Hold1'
+  ZCSigState SampleandHold_Trig_ZCE;   // '<S3>/Sample and Hold'
+};
+
 struct MdlrefDW_motion_controller_T {
   B_motion_controller_c_T rtb;
   DW_motion_controller_f_T rtdw;
+  ZCE_motion_controller_T rtzce;
 };
 
 // Model reference registration function
-extern void motion_controller_initialize(DW_motion_controller_f_T *localDW);
+extern void motion_controller_initialize(DW_motion_controller_f_T *localDW,
+  ZCE_motion_controller_T *localZCE);
 extern void motion_controller_Init(Flags *rty_Flags, ActuatorConfiguration
   *rty_ActuatorsConfiguration, B_motion_controller_c_T *localB,
   DW_motion_controller_f_T *localDW);
@@ -97,7 +108,7 @@ extern void motion_controller_Disable(DW_motion_controller_f_T *localDW);
 extern void motion_controllerTID0(void);
 extern void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs *
   rty_FOCOutputs, SensorsData *rty_SensorData_decoded, B_motion_controller_c_T
-  *localB, DW_motion_controller_f_T *localDW);
+  *localB, DW_motion_controller_f_T *localDW, ZCE_motion_controller_T *localZCE);
 extern void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const
   ReceivedEvents rtu_Events[4], const ActuatorConfiguration *rtu_InitConf, const
   JointData *rtu_JointData, EstimatedData *rty_EstimatedData, Flags *rty_Flags,
@@ -125,6 +136,8 @@ extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 //  '<S3>'   : 'motion_controller/Process Sensors'
 //  '<S4>'   : 'motion_controller/Estimation/Thermal model'
 //  '<S5>'   : 'motion_controller/Estimation/Thermal model/Thermal model OFF'
+//  '<S6>'   : 'motion_controller/Process Sensors/Sample and Hold'
+//  '<S7>'   : 'motion_controller/Process Sensors/Sample and Hold1'
 
 #endif                                 // motion_controller_h_
 

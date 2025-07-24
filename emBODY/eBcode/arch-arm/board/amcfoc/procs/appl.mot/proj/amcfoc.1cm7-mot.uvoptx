@@ -1656,7 +1656,7 @@
 
   <Group>
     <GroupName>mbd::motion-controller</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1664,7 +1664,7 @@
       <GroupNumber>27</GroupNumber>
       <FileNumber>101</FileNumber>
       <FileType>8</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\..\..\mbd\amcfoc\motion-controller\motion_controller.cpp</PathWithFileName>
@@ -1688,7 +1688,7 @@
 
   <Group>
     <GroupName>mbd::calibrator</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

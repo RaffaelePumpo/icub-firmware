@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Calibrator'.
 //
-// Model version                  : 1.111
+// Model version                  : 1.116
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Fri Jul 18 15:38:00 2025
+// C/C++ source code generated on : Thu Jul 24 09:13:33 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -105,8 +105,8 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
       localDW->p_index = rtu_Sensors->motorsensors.qencoder.Idx_counter;
       localDW->diff_index = 0.0F;
       localDW->tzeroalign = 0.7;
-      localDW->talign = 0.1;
-      localDW->v_threshold = 2.0;
+      localDW->talign = 0.01;
+      localDW->v_threshold = 1.0;
       localDW->count = 0.0F;
       localB->target_angle = 0.0F;
     } else {
@@ -139,8 +139,8 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
           localDW->p_index = rtu_Sensors->motorsensors.qencoder.Idx_counter;
           localDW->diff_index = 0.0F;
           localDW->tzeroalign = 0.7;
-          localDW->talign = 0.1;
-          localDW->v_threshold = 2.0;
+          localDW->talign = 0.01;
+          localDW->v_threshold = 1.0;
           localDW->count = 0.0F;
           localB->target_angle = 0.0F;
         } else if ((localDW->diff_index != 0.0F) && (rtu_Flags->calibration_type
@@ -200,8 +200,8 @@ void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
               } else if ((localDW->temporalCounter_i1 >= static_cast<uint32_T>
                           (tmp_0)) && (localDW->condition == 4.0)) {
                 localDW->is_c1_Calibrator = Calibrator_IN_Read_0_encoder;
-                localB->offset = rtu_Sensors->motorsensors.qencoder.rotor_angle
-                  + 90.0F;
+                localB->offset = 45.0F -
+                  rtu_Sensors->motorsensors.qencoder.rotor_angle;
                 if (localB->offset > 360.0F) {
                   localB->offset -= 360.0F;
                 }
