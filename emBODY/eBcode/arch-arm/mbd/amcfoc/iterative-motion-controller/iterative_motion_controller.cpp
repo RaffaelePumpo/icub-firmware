@@ -381,8 +381,8 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
     }
 #else  
     #warning MBD_foc_keep_degenerated_code is undefined
-#endif    
-// ForEachSliceSelector generated from: '<S1>/InitConf' incorporates:
+#endif
+    // ForEachSliceSelector generated from: '<S1>/InitConf' incorporates:
     //   Constant: '<Root>/Constant'
 
     rtb_ImpSel_InsertedFor_InitConf_at_outport_0 = AmcfocInitConf[ForEach_itr];

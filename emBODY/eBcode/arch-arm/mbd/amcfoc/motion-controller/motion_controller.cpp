@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.90
+// Model version                  : 5.94
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 23 16:40:35 2025
+// C/C++ source code generated on : Thu Jul 24 09:35:39 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,6 +19,7 @@
 #include "motion_controller.h"
 #include "motion_controller_types.h"
 #include "rtw_mutex.h"
+#include <cmath>
 #include "rt_remf.h"
 #include "rtwtypes.h"
 #include "motion_controller_private.h"
@@ -110,6 +111,7 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   ActuatorConfiguration rtb_RateTransition3;
   FOCSlowInputs rtb_RateTransition5;
   Flags rtb_Flags;
+  real32_T rtb_Rem;
   real32_T rtb_Switch1;
   int16_T rtb_RateTransition4_motor_externals_rotor_index_offset;
   int8_T wrBufIdx;
@@ -135,12 +137,12 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   *rty_SensorData_decoded = *rtu_SensorData;
 
   // Outputs for Triggered SubSystem: '<S3>/Sample and Hold' incorporates:
-  //   TriggerPort: '<S6>/Trigger'
+  //   TriggerPort: '<S7>/Trigger'
 
   // UnitDelay: '<S3>/Unit Delay1'
   if (localDW->UnitDelay1_DSTATE && (localZCE->SampleandHold_Trig_ZCE !=
        POS_ZCSIG)) {
-    // SignalConversion generated from: '<S6>/In'
+    // SignalConversion generated from: '<S7>/In'
     localB->In_g = rtu_SensorData->motorsensors.qencoder.Idx_counter;
   }
 
@@ -149,11 +151,11 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
   // End of Outputs for SubSystem: '<S3>/Sample and Hold'
 
   // Outputs for Triggered SubSystem: '<S3>/Sample and Hold1' incorporates:
-  //   TriggerPort: '<S7>/Trigger'
+  //   TriggerPort: '<S8>/Trigger'
 
   if (localDW->UnitDelay1_DSTATE && (localZCE->SampleandHold1_Trig_ZCE !=
        POS_ZCSIG)) {
-    // SignalConversion generated from: '<S7>/In' incorporates:
+    // SignalConversion generated from: '<S8>/In' incorporates:
     //   Constant: '<S3>/One'
 
     localB->In = 1.0F;
@@ -176,18 +178,48 @@ void motion_controllerTID1(const SensorsData *rtu_SensorData, FOCOutputs
 
   // End of Switch: '<S3>/Switch1'
 
+  // If: '<S11>/If' incorporates:
+  //   Constant: '<S13>/Constant'
+  //   Product: '<S16>/Product'
+  //   RateTransition: '<Root>/Rate Transition4'
+  //   Sum: '<S13>/Add'
+  //   Sum: '<S14>/Add'
+  //   Switch: '<S10>/Switch'
+
+  if (rtb_Switch1 <= rtb_RateTransition4_motor_externals_rotor_index_offset) {
+    // Outputs for IfAction SubSystem: '<S11>/If Action Subsystem' incorporates:
+    //   ActionPort: '<S13>/Action Port'
+
+    rtb_Rem = (rtb_Switch1 + 360.0F) - static_cast<real32_T>
+      (rtb_RateTransition4_motor_externals_rotor_index_offset);
+
+    // End of Outputs for SubSystem: '<S11>/If Action Subsystem'
+  } else {
+    // Outputs for IfAction SubSystem: '<S11>/If Action Subsystem1' incorporates:
+    //   ActionPort: '<S14>/Action Port'
+
+    rtb_Rem = rtb_Switch1 - static_cast<real32_T>
+      (rtb_RateTransition4_motor_externals_rotor_index_offset);
+
+    // End of Outputs for SubSystem: '<S11>/If Action Subsystem1'
+  }
+
+  rtb_Rem *= static_cast<real32_T>
+    (rtb_RateTransition4_motor_externals_pole_pairs);
+
+  // End of If: '<S11>/If'
+
   // BusAssignment: '<S3>/Bus Assignment' incorporates:
   //   Constant: '<S3>/Constant'
+  //   Gain: '<S12>/Multiply'
+  //   Gain: '<S12>/Multiply1'
   //   Math: '<S3>/Rem'
-  //   Product: '<S3>/Product'
-  //   RateTransition: '<Root>/Rate Transition4'
-  //   Sum: '<S3>/Add1'
+  //   Rounding: '<S12>/Floor'
+  //   Sum: '<S12>/Add'
 
+  rty_SensorData_decoded->motorsensors.electrical_angle = rt_remf(rtb_Rem - std::
+    floor(0.00277777785F * rtb_Rem) * 360.0F, 360.0F);
   rty_SensorData_decoded->motorsensors.qencoder.rotor_angle = rtb_Switch1;
-  rty_SensorData_decoded->motorsensors.electrical_angle = rt_remf((rtb_Switch1 -
-    static_cast<real32_T>(rtb_RateTransition4_motor_externals_rotor_index_offset))
-    * static_cast<real32_T>(rtb_RateTransition4_motor_externals_pole_pairs),
-    360.0F);
 
   // Switch: '<S3>/Switch' incorporates:
   //   RateTransition: '<Root>/Rate Transition4'

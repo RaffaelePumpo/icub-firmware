@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.90
+// Model version                  : 5.94
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 23 16:40:35 2025
+// C/C++ source code generated on : Thu Jul 24 09:35:39 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -41,8 +41,8 @@ struct B_motion_controller_c_T {
   real32_T velocity;                   // '<S1>/Motor Velocity Estimator'
   real32_T velocity_g;                 // '<S1>/Joint Velocity Estimator'
   real32_T TmpRTBAtMotorSupervisorInport8;
-  real32_T In;                         // '<S7>/In'
-  real32_T In_g;                       // '<S6>/In'
+  real32_T In;                         // '<S8>/In'
+  real32_T In_g;                       // '<S7>/In'
 };
 
 // Block states (default storage) for model 'motion_controller'
@@ -117,6 +117,12 @@ extern void mc_step_1ms(const ExternalFlags *rtu_ExternalFlags, const
 extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 
 //-
+//  These blocks were eliminated from the model due to optimizations:
+//
+//  Block '<S10>/Data Type Duplicate' : Unused code path elimination
+
+
+//-
 //  The generated code includes comments that allow you to trace directly
 //  back to the appropriate location in the model.  The basic format
 //  is <system>/block_name, where system is the system number (uniquely
@@ -136,8 +142,17 @@ extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 //  '<S3>'   : 'motion_controller/Process Sensors'
 //  '<S4>'   : 'motion_controller/Estimation/Thermal model'
 //  '<S5>'   : 'motion_controller/Estimation/Thermal model/Thermal model OFF'
-//  '<S6>'   : 'motion_controller/Process Sensors/Sample and Hold'
-//  '<S7>'   : 'motion_controller/Process Sensors/Sample and Hold1'
+//  '<S6>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position'
+//  '<S7>'   : 'motion_controller/Process Sensors/Sample and Hold'
+//  '<S8>'   : 'motion_controller/Process Sensors/Sample and Hold1'
+//  '<S9>'   : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec'
+//  '<S10>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point'
+//  '<S11>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset'
+//  '<S12>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec'
+//  '<S13>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset/If Action Subsystem'
+//  '<S14>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Compensate Offset/If Action Subsystem1'
+//  '<S15>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec/Variant Subsystem'
+//  '<S16>'  : 'motion_controller/Process Sensors/Mechanical to Electrical Position/MechToElec/floating-point/Mech To Elec/Variant Subsystem/Input Port'
 
 #endif                                 // motion_controller_h_
 
