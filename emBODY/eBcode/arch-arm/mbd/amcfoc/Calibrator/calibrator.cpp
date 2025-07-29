@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'Calibrator'.
 //
-// Model version                  : 1.116
+// Model version                  : 1.118
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Jul 24 09:13:33 2025
+// C/C++ source code generated on : Tue Jul 29 11:32:23 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -44,9 +44,9 @@ void Calibrator_Disable(DW_Calibrator_f_T *localDW)
 }
 
 // Output and update for referenced model: 'Calibrator'
-void Calibrator(const Flags *rtu_Flags, const SensorsData *rtu_Sensors, const
-                FOCSlowInputs *rtu_FocInputs, const ActuatorConfiguration
-                *rtu_ActuatorCfg, boolean_T *rty_CalibrationDone, SensorsData
+void Calibrator(const Flags *rtu_Flags, const FOCSlowInputs *rtu_FocInputs,
+                const ActuatorConfiguration *rtu_ActuatorCfg, const SensorsData *
+                rtu_Sensors, boolean_T *rty_CalibrationDone, SensorsData
                 *rty_SensorDataCalibration, FOCSlowInputs
                 *rty_FocInputsCalibration, B_Calibrator_c_T *localB,
                 DW_Calibrator_f_T *localDW)

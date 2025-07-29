@@ -1199,7 +1199,7 @@ void embot::app::board::amcfoc::cm7::theMBD::Impl::FOC(embot::hw::MOTOR m)
         _items[embot::core::tointegral(m)].pwm.v = std::clamp(output[embot::core::tointegral(m)].pwm.v - 5.0f, 0.0f, 100.0f);   
         _items[embot::core::tointegral(m)].pwm.w = std::clamp(output[embot::core::tointegral(m)].pwm.w - 5.0f, 0.0f, 100.0f);        
 #else        
-        _items[embot::core::tointegral(m)].pwm = output[embot::core::tointegral(m)].pwm; 
+        _items[embot::core::tointegral(m)].pwm = output[embot::core::tointegral(m)].pwm;
 #endif     
 				embot::hw::motor::bldc::set(m, _items[embot::core::tointegral(m)].pwm);        
 

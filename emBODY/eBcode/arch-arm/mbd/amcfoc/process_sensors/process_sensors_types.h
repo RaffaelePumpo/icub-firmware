@@ -3,21 +3,21 @@
 // granting, nonprofit, education, and research organizations only. Not
 // for commercial or industrial use.
 //
-// File: Calibrator_types.h
+// File: process_sensors_types.h
 //
-// Code generated for Simulink model 'Calibrator'.
+// Code generated for Simulink model 'process_sensors'.
 //
-// Model version                  : 1.118
+// Model version                  : 1.8
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul 29 11:32:23 2025
+// C/C++ source code generated on : Tue Jul 29 11:49:09 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef Calibrator_types_h_
-#define Calibrator_types_h_
+#ifndef process_sensors_types_h_
+#define process_sensors_types_h_
 #include "rtwtypes.h"
 #ifndef DEFINED_TYPEDEF_FOR_DriverSensors_
 #define DEFINED_TYPEDEF_FOR_DriverSensors_
@@ -221,145 +221,7 @@ struct ActuatorConfiguration
 };
 
 #endif
-
-#ifndef DEFINED_TYPEDEF_FOR_CalibrationTypes_
-#define DEFINED_TYPEDEF_FOR_CalibrationTypes_
-
-typedef enum {
-  CalibrationTypes_None = 0,           // Default value
-  CalibrationTypes_Search_Index,
-  CalibrationTypes_Full_Calibration
-} CalibrationTypes;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_HardwareFaults_
-#define DEFINED_TYPEDEF_FOR_HardwareFaults_
-
-struct HardwareFaults
-{
-  boolean_T overcurrent;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Flags_
-#define DEFINED_TYPEDEF_FOR_Flags_
-
-struct Flags
-{
-  // Flag that shows if:
-  // 0. None calibration
-  // 1. Search Index must be done
-  // 2. Full calibration must be done
-  CalibrationTypes calibration_type;
-  boolean_T calibration_done;
-  boolean_T enable_sending_msg_status;
-  HardwareFaults hw_faults;
-  boolean_T enable_thermal_protection;
-
-  // control mode
-  ControlModes control_mode;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_EstimationVelocityModes_
-#define DEFINED_TYPEDEF_FOR_EstimationVelocityModes_
-
-typedef enum {
-  EstimationVelocityModes_Disabled = 0,// Default value
-  EstimationVelocityModes_MovingAverage,
-  EstimationVelocityModes_LeastSquares
-} EstimationVelocityModes;
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_EstimationConfiguration_
-#define DEFINED_TYPEDEF_FOR_EstimationConfiguration_
-
-struct EstimationConfiguration
-{
-  real32_T environment_temperature;
-  real32_T current_rms_lambda;
-  EstimationVelocityModes velocity_est_mode;
-  uint32_T velocity_est_window;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_GlobalConfiguration_
-#define DEFINED_TYPEDEF_FOR_GlobalConfiguration_
-
-struct GlobalConfiguration
-{
-  EstimationConfiguration estimation;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_EstimatedData_
-#define DEFINED_TYPEDEF_FOR_EstimatedData_
-
-struct EstimatedData
-{
-  // velocity
-  real32_T rotor_velocity;
-
-  // filtered motor current
-  real32_T Iq_filtered;
-
-  // motor temperature
-  real32_T motor_temperature;
-
-  // velocity
-  real32_T joint_velocity;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_Targets_
-#define DEFINED_TYPEDEF_FOR_Targets_
-
-struct Targets
-{
-  real32_T position;
-  real32_T velocity;
-  real32_T current;
-  real32_T voltage;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
-#define DEFINED_TYPEDEF_FOR_ControlOuterOutputs_
-
-struct ControlOuterOutputs
-{
-  boolean_T vel_en;
-  boolean_T cur_en;
-  boolean_T out_en;
-  boolean_T pid_reset;
-  real32_T motorcurrent;
-  real32_T current_limiter;
-};
-
-#endif
-
-#ifndef DEFINED_TYPEDEF_FOR_FOCSlowInputs_
-#define DEFINED_TYPEDEF_FOR_FOCSlowInputs_
-
-struct FOCSlowInputs
-{
-  GlobalConfiguration global_configuration;
-  ActuatorConfiguration actuator_configuration;
-  EstimatedData estimated_data;
-  Targets targets;
-  ControlOuterOutputs control_outer_outputs;
-};
-
-#endif
-#endif                                 // Calibrator_types_h_
+#endif                                 // process_sensors_types_h_
 
 //
 // File trailer for generated code.

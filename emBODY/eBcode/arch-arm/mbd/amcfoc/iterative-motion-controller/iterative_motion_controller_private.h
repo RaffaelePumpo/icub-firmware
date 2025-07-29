@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.16
+// Model version                  : 4.28
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 23 15:53:14 2025
+// C/C++ source code generated on : Tue Jul 29 15:42:38 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -21,6 +21,13 @@
 #include "rtwtypes.h"
 #include "zero_crossing_types.h"
 #include "iterative_motion_controller_types.h"
+#include "iterative_motion_controller.h"
+
+extern void iterative_motion_controller_SortEvents_Init(ReceivedEvents
+  rty_SortedEvs[8]);
+extern void iterative_motion_controller_SortEvents(const ReceivedEvents rtu_e[8],
+  ReceivedEvents rty_SortedEvs[8]);
+
 #endif                                // iterative_motion_controller_private_h_
 
 //
