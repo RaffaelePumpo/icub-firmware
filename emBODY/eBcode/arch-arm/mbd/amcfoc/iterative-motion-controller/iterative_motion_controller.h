@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.28
+// Model version                  : 4.29
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul 29 15:42:38 2025
+// C/C++ source code generated on : Wed Jul 30 12:36:29 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -77,7 +77,9 @@ struct DW_CoreSubsys_iterative_motion_controller_T {
   int8_T RateTransition2_RDBuf;        // '<S1>/Rate Transition2'
   int8_T Transitionto1ms_LstBufWR;     // '<S1>/Transition to 1ms'
   int8_T Transitionto1ms_RDBuf;        // '<S1>/Transition to 1ms'
+  boolean_T areLimitsSet;              // '<S1>/Motion Controller'
   boolean_T UnitDelay_DSTATE;          // '<S1>/Unit Delay'
+  volatile boolean_T TmpRTBAtFOCInport4_Buffer0;// synthesized block
 };
 
 // Block signals and states (default storage) for system '<Root>'

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 4.75
+// Model version                  : 4.76
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul 29 11:32:40 2025
+// C/C++ source code generated on : Wed Jul 30 12:06:02 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -47,7 +47,6 @@ struct DW_supervisor_f_T {
   uint8_T is_InputsDispatcher;         // '<Root>/Supervisor'
   uint8_T is_active_TargetsManager;    // '<Root>/Supervisor'
   uint8_T is_TargetsManager;           // '<Root>/Supervisor'
-  boolean_T areLimitsSet;              // '<Root>/Supervisor'
   boolean_T ExternalFlags_fault_button_prev;// '<Root>/Supervisor'
   boolean_T ExternalFlags_fault_button_start;// '<Root>/Supervisor'
 };
@@ -63,7 +62,7 @@ extern void supervisor(const ExternalFlags *rtu_ExternalFlags, const
   SensorsData *rtu_SensorsData, const ReceivedEvents rtu_ReceivedEvents[4],
   const ActuatorConfiguration *rtu_InitConf, const real32_T *rtu_offset_calib,
   Targets *rty_targets, ActuatorConfiguration *rty_ConfigurationParameters,
-  Flags *rty_Flags, DW_supervisor_f_T *localDW);
+  Flags *rty_Flags, boolean_T *rty_ArelimitSet, DW_supervisor_f_T *localDW);
 
 //-
 //  The generated code includes comments that allow you to trace directly

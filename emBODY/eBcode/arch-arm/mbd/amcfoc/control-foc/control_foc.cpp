@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'control_foc'.
 //
-// Model version                  : 9.4
+// Model version                  : 9.8
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 11:54:54 2025
+// C/C++ source code generated on : Wed Jul 30 12:05:19 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -32,16 +32,17 @@ void control_foc_Init(DW_control_foc_f_T *localDW)
 
 // Output and update for referenced model: 'control_foc'
 void control_foc(const SensorsData *rtu_Sensors, const FOCSlowInputs
-                 *rtu_FocSlowInputs, const boolean_T *rtu_CalibrationDone,
-                 FOCOutputs *rty_FOCOutputs, B_control_foc_c_T *localB,
-                 DW_control_foc_f_T *localDW, ZCE_control_foc_T *localZCE)
+                 *rtu_FocSlowInputs, const boolean_T *rtu_CalibrationDone, const
+                 boolean_T *rtu_areLimitSet, FOCOutputs *rty_FOCOutputs,
+                 B_control_foc_c_T *localB, DW_control_foc_f_T *localDW,
+                 ZCE_control_foc_T *localZCE)
 {
   // Outputs for Atomic SubSystem: '<Root>/FOC inner loop'
   FOCInnerLoop(rtu_CalibrationDone, rtu_Sensors,
                &rtu_FocSlowInputs->actuator_configuration,
                &rtu_FocSlowInputs->targets,
-               &rtu_FocSlowInputs->control_outer_outputs, rty_FOCOutputs,
-               &localB->FOCinnerloop, &localDW->FOCinnerloop,
+               &rtu_FocSlowInputs->control_outer_outputs, rtu_areLimitSet,
+               rty_FOCOutputs, &localB->FOCinnerloop, &localDW->FOCinnerloop,
                &localZCE->FOCinnerloop);
 
   // End of Outputs for SubSystem: '<Root>/FOC inner loop'
@@ -51,6 +52,15 @@ void control_foc(const SensorsData *rtu_Sensors, const FOCSlowInputs
                       &localB->FOCinnerloop, &localDW->FOCinnerloop);
 
   // End of Update for SubSystem: '<Root>/FOC inner loop'
+}
+
+// Termination for referenced model: 'control_foc'
+void control_foc_Term(DW_control_foc_f_T *localDW)
+{
+  // Terminate for Atomic SubSystem: '<Root>/FOC inner loop'
+  FOCInnerLoop_Term(&localDW->FOCinnerloop);
+
+  // End of Terminate for SubSystem: '<Root>/FOC inner loop'
 }
 
 // Model initialize function

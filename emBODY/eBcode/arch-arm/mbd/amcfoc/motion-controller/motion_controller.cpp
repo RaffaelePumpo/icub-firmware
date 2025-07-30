@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.39
+// Model version                  : 5.40
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul 29 15:42:21 2025
+// C/C++ source code generated on : Wed Jul 30 12:06:17 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -91,8 +91,8 @@ void mc_step_1ms(const SensorsData *rtu_SensorData, const ExternalFlags
                  real32_T *rtu_offset_calib, EstimatedData *rty_EstimatedData,
                  Flags *rty_Flags, ActuatorConfiguration
                  *rty_ActuatorsConfiguration, FOCSlowInputs *rty_FOCSlowInputs,
-                 B_motion_controller_c_T *localB, DW_motion_controller_f_T
-                 *localDW)
+                 boolean_T *rty_areLimitSet, B_motion_controller_c_T *localB,
+                 DW_motion_controller_f_T *localDW)
 {
   // Constant: '<S2>/Velocity Estimation Mode'
   localB->VelocityEstimationMode = EstimationVelocityModes_MovingAverage;
@@ -139,7 +139,7 @@ void mc_step_1ms(const SensorsData *rtu_SensorData, const ExternalFlags
   supervisor(rtu_ExternalFlags, rty_EstimatedData, rtu_FOCOutputs,
              rtu_SensorData, &rtu_Events[0], rtu_InitConf, rtu_offset_calib,
              &localB->targets, rty_ActuatorsConfiguration, rty_Flags,
-             &(localDW->MotorSupervisor_InstanceData.rtdw));
+             rty_areLimitSet, &(localDW->MotorSupervisor_InstanceData.rtdw));
 
   // ModelReference generated from: '<Root>/Position velocity cascade'
   position_velocity_cascade(rty_EstimatedData, &localB->targets,

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 4.28
+// Model version                  : 4.29
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul 29 15:42:38 2025
+// C/C++ source code generated on : Wed Jul 30 12:36:29 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -348,6 +348,7 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
   Flags rtb_RateTransition4;
   SensorsData rtb_ImpSel_InsertedFor_SensorData_at_outport_0;
   int8_T wrBufIdx;
+  boolean_T rtb_TmpRTBAtFOCInport4;
   boolean_T rtb_UnitDelay;
 
   // Outputs for Iterator SubSystem: '<Root>/Iterative Motion Controller' incorporates:
@@ -359,6 +360,11 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
 
     rtb_ImpSel_InsertedFor_SensorData_at_outport_0 =
       iterative_motion_controller_U.SensorData[ForEach_itr];
+
+    // RateTransition generated from: '<S1>/FOC'
+    rtb_TmpRTBAtFOCInport4 =
+      iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+      TmpRTBAtFOCInport4_Buffer0;
 
     // RateTransition: '<S1>/Rate Transition4'
     rtw_mutex_lock();
@@ -431,7 +437,7 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
     control_foc(&iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                 Calibrator_o2,
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
-                Calibrator_o3, &rtb_Calibrator_o1,
+                Calibrator_o3, &rtb_Calibrator_o1, &rtb_TmpRTBAtFOCInport4,
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].FOC,
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                   FOC_InstanceData.rtb),
@@ -672,6 +678,8 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
                 ConfigurationParameters,
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                 MotionController_o4,
+                &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+                areLimitsSet,
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                   MotionController_InstanceData.rtb),
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
@@ -807,6 +815,11 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
       RateTransition5_LstBufWR = wrBufIdx;
 
     // End of RateTransition: '<S1>/Rate Transition5'
+
+    // RateTransition generated from: '<S1>/FOC'
+    iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+      TmpRTBAtFOCInport4_Buffer0 =
+      iterative_motion_controller_DW.CoreSubsys[ForEach_itr].areLimitsSet;
 
     // ForEachSliceAssignment generated from: '<S1>/Messages' incorporates:
     //   ModelReference generated from: '<S1>/Model'
@@ -1038,6 +1051,10 @@ void AMCFOC_terminate(void)
 
     // Terminate for RateTransition: '<S1>/Rate Transition3'
     rtw_mutex_destroy();
+
+    // Terminate for ModelReference: '<S1>/FOC'
+    control_foc_Term(&(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+                       FOC_InstanceData.rtdw));
 
     // Terminate for RateTransition: '<S1>/Rate Transition2'
     rtw_mutex_destroy();

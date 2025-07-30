@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 5.39
+// Model version                  : 5.40
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Tue Jul 29 15:42:21 2025
+// C/C++ source code generated on : Wed Jul 30 12:06:17 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -64,8 +64,9 @@ extern void mc_step_1ms(const SensorsData *rtu_SensorData, const ExternalFlags
   ActuatorConfiguration *rtu_InitConf, const JointData *rtu_JointData, const
   FOCOutputs *rtu_FOCOutputs, const real32_T *rtu_offset_calib, EstimatedData
   *rty_EstimatedData, Flags *rty_Flags, ActuatorConfiguration
-  *rty_ActuatorsConfiguration, FOCSlowInputs *rty_FOCSlowInputs,
-  B_motion_controller_c_T *localB, DW_motion_controller_f_T *localDW);
+  *rty_ActuatorsConfiguration, FOCSlowInputs *rty_FOCSlowInputs, boolean_T
+  *rty_areLimitSet, B_motion_controller_c_T *localB, DW_motion_controller_f_T
+  *localDW);
 extern void motion_controller_Term(DW_motion_controller_f_T *localDW);
 
 //-

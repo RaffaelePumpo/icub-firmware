@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'control_foc'.
 //
-// Model version                  : 9.4
+// Model version                  : 9.8
 // Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Wed Jul 16 11:54:54 2025
+// C/C++ source code generated on : Wed Jul 30 12:05:19 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -345,6 +345,36 @@ struct FOCOutputs
 };
 
 #endif
+
+#ifndef struct_cell_wrap_control_foc_T
+#define struct_cell_wrap_control_foc_T
+
+struct cell_wrap_control_foc_T
+{
+  uint32_T f1[8];
+};
+
+#endif                                 // struct_cell_wrap_control_foc_T
+
+#ifndef struct_dsp_simulink_MovingAverage_control_foc_T
+#define struct_dsp_simulink_MovingAverage_control_foc_T
+
+struct dsp_simulink_MovingAverage_control_foc_T
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  boolean_T TunablePropsChanged;
+  cell_wrap_control_foc_T inputVarSize;
+  real32_T ForgettingFactor;
+  int32_T NumChannels;
+  int32_T FrameLength;
+  real32_T pwN;
+  real32_T pmN;
+  real32_T plambda;
+};
+
+#endif                       // struct_dsp_simulink_MovingAverage_control_foc_T
 #endif                                 // control_foc_types_h_
 
 //
