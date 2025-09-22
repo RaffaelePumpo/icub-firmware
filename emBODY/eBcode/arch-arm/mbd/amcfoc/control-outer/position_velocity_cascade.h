@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'position_velocity_cascade'.
 //
-// Model version                  : 9.22
-// Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Aug  7 11:09:07 2025
+// Model version                  : 10.14
+// Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
+// C/C++ source code generated on : Mon Sep 22 10:32:22 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -73,20 +73,8 @@ extern void position_velocity_cascade_Enable(DW_position_velocity_cascade_f_T
 extern void position_velocity_cascade_Disable(B_position_velocity_cascade_c_T
   *localB, DW_position_velocity_cascade_f_T *localDW);
 extern void position_velocity_cascade(const EstimatedData *rtu_Estimates, const
-  Targets *rtu_Targets, const real32_T *rtu_JointData_position, const real32_T
-  *rtu_ActuatorCfg_thresholds_jntVelMax, const real32_T
-  *rtu_ActuatorCfg_thresholds_motorNominalCurrents, const real32_T
-  *rtu_ActuatorCfg_thresholds_motorPeakCurrents, const real32_T
-  *rtu_ActuatorCfg_pids_currentPID_I, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_P, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_I, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_D, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_N, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_P, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_I, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_D, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_N, const ReferenceEncoder
-  *rtu_ActuatorCfg_motor_reference_encoder, const real32_T
+  Targets *rtu_Targets, const real32_T *rtu_JointData_position, const
+  ActuatorConfiguration *rtu_ActuatorCfg, const real32_T
   *rtu_SensorsData_motorsensors_qencoder_rotor_angle, const boolean_T
   *rtu_Flags_enable_thermal_protection, const ControlModes
   *rtu_Flags_control_mode, ControlOuterOutputs *rty_OuterOutputs,
@@ -96,6 +84,8 @@ extern void position_velocity_cascade(const EstimatedData *rtu_Estimates, const
 //-
 //  These blocks were eliminated from the model due to optimizations:
 //
+//  Block '<S17>/Compare' : Unused code path elimination
+//  Block '<S17>/Constant' : Unused code path elimination
 //  Block '<S4>/Data Type Duplicate' : Unused code path elimination
 //  Block '<S4>/Data Type Propagation' : Unused code path elimination
 //  Block '<S5>/Data Type Duplicate' : Unused code path elimination

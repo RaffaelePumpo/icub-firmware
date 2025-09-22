@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'position_velocity_cascade'.
 //
-// Model version                  : 9.22
-// Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Aug  7 11:09:07 2025
+// Model version                  : 10.14
+// Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
+// C/C++ source code generated on : Mon Sep 22 10:32:22 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -61,20 +61,8 @@ void position_velocity_cascade_Disable(B_position_velocity_cascade_c_T *localB,
 
 // Output and update for referenced model: 'position_velocity_cascade'
 void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
-  *rtu_Targets, const real32_T *rtu_JointData_position, const real32_T
-  *rtu_ActuatorCfg_thresholds_jntVelMax, const real32_T
-  *rtu_ActuatorCfg_thresholds_motorNominalCurrents, const real32_T
-  *rtu_ActuatorCfg_thresholds_motorPeakCurrents, const real32_T
-  *rtu_ActuatorCfg_pids_currentPID_I, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_P, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_I, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_D, const real32_T
-  *rtu_ActuatorCfg_pids_velocityPID_N, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_P, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_I, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_D, const real32_T
-  *rtu_ActuatorCfg_pids_positionPID_N, const ReferenceEncoder
-  *rtu_ActuatorCfg_motor_reference_encoder, const real32_T
+  *rtu_Targets, const real32_T *rtu_JointData_position, const
+  ActuatorConfiguration *rtu_ActuatorCfg, const real32_T
   *rtu_SensorsData_motorsensors_qencoder_rotor_angle, const boolean_T
   *rtu_Flags_enable_thermal_protection, const ControlModes
   *rtu_Flags_control_mode, ControlOuterOutputs *rty_OuterOutputs,
@@ -85,13 +73,13 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   real32_T Integrator;
   real32_T Integrator_p;
   real32_T rtb_Abs;
-  real32_T rtb_Abs1;
   real32_T rtb_DProdOut_b;
+  real32_T rtb_DenCoefOut;
+  real32_T rtb_NProdOut;
   real32_T rtb_NProdOut_f;
   real32_T rtb_PProdOut;
   real32_T rtb_SumI1;
   real32_T rtb_SumI1_e;
-  real32_T rtb_Switch1_g;
   real32_T rtb_Switch2;
   uint32_T rowIdx;
   boolean_T rtb_Compare_bu;
@@ -99,7 +87,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   boolean_T rtb_FixPtRelationalOperator;
 
   // Abs: '<Root>/Abs'
-  rtb_Abs = std::abs(*rtu_ActuatorCfg_thresholds_jntVelMax);
+  rtb_Abs = std::abs(rtu_ActuatorCfg->thresholds.jntVelMax);
 
   // RelationalOperator: '<S12>/Compare' incorporates:
   //   Constant: '<S12>/Constant'
@@ -135,43 +123,51 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
 
   // Switch: '<Root>/Switch2'
   if (*rtu_Flags_enable_thermal_protection) {
-    rtb_Switch2 = *rtu_ActuatorCfg_thresholds_motorNominalCurrents;
+    rtb_Switch2 = rtu_ActuatorCfg->thresholds.motorNominalCurrents;
   } else {
-    rtb_Switch2 = *rtu_ActuatorCfg_thresholds_motorPeakCurrents;
+    rtb_Switch2 = rtu_ActuatorCfg->thresholds.motorPeakCurrents;
   }
 
   // End of Switch: '<Root>/Switch2'
 
   // MultiPortSwitch: '<Root>/Multiport Switch'
-  if (*rtu_ActuatorCfg_motor_reference_encoder == ReferenceEncoder_Motor) {
-    rtb_Abs1 = *rtu_SensorsData_motorsensors_qencoder_rotor_angle;
+  if (rtu_ActuatorCfg->motor.reference_encoder == ReferenceEncoder_Motor) {
+    rtb_DenCoefOut = *rtu_SensorsData_motorsensors_qencoder_rotor_angle;
   } else {
-    rtb_Abs1 = *rtu_JointData_position;
+    rtb_DenCoefOut = *rtu_JointData_position;
   }
 
   // Sum: '<S3>/Sum3' incorporates:
   //   MultiPortSwitch: '<Root>/Multiport Switch'
 
-  rtb_Abs1 = rtu_Targets->position - rtb_Abs1;
+  rtb_DenCoefOut = rtu_Targets->position - rtb_DenCoefOut;
 
   // Product: '<S62>/PProd Out'
-  rtb_PProdOut = rtb_Abs1 * *rtu_ActuatorCfg_pids_positionPID_P;
+  rtb_PProdOut = rtb_DenCoefOut * rtu_ActuatorCfg->pids.positionPID.P;
 
-  // SampleTimeMath: '<S52>/Tsamp'
+  // SampleTimeMath: '<S52>/Tsamp' incorporates:
+  //   SampleTimeMath: '<S106>/Tsamp'
   //
   //  About '<S52>/Tsamp':
   //   y = u * K where K = ( w * Ts )
+  //    *
+  //  About '<S106>/Tsamp':
+  //   y = u * K where K = ( w * Ts )
   //
-  rtb_Switch1_g = *rtu_ActuatorCfg_pids_positionPID_N * 0.0005F;
+  rtb_SumI1 = rtu_ActuatorCfg->pids.positionPID.N * 0.0005F;
 
   // Math: '<S50>/Reciprocal' incorporates:
   //   Constant: '<S50>/Filter Den Constant'
+  //   SampleTimeMath: '<S52>/Tsamp'
   //   Sum: '<S50>/SumDen'
   //
   //  About '<S50>/Reciprocal':
   //   Operator: reciprocal
-
-  rtb_NProdOut_f = 1.0F / (rtb_Switch1_g + 1.0F);
+  //
+  //  About '<S52>/Tsamp':
+  //   y = u * K where K = ( w * Ts )
+  //
+  rtb_NProdOut_f = 1.0F / (rtb_SumI1 + 1.0F);
 
   // DiscreteTransferFcn: '<S50>/Filter Differentiator TF'
   if (rtb_FixPtRelationalOperator && (localZCE->FilterDifferentiatorTF_Reset_ZCE
@@ -184,14 +180,18 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   // Product: '<S48>/DProd Out' incorporates:
   //   Product: '<S102>/DProd Out'
 
-  rtb_SumI1_e = rtb_Abs1 * *rtu_ActuatorCfg_pids_positionPID_D;
+  rtb_SumI1_e = rtb_DenCoefOut * rtu_ActuatorCfg->pids.positionPID.D;
 
   // Product: '<S50>/Divide' incorporates:
   //   Constant: '<S50>/Filter Den Constant'
   //   Product: '<S104>/Divide'
+  //   SampleTimeMath: '<S52>/Tsamp'
   //   Sum: '<S50>/SumNum'
-
-  Integrator_p = (rtb_Switch1_g - 1.0F) * rtb_NProdOut_f;
+  //
+  //  About '<S52>/Tsamp':
+  //   y = u * K where K = ( w * Ts )
+  //
+  Integrator_p = (rtb_SumI1 - 1.0F) * rtb_NProdOut_f;
 
   // DiscreteTransferFcn: '<S50>/Filter Differentiator TF' incorporates:
   //   Product: '<S48>/DProd Out'
@@ -204,14 +204,14 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   //   DiscreteTransferFcn: '<S50>/Filter Differentiator TF'
   //   Product: '<S50>/DenCoefOut'
 
-  rtb_Switch1_g = (localDW->FilterDifferentiatorTF_tmp -
-                   localDW->FilterDifferentiatorTF_states) * rtb_NProdOut_f *
-    *rtu_ActuatorCfg_pids_positionPID_N;
+  rtb_NProdOut = (localDW->FilterDifferentiatorTF_tmp -
+                  localDW->FilterDifferentiatorTF_states) * rtb_NProdOut_f *
+    rtu_ActuatorCfg->pids.positionPID.N;
 
   // Product: '<S54>/IProd Out' incorporates:
   //   Product: '<S108>/IProd Out'
 
-  rtb_Abs1 *= *rtu_ActuatorCfg_pids_positionPID_I;
+  rtb_DenCoefOut *= rtu_ActuatorCfg->pids.positionPID.I;
 
   // Sum: '<S69>/SumI1' incorporates:
   //   Product: '<S54>/IProd Out'
@@ -220,7 +220,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   //   UnitDelay: '<Root>/Unit Delay'
 
   rtb_SumI1 = (localDW->UnitDelay_DSTATE - ((rtb_PProdOut +
-    localDW->Integrator_DSTATE) + rtb_Switch1_g)) + rtb_Abs1;
+    localDW->Integrator_DSTATE) + rtb_NProdOut)) + rtb_DenCoefOut;
 
   // DiscreteIntegrator: '<S57>/Integrator'
   if (rtb_FixPtRelationalOperator && (localDW->Integrator_PrevResetState <= 0))
@@ -260,7 +260,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
 
   rtb_NProdOut_f = (localDW->FilterDifferentiatorTF_tmp_m -
                     localDW->FilterDifferentiatorTF_states_i) * rtb_NProdOut_f *
-    *rtu_ActuatorCfg_pids_positionPID_N;
+    rtu_ActuatorCfg->pids.positionPID.N;
 
   // Sum: '<S123>/SumI1' incorporates:
   //   Product: '<S116>/PProd Out'
@@ -269,7 +269,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   //   UnitDelay: '<Root>/Unit Delay'
 
   rtb_SumI1_e = (localDW->UnitDelay_DSTATE - ((rtb_PProdOut +
-    localDW->Integrator_DSTATE_i) + rtb_NProdOut_f)) + rtb_Abs1;
+    localDW->Integrator_DSTATE_i) + rtb_NProdOut_f)) + rtb_DenCoefOut;
 
   // DiscreteIntegrator: '<S111>/Integrator'
   if (rtb_FixPtRelationalOperator && (localDW->Integrator_PrevResetState_n <= 0))
@@ -285,33 +285,31 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   // Switch: '<Root>/Switch3' incorporates:
   //   Constant: '<Root>/Constant1'
   //   Constant: '<S14>/Constant'
-  //   Constant: '<S17>/Constant'
   //   Logic: '<S2>/OR'
   //   RelationalOperator: '<S14>/Compare'
-  //   RelationalOperator: '<S17>/Compare'
 
-  if (rtb_Compare_e || (*rtu_Flags_control_mode == ControlModes_PositionDirect) ||
-      (*rtu_Flags_control_mode == ControlModes_Velocity)) {
+  if (rtb_Compare_e || (*rtu_Flags_control_mode == ControlModes_PositionDirect))
+  {
     // Switch: '<S3>/Switch5' incorporates:
     //   Product: '<S116>/PProd Out'
     //   Sum: '<S120>/Sum'
     //   Sum: '<S66>/Sum'
 
     if (rtb_Compare_e) {
-      rtb_Abs1 = (rtb_PProdOut + Integrator) + rtb_Switch1_g;
+      rtb_DenCoefOut = (rtb_PProdOut + Integrator) + rtb_NProdOut;
     } else {
-      rtb_Abs1 = (rtb_PProdOut + Integrator_p) + rtb_NProdOut_f;
+      rtb_DenCoefOut = (rtb_PProdOut + Integrator_p) + rtb_NProdOut_f;
     }
 
     // End of Switch: '<S3>/Switch5'
   } else {
-    rtb_Abs1 = 0.0F;
+    rtb_DenCoefOut = 0.0F;
   }
 
   // Sum: '<Root>/Sum2' incorporates:
   //   Switch: '<Root>/Switch3'
 
-  rtb_NProdOut_f = rtb_Abs1 + rtu_Targets->velocity;
+  rtb_NProdOut_f = rtb_DenCoefOut + rtu_Targets->velocity;
 
   // Switch: '<S4>/Switch2' incorporates:
   //   Gain: '<Root>/Gain'
@@ -331,32 +329,32 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   // End of Switch: '<S4>/Switch2'
 
   // MultiPortSwitch: '<Root>/Multiport Switch1'
-  if (*rtu_ActuatorCfg_motor_reference_encoder == ReferenceEncoder_Motor) {
-    rtb_Abs1 = rtu_Estimates->rotor_velocity;
+  if (rtu_ActuatorCfg->motor.reference_encoder == ReferenceEncoder_Motor) {
+    rtb_DenCoefOut = rtu_Estimates->rotor_velocity;
   } else {
-    rtb_Abs1 = rtu_Estimates->joint_velocity;
+    rtb_DenCoefOut = rtu_Estimates->joint_velocity;
   }
 
   // Sum: '<Root>/Sum1' incorporates:
   //   MultiPortSwitch: '<Root>/Multiport Switch1'
 
-  rtb_Switch1_g = rtb_NProdOut_f - rtb_Abs1;
+  rtb_NProdOut = rtb_NProdOut_f - rtb_DenCoefOut;
 
   // Product: '<S170>/PProd Out'
-  rtb_PProdOut = rtb_Switch1_g * *rtu_ActuatorCfg_pids_velocityPID_P;
+  rtb_PProdOut = rtb_NProdOut * rtu_ActuatorCfg->pids.velocityPID.P;
 
   // Product: '<S162>/IProd Out'
-  rtb_Abs = rtb_Switch1_g * *rtu_ActuatorCfg_pids_velocityPID_I;
+  rtb_Abs = rtb_NProdOut * rtu_ActuatorCfg->pids.velocityPID.I;
 
   // Product: '<S156>/DProd Out'
-  rtb_DProdOut_b = rtb_Switch1_g * *rtu_ActuatorCfg_pids_velocityPID_D;
+  rtb_DProdOut_b = rtb_NProdOut * rtu_ActuatorCfg->pids.velocityPID.D;
 
   // SampleTimeMath: '<S160>/Tsamp'
   //
   //  About '<S160>/Tsamp':
   //   y = u * K where K = ( w * Ts )
   //
-  rtb_Switch1_g = *rtu_ActuatorCfg_pids_velocityPID_N * 0.0005F;
+  rtb_NProdOut = rtu_ActuatorCfg->pids.velocityPID.N * 0.0005F;
 
   // Math: '<S158>/Reciprocal' incorporates:
   //   Constant: '<S158>/Filter Den Constant'
@@ -365,7 +363,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   //  About '<S158>/Reciprocal':
   //   Operator: reciprocal
 
-  rtb_Abs1 = 1.0F / (rtb_Switch1_g + 1.0F);
+  rtb_DenCoefOut = 1.0F / (rtb_NProdOut + 1.0F);
 
   // DiscreteTransferFcn: '<S158>/Filter Differentiator TF' incorporates:
   //   Constant: '<S158>/Filter Den Constant'
@@ -379,16 +377,16 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   }
 
   localZCE->FilterDifferentiatorTF_Reset_ZCE_e = rtb_FixPtRelationalOperator;
-  localDW->FilterDifferentiatorTF_tmp_p = rtb_DProdOut_b - (rtb_Switch1_g - 1.0F)
-    * rtb_Abs1 * localDW->FilterDifferentiatorTF_states_c;
+  localDW->FilterDifferentiatorTF_tmp_p = rtb_DProdOut_b - (rtb_NProdOut - 1.0F)
+    * rtb_DenCoefOut * localDW->FilterDifferentiatorTF_states_c;
 
   // Product: '<S168>/NProd Out' incorporates:
   //   DiscreteTransferFcn: '<S158>/Filter Differentiator TF'
   //   Product: '<S158>/DenCoefOut'
 
-  rtb_Switch1_g = (localDW->FilterDifferentiatorTF_tmp_p -
-                   localDW->FilterDifferentiatorTF_states_c) * rtb_Abs1 *
-    *rtu_ActuatorCfg_pids_velocityPID_N;
+  rtb_NProdOut = (localDW->FilterDifferentiatorTF_tmp_p -
+                  localDW->FilterDifferentiatorTF_states_c) * rtb_DenCoefOut *
+    rtu_ActuatorCfg->pids.velocityPID.N;
 
   // Sum: '<S177>/SumI1' incorporates:
   //   Sum: '<S175>/Sum Fdbk'
@@ -396,7 +394,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   //   UnitDelay: '<Root>/Unit Delay1'
 
   rtb_Abs += localDW->UnitDelay1_DSTATE - ((rtb_PProdOut +
-    localDW->Integrator_DSTATE_b) + rtb_Switch1_g);
+    localDW->Integrator_DSTATE_b) + rtb_NProdOut);
 
   // DiscreteIntegrator: '<S165>/Integrator'
   if (rtb_FixPtRelationalOperator && (localDW->Integrator_PrevResetState_c <= 0))
@@ -407,14 +405,14 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   rtb_Abs *= 0.0005F;
 
   // DiscreteIntegrator: '<S165>/Integrator'
-  rtb_Abs1 = rtb_Abs + localDW->Integrator_DSTATE_b;
+  rtb_DenCoefOut = rtb_Abs + localDW->Integrator_DSTATE_b;
 
   // Switch: '<Root>/Switch1'
   if (rtb_Compare_bu) {
     // Switch: '<Root>/Switch1' incorporates:
     //   Sum: '<S174>/Sum'
 
-    localDW->UnitDelay1_DSTATE = (rtb_PProdOut + rtb_Abs1) + rtb_Switch1_g;
+    localDW->UnitDelay1_DSTATE = (rtb_PProdOut + rtb_DenCoefOut) + rtb_NProdOut;
   } else {
     // Switch: '<Root>/Switch1'
     localDW->UnitDelay1_DSTATE = rtu_Targets->current;
@@ -444,7 +442,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   // Sum: '<S1>/Sum' incorporates:
   //   Abs: '<S1>/Abs1'
 
-  rtb_Switch2 = *rtu_ActuatorCfg_thresholds_motorPeakCurrents - std::abs
+  rtb_Switch2 = rtu_ActuatorCfg->thresholds.motorPeakCurrents - std::abs
     (rtu_Estimates->Iq_filtered);
 
   // CombinatorialLogic: '<S9>/Logic' incorporates:
@@ -456,7 +454,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   //   RelationalOperator: '<S7>/Compare'
 
   rowIdx = ((((rtb_Switch2 > 0.1F *
-               *rtu_ActuatorCfg_thresholds_motorPeakCurrents) ||
+               rtu_ActuatorCfg->thresholds.motorPeakCurrents) ||
               rtb_FixPtRelationalOperator) + (static_cast<uint32_T>(rtb_Switch2 <=
     0.0F) << 1)) << 1) + localDW->Memory_PreviousInput;
   rtb_Compare_e = rtCP_Logic_table[rowIdx + 8U];
@@ -477,6 +475,13 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
 
   // End of DiscreteIntegrator: '<S1>/Discrete-Time Integrator'
 
+  // BusCreator: '<Root>/Bus Creator1' incorporates:
+  //   UnitDelay: '<Root>/Unit Delay1'
+
+  rty_OuterOutputs->vel_en = rtb_Compare_bu;
+  rty_OuterOutputs->pid_reset = rtb_FixPtRelationalOperator;
+  rty_OuterOutputs->motorcurrent = localDW->UnitDelay1_DSTATE;
+
   // Switch: '<S1>/Switch1' incorporates:
   //   Constant: '<S1>/Constant1'
   //   Constant: '<S1>/Constant2'
@@ -489,18 +494,12 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
     tmp = 1;
   }
 
-  // Product: '<S1>/Product' incorporates:
+  // BusCreator: '<Root>/Bus Creator1' incorporates:
+  //   Product: '<S1>/Product'
   //   Switch: '<S1>/Switch1'
 
   rty_OuterOutputs->current_limiter = static_cast<real32_T>(tmp) *
-    localB->DiscreteTimeIntegrator * *rtu_ActuatorCfg_pids_currentPID_I;
-
-  // BusCreator: '<Root>/Bus Creator1' incorporates:
-  //   UnitDelay: '<Root>/Unit Delay1'
-
-  rty_OuterOutputs->vel_en = rtb_Compare_bu;
-  rty_OuterOutputs->pid_reset = rtb_FixPtRelationalOperator;
-  rty_OuterOutputs->motorcurrent = localDW->UnitDelay1_DSTATE;
+    localB->DiscreteTimeIntegrator * rtu_ActuatorCfg->pids.currentPID.I;
 
   // Sum: '<Root>/Sum3' incorporates:
   //   UnitDelay: '<Root>/Unit Delay'
@@ -541,7 +540,7 @@ void position_velocity_cascade(const EstimatedData *rtu_Estimates, const Targets
   // Update for DiscreteIntegrator: '<S165>/Integrator' incorporates:
   //   DiscreteIntegrator: '<S57>/Integrator'
 
-  localDW->Integrator_DSTATE_b = rtb_Abs + rtb_Abs1;
+  localDW->Integrator_DSTATE_b = rtb_Abs + rtb_DenCoefOut;
   localDW->Integrator_PrevResetState_c = static_cast<int8_T>
     (rtb_FixPtRelationalOperator);
 

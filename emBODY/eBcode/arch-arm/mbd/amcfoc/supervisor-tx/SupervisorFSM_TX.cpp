@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'SupervisorFSM_TX'.
 //
-// Model version                  : 10.22
-// Simulink Coder version         : 25.1 (R2025a) 21-Nov-2024
-// C/C++ source code generated on : Thu Aug  7 11:07:50 2025
+// Model version                  : 11.4
+// Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
+// C/C++ source code generated on : Mon Sep 22 10:32:21 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -46,6 +46,10 @@ static MCControlModes SupervisorFSM_TX_convert(ControlModes controlmode)
 
    case ControlModes_HwFaultCM:
     mccontrolmode = MCControlModes_HWFault;
+    break;
+
+   case ControlModes_Position:
+    mccontrolmode = MCControlModes_Position;
     break;
 
    default:
@@ -111,12 +115,12 @@ void SupervisorFSM_TX_Init(BUS_MESSAGES_TX *rty_MessagesTx, BUS_STATUS_TX
 }
 
 // Output and update for referenced model: 'SupervisorFSM_TX'
-void SupervisorFSM_TX(const SensorsData *rtu_SensorsData, const EstimatedData
-                      *rtu_Estimates, const Flags *rtu_Flags, const FOCOutputs
-                      *rtu_FOCOutputs, const boolean_T
-                      *rtu_ExternalFlags_fault_button, BUS_MESSAGES_TX
-                      *rty_MessagesTx, BUS_STATUS_TX *rty_StatusTx,
-                      DW_SupervisorFSM_TX_f_T *localDW)
+void SupervisorFSM_TX(const EstimatedData *rtu_Estimates, const Flags *rtu_Flags,
+                      const FOCOutputs *rtu_FOCOutputs, const boolean_T
+                      *rtu_ExternalFlags_fault_button, const Targets
+                      *rtu_TargetPlanner, BUS_MESSAGES_TX *rty_MessagesTx,
+                      BUS_STATUS_TX *rty_StatusTx, DW_SupervisorFSM_TX_f_T
+                      *localDW)
 {
   boolean_T ev_foc;
 
@@ -175,8 +179,7 @@ void SupervisorFSM_TX(const SensorsData *rtu_SensorsData, const EstimatedData
   } else if (rtu_Flags->enable_sending_msg_status) {
     rty_MessagesTx->foc.current = rtu_Estimates->Iq_filtered;
     rty_MessagesTx->foc.velocity = rtu_Estimates->rotor_velocity;
-    rty_MessagesTx->foc.position =
-      rtu_SensorsData->motorsensors.qencoder.rotor_angle;
+    rty_MessagesTx->foc.position = rtu_TargetPlanner->position;
     ev_foc = true;
     rty_MessagesTx->status.control_mode = SupervisorFSM_TX_convert
       (rtu_Flags->control_mode);
