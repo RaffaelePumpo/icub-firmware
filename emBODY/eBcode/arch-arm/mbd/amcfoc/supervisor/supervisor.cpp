@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 5.12
+// Model version                  : 5.14
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Mon Sep 22 10:03:29 2025
+// C/C++ source code generated on : Tue Sep 23 09:01:17 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -102,6 +102,7 @@ static void supervisor_ResetTargets(Targets *rty_targets)
   rty_targets->current = 0.0F;
   rty_targets->velocity = 0.0F;
   rty_targets->position = 0.0F;
+  rty_targets->trajectory_time = 0.0F;
 }
 
 // Function for Chart: '<Root>/Supervisor'
@@ -1224,7 +1225,7 @@ void supervisor_Init(Targets *rty_targets, ActuatorConfiguration
 {
   // SystemInitialize for Chart: '<Root>/Supervisor'
   localDW->sfEvent = supervisor_CALL_EVENT;
-  rty_targets->trajectory_time = 0.5F;
+  rty_targets->trajectory_time = 0.0F;
   rty_targets->position = 0.0F;
   rty_targets->velocity = 0.0F;
   rty_targets->current = 0.0F;

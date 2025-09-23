@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'trajectory_planner'.
 //
-// Model version                  : 2.9
+// Model version                  : 2.17
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Mon Sep 22 11:06:24 2025
+// C/C++ source code generated on : Tue Sep 23 09:15:01 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -24,28 +24,27 @@
 
 // Block signals for model 'trajectory_planner'
 struct B_trajectory_planner_c_T {
-  real_T Product2;                     // '<S7>/Product2'
-  real_T Divide9[4];                   // '<S6>/Divide9'
+  real_T Product2;                     // '<S6>/Product2'
+  real_T Divide9[4];                   // '<S5>/Divide9'
   real_T OutportBufferForDen[4];
 };
 
 // Block states (default storage) for model 'trajectory_planner'
 struct DW_trajectory_planner_f_T {
-  real_T UnitDelay_DSTATE;             // '<S5>/Unit Delay'
-  real_T DelayInput1_DSTATE;           // '<S8>/Delay Input1'
-  real_T DiscreteFilter_states[3];     // '<S5>/Discrete Filter'
-  real_T DiscreteFilter_tmp;           // '<S5>/Discrete Filter'
-  real32_T DelayInput1_DSTATE_l;       // '<S3>/Delay Input1'
-  real32_T DelayInput1_DSTATE_n;       // '<S4>/Delay Input1'
-  boolean_T UnitDelay1_DSTATE;         // '<S5>/Unit Delay1'
-  uint8_T DiscreteFilter_icLoad;       // '<S5>/Discrete Filter'
+  real_T UnitDelay_DSTATE;             // '<S4>/Unit Delay'
+  real_T DelayInput1_DSTATE;           // '<S7>/Delay Input1'
+  real_T DiscreteFilter_states[3];     // '<S4>/Discrete Filter'
+  real_T DiscreteFilter_tmp;           // '<S4>/Discrete Filter'
+  real32_T DelayInput1_DSTATE_j;       // '<S3>/Delay Input1'
+  boolean_T UnitDelay1_DSTATE;         // '<S4>/Unit Delay1'
+  uint8_T DiscreteFilter_icLoad;       // '<S4>/Discrete Filter'
 };
 
 // Zero-crossing (trigger) state for model 'trajectory_planner'
 struct ZCE_trajectory_planner_T {
-  ZCSigState DiscreteFilter_Reset_ZCE; // '<S5>/Discrete Filter'
-  ZCSigState ComputeInitState_Trig_ZCE;// '<S5>/Compute Init State'
-  ZCSigState ComputeCoefficients_Trig_ZCE;// '<S5>/Compute Coefficients'
+  ZCSigState DiscreteFilter_Reset_ZCE; // '<S4>/Discrete Filter'
+  ZCSigState ComputeInitState_Trig_ZCE;// '<S4>/Compute Init State'
+  ZCSigState ComputeCoefficients_Trig_ZCE;// '<S4>/Compute Coefficients'
 };
 
 struct MdlrefDW_trajectory_planner_T {
@@ -58,10 +57,16 @@ struct MdlrefDW_trajectory_planner_T {
 extern void trajectory_planner_initialize(ZCE_trajectory_planner_T *localZCE);
 extern void trajectory_planner_Init(B_trajectory_planner_c_T *localB,
   DW_trajectory_planner_f_T *localDW);
-extern void trajectory_planner(const Targets *rtu_Targets, const SensorsData
-  *rtu_SensorData, Targets *rty_Targets_out, Targets *rty_planner,
+extern void trajectory_planner(const Flags *rtu_Flags, const Targets
+  *rtu_Targets, const SensorsData *rtu_SensorData, Targets *rty_Targets_out,
   B_trajectory_planner_c_T *localB, DW_trajectory_planner_f_T *localDW,
   ZCE_trajectory_planner_T *localZCE);
+
+//-
+//  These blocks were eliminated from the model due to optimizations:
+//
+//  Block '<S1>/Cast To Double1' : Eliminate redundant data type conversion
+
 
 //-
 //  The generated code includes comments that allow you to trace directly
@@ -78,14 +83,13 @@ extern void trajectory_planner(const Targets *rtu_Targets, const SensorsData
 //  Here is the system hierarchy for this model
 //
 //  '<Root>' : 'trajectory_planner'
-//  '<S1>'   : 'trajectory_planner/If Action Subsystem'
-//  '<S2>'   : 'trajectory_planner/If Action Subsystem1'
-//  '<S3>'   : 'trajectory_planner/If Action Subsystem/Detect Change'
-//  '<S4>'   : 'trajectory_planner/If Action Subsystem/Detect Change1'
-//  '<S5>'   : 'trajectory_planner/If Action Subsystem/Discrete Minimum Jerk'
-//  '<S6>'   : 'trajectory_planner/If Action Subsystem/Discrete Minimum Jerk/Compute Coefficients'
-//  '<S7>'   : 'trajectory_planner/If Action Subsystem/Discrete Minimum Jerk/Compute Init State'
-//  '<S8>'   : 'trajectory_planner/If Action Subsystem/Discrete Minimum Jerk/Detect Change'
+//  '<S1>'   : 'trajectory_planner/If Action Subsystem2'
+//  '<S2>'   : 'trajectory_planner/If Action Subsystem3'
+//  '<S3>'   : 'trajectory_planner/If Action Subsystem2/Detect Change'
+//  '<S4>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk'
+//  '<S5>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Compute Coefficients'
+//  '<S6>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Compute Init State'
+//  '<S7>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Detect Change'
 
 #endif                                 // trajectory_planner_h_
 

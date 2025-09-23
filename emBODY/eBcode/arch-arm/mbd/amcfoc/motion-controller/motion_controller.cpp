@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'motion_controller'.
 //
-// Model version                  : 6.9
+// Model version                  : 6.10
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Mon Sep 22 11:06:33 2025
+// C/C++ source code generated on : Tue Sep 23 09:01:48 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -100,9 +100,6 @@ void mc_step_1ms(const SensorsData *rtu_SensorData, const ExternalFlags
                  *rty_TargetPlanner, B_motion_controller_c_T *localB,
                  DW_motion_controller_f_T *localDW)
 {
-  // local block i/o variables
-  Targets rtb_TrajectoryPlanner_o1;
-
   // Constant: '<S2>/Velocity Estimation Mode'
   localB->VelocityEstimationMode = EstimationVelocityModes_MovingAverage;
 
@@ -158,14 +155,14 @@ void mc_step_1ms(const SensorsData *rtu_SensorData, const ExternalFlags
              &(localDW->MotorSupervisor_InstanceData.rtdw));
 
   // ModelReference generated from: '<Root>/Trajectory Planner'
-  trajectory_planner(&localB->targets, &localB->RateTransition1,
-                     &rtb_TrajectoryPlanner_o1, rty_TargetPlanner,
+  trajectory_planner(rty_Flags, &localB->targets, &localB->RateTransition1,
+                     rty_TargetPlanner,
                      &(localDW->TrajectoryPlanner_InstanceData.rtb),
                      &(localDW->TrajectoryPlanner_InstanceData.rtdw),
                      &(localDW->TrajectoryPlanner_InstanceData.rtzce));
 
   // ModelReference generated from: '<Root>/Position velocity cascade'
-  position_velocity_cascade(rty_EstimatedData, &rtb_TrajectoryPlanner_o1,
+  position_velocity_cascade(rty_EstimatedData, rty_TargetPlanner,
     &rtu_JointData->position, rty_ActuatorsConfiguration,
     &localB->RateTransition1.motorsensors.qencoder.rotor_angle,
     &rty_Flags->enable_thermal_protection, &rty_Flags->control_mode,

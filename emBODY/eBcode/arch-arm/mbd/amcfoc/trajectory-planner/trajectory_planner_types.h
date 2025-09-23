@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'trajectory_planner'.
 //
-// Model version                  : 2.9
+// Model version                  : 2.17
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Mon Sep 22 11:06:24 2025
+// C/C++ source code generated on : Tue Sep 23 09:15:01 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M

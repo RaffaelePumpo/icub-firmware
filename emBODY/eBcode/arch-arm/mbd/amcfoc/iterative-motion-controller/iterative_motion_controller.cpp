@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 5.16
+// Model version                  : 5.18
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Mon Sep 22 11:06:45 2025
+// C/C++ source code generated on : Tue Sep 23 09:02:00 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -456,7 +456,7 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
 
   struct_temp.motor_id = 0U;
   struct_temp.event_type = EventTypes_None;
-  struct_temp.targets_content.trajectory_time = 0.5F;
+  struct_temp.targets_content.trajectory_time = 0.0F;
   struct_temp.targets_content.position = 0.0F;
   struct_temp.targets_content.velocity = 0.0F;
   struct_temp.targets_content.current = 0.0F;
@@ -625,7 +625,8 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
     // ModelReference generated from: '<S1>/Model' incorporates:
     //   Inport: '<Root>/ExternalFlags'
 
-    SupervisorFSM_TX(&iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
+    SupervisorFSM_TX(&rtb_Transitionto1ms,
+                     &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                      MotionController_o1,
                      &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                      Flags_p, &rtb_RateTransition2,
@@ -969,7 +970,7 @@ void AMCFOC_initialize(void)
         0.0F                           // joint_velocity
       },                               // estimated_data
 
-      { 0.5F,                          // trajectory_time
+      { 0.0F,                          // trajectory_time
         0.0F,                          // position
         0.0F,                          // velocity
         0.0F,                          // current
