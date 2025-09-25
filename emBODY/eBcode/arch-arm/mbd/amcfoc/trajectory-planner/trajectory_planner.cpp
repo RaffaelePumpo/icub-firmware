@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'trajectory_planner'.
 //
-// Model version                  : 2.17
+// Model version                  : 2.33
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:15:01 2025
+// C/C++ source code generated on : Thu Sep 25 09:26:15 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -31,8 +31,8 @@ void trajectory_planner_Init(B_trajectory_planner_c_T *localB,
   localDW->DiscreteFilter_icLoad = 1U;
 
   // SystemInitialize for Triggered SubSystem: '<S4>/Compute Coefficients'
-  // SystemInitialize for SignalConversion generated from: '<S5>/Den' incorporates:
-  //   Outport: '<S5>/Den'
+  // SystemInitialize for SignalConversion generated from: '<S6>/Den' incorporates:
+  //   Outport: '<S6>/Den'
 
   localB->OutportBufferForDen[0] = 1.0;
   localB->OutportBufferForDen[1] = 0.0;
@@ -52,6 +52,7 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
   // SwitchCase: '<Root>/Switch Case'
   if (rtu_Flags->control_mode == ControlModes_Position) {
     real_T rtb_UnitDelay;
+    real32_T u0;
     uint8_T rtb_FixPtRelationalOperator;
     boolean_T rtb_OR;
 
@@ -64,11 +65,11 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
     // UnitDelay: '<S4>/Unit Delay'
     rtb_UnitDelay = localDW->UnitDelay_DSTATE;
 
-    // RelationalOperator: '<S7>/FixPt Relational Operator' incorporates:
+    // RelationalOperator: '<S8>/FixPt Relational Operator' incorporates:
     //   UnitDelay: '<S4>/Unit Delay'
-    //   UnitDelay: '<S7>/Delay Input1'
+    //   UnitDelay: '<S8>/Delay Input1'
     //
-    //  Block description for '<S7>/Delay Input1':
+    //  Block description for '<S8>/Delay Input1':
     //
     //   Store in Global RAM
 
@@ -76,7 +77,7 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
       localDW->DelayInput1_DSTATE);
 
     // Outputs for Triggered SubSystem: '<S4>/Compute Coefficients' incorporates:
-    //   TriggerPort: '<S5>/Trigger'
+    //   TriggerPort: '<S6>/Trigger'
 
     if ((rtb_FixPtRelationalOperator > 0) &&
         (localZCE->ComputeCoefficients_Trig_ZCE != POS_ZCSIG)) {
@@ -87,73 +88,73 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
       real_T rtb_Divide8;
       real_T rtb_Fcn4;
 
-      // Math: '<S5>/Square' incorporates:
+      // Math: '<S6>/Square' incorporates:
       //   UnitDelay: '<S4>/Unit Delay'
 
       rtb_Divide5 = localDW->UnitDelay_DSTATE * localDW->UnitDelay_DSTATE;
 
-      // Product: '<S5>/Divide6' incorporates:
-      //   Constant: '<S5>/Constant1'
-      //   Constant: '<S5>/Constant7'
-      //   Product: '<S5>/Divide'
+      // Product: '<S6>/Divide6' incorporates:
+      //   Constant: '<S6>/Constant1'
+      //   Constant: '<S6>/Constant7'
+      //   Product: '<S6>/Divide'
       //   UnitDelay: '<S4>/Unit Delay'
 
       rtb_Divide6 = -150.765868956161 / localDW->UnitDelay_DSTATE / rtb_Divide5 *
         1.0E-9;
 
-      // Product: '<S5>/Divide4' incorporates:
-      //   Constant: '<S5>/Constant'
-      //   Constant: '<S5>/Constant3'
-      //   Product: '<S5>/Divide2'
+      // Product: '<S6>/Divide4' incorporates:
+      //   Constant: '<S6>/Constant'
+      //   Constant: '<S6>/Constant3'
+      //   Product: '<S6>/Divide2'
       //   UnitDelay: '<S4>/Unit Delay'
 
       rtb_Divide8 = -15.9669610709384 / localDW->UnitDelay_DSTATE * 0.004;
 
-      // Product: '<S5>/Divide5' incorporates:
-      //   Constant: '<S5>/Constant2'
-      //   Constant: '<S5>/Constant6'
-      //   Product: '<S5>/Divide1'
+      // Product: '<S6>/Divide5' incorporates:
+      //   Constant: '<S6>/Constant2'
+      //   Constant: '<S6>/Constant6'
+      //   Product: '<S6>/Divide1'
 
       rtb_Divide5 = -84.9812819469538 / rtb_Divide5 * 2.0E-6;
 
-      // Fcn: '<S5>/Fcn4'
+      // Fcn: '<S6>/Fcn4'
       rtb_Fcn4 = ((rtb_Divide8 + rtb_Divide5) + rtb_Divide6) - 8.0;
 
-      // Product: '<S5>/Divide9' incorporates:
-      //   Gain: '<S5>/Gain1'
+      // Product: '<S6>/Divide9' incorporates:
+      //   Gain: '<S6>/Gain1'
 
       Divide9_tmp_0 = rtb_Divide6 / rtb_Fcn4;
 
-      // Product: '<S5>/Divide9'
+      // Product: '<S6>/Divide9'
       localB->Divide9[0] = Divide9_tmp_0;
 
-      // Product: '<S5>/Divide9' incorporates:
-      //   Gain: '<S5>/Gain1'
+      // Product: '<S6>/Divide9' incorporates:
+      //   Gain: '<S6>/Gain1'
 
       Divide9_tmp = 3.0 * rtb_Divide6 / rtb_Fcn4;
 
-      // Product: '<S5>/Divide9'
+      // Product: '<S6>/Divide9'
       localB->Divide9[1] = Divide9_tmp;
       localB->Divide9[2] = Divide9_tmp;
       localB->Divide9[3] = Divide9_tmp_0;
 
-      // SignalConversion generated from: '<S5>/Den' incorporates:
-      //   Constant: '<S5>/Constant4'
+      // SignalConversion generated from: '<S6>/Den' incorporates:
+      //   Constant: '<S6>/Constant4'
 
       localB->OutportBufferForDen[0] = 1.0;
 
-      // Fcn: '<S5>/Fcn1' incorporates:
-      //   Fcn: '<S5>/Fcn2'
+      // Fcn: '<S6>/Fcn1' incorporates:
+      //   Fcn: '<S6>/Fcn2'
 
       Divide9_tmp_0 = 3.0 * rtb_Divide6;
 
-      // SignalConversion generated from: '<S5>/Den' incorporates:
-      //   Fcn: '<S5>/Fcn1'
-      //   Fcn: '<S5>/Fcn2'
-      //   Fcn: '<S5>/Fcn3'
-      //   Product: '<S5>/Divide3'
-      //   Product: '<S5>/Divide7'
-      //   Product: '<S5>/Divide8'
+      // SignalConversion generated from: '<S6>/Den' incorporates:
+      //   Fcn: '<S6>/Fcn1'
+      //   Fcn: '<S6>/Fcn2'
+      //   Fcn: '<S6>/Fcn3'
+      //   Product: '<S6>/Divide3'
+      //   Product: '<S6>/Divide7'
+      //   Product: '<S6>/Divide8'
 
       localB->OutportBufferForDen[1] = (((-rtb_Divide8 + rtb_Divide5) +
         Divide9_tmp_0) + 24.0) / rtb_Fcn4;
@@ -173,17 +174,17 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
     rtb_OR = ((rtb_FixPtRelationalOperator != 0) || localDW->UnitDelay1_DSTATE);
 
     // Outputs for Triggered SubSystem: '<S4>/Compute Init State' incorporates:
-    //   TriggerPort: '<S6>/Trigger'
+    //   TriggerPort: '<S7>/Trigger'
 
     if (rtb_OR && (localZCE->ComputeInitState_Trig_ZCE != POS_ZCSIG)) {
-      // Product: '<S6>/Product2' incorporates:
-      //   Constant: '<S6>/Constant'
+      // Product: '<S7>/Product2' incorporates:
+      //   Constant: '<S7>/Constant'
       //   DataTypeConversion: '<S1>/Cast To Double2'
-      //   Product: '<S6>/Product1'
-      //   Sum: '<S6>/Sum'
-      //   Sum: '<S6>/Sum of Elements'
-      //   Sum: '<S6>/Sum of Elements1'
-      //   Sum: '<S6>/Sum1'
+      //   Product: '<S7>/Product1'
+      //   Sum: '<S7>/Sum'
+      //   Sum: '<S7>/Sum of Elements'
+      //   Sum: '<S7>/Sum of Elements1'
+      //   Sum: '<S7>/Sum1'
 
       localB->Product2 = 1.0 / (((localB->Divide9[1] + localB->Divide9[2]) +
         localB->Divide9[3]) - ((localB->OutportBufferForDen[1] +
@@ -204,7 +205,7 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
     }
 
     // Outputs for Triggered SubSystem: '<S4>/Compute Init State' incorporates:
-    //   TriggerPort: '<S6>/Trigger'
+    //   TriggerPort: '<S7>/Trigger'
 
     localZCE->DiscreteFilter_Reset_ZCE = rtb_OR;
 
@@ -231,7 +232,6 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
 
     // RelationalOperator: '<S3>/FixPt Relational Operator' incorporates:
     //   UnitDelay: '<S3>/Delay Input1'
-    //   UnitDelay: '<S4>/Unit Delay1'
     //
     //  Block description for '<S3>/Delay Input1':
     //
@@ -240,22 +240,41 @@ void trajectory_planner(const Flags *rtu_Flags, const Targets *rtu_Targets,
     localDW->UnitDelay1_DSTATE = (rtu_Targets->position !=
       localDW->DelayInput1_DSTATE_j);
 
-    // MinMax: '<S1>/Max' incorporates:
-    //   Abs: '<S1>/Abs'
+    // Outputs for Triggered SubSystem: '<S5>/Sample and Hold' incorporates:
+    //   TriggerPort: '<S9>/Trigger'
 
-    localDW->UnitDelay_DSTATE = std::abs(rtu_Targets->trajectory_time);
-    if (localDW->UnitDelay_DSTATE < 0.01) {
-      // Update for MinMax: '<S1>/Max' incorporates:
-      //   UnitDelay: '<S4>/Unit Delay'
-
-      localDW->UnitDelay_DSTATE = 0.01;
+    if (localDW->UnitDelay1_DSTATE && (localZCE->SampleandHold_Trig_ZCE !=
+         POS_ZCSIG)) {
+      // SignalConversion generated from: '<S9>/In'
+      localB->In = rtu_SensorData->motorsensors.qencoder.rotor_angle;
     }
 
-    // End of MinMax: '<S1>/Max'
+    localZCE->SampleandHold_Trig_ZCE = localDW->UnitDelay1_DSTATE;
 
-    // Update for UnitDelay: '<S7>/Delay Input1'
+    // End of Outputs for SubSystem: '<S5>/Sample and Hold'
+
+    // Abs: '<S5>/Abs' incorporates:
+    //   Product: '<S5>/Divide'
+    //   Sum: '<S5>/Subtract'
+
+    u0 = std::abs((rtu_Targets->position - localB->In) / rtu_Targets->velocity);
+
+    // MinMax: '<S5>/Max'
+    if (u0 >= 0.1F) {
+      // Update for UnitDelay: '<S4>/Unit Delay'
+      localDW->UnitDelay_DSTATE = u0;
+    } else {
+      // Update for UnitDelay: '<S4>/Unit Delay' incorporates:
+      //   DataTypeConversion: '<S1>/Cast To Double1'
+
+      localDW->UnitDelay_DSTATE = 0.10000000149011612;
+    }
+
+    // End of MinMax: '<S5>/Max'
+
+    // Update for UnitDelay: '<S8>/Delay Input1'
     //
-    //  Block description for '<S7>/Delay Input1':
+    //  Block description for '<S8>/Delay Input1':
     //
     //   Store in Global RAM
 
@@ -294,6 +313,7 @@ void trajectory_planner_initialize(ZCE_trajectory_planner_T *localZCE)
 {
   localZCE->ComputeCoefficients_Trig_ZCE = POS_ZCSIG;
   localZCE->ComputeInitState_Trig_ZCE = POS_ZCSIG;
+  localZCE->SampleandHold_Trig_ZCE = POS_ZCSIG;
   localZCE->DiscreteFilter_Reset_ZCE = POS_ZCSIG;
 }
 

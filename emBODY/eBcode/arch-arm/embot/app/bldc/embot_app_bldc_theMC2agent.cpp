@@ -440,6 +440,7 @@ bool embot::app::bldc::theMC2agent::Impl::get(const embot::prot::can::motor::pol
             embot::app::bldc::mbd::interface::Targets t {};        
             t.position = vvgTargetPOS[motor].value().position;
             t.velocity = vvgTargetPOS[motor].value().withvelocity;
+						embot::core::print(std::string("pos = ") + std::to_string(t.position) + " w/ vel = " + std::to_string(t.velocity));
             io2handle.event_pushback(t, motor);            
         } break;
         

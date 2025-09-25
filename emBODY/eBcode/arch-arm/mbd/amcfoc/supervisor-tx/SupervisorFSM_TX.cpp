@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'SupervisorFSM_TX'.
 //
-// Model version                  : 11.6
+// Model version                  : 11.16
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:01:16 2025
+// C/C++ source code generated on : Thu Sep 25 16:26:13 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -118,10 +118,9 @@ void SupervisorFSM_TX_Init(BUS_MESSAGES_TX *rty_MessagesTx, BUS_STATUS_TX
 void SupervisorFSM_TX(const SensorsData *rtu_SensorsData, const EstimatedData
                       *rtu_Estimates, const Flags *rtu_Flags, const FOCOutputs
                       *rtu_FOCOutputs, const boolean_T
-                      *rtu_ExternalFlags_fault_button, const Targets
-                      *rtu_TargetPlanner, BUS_MESSAGES_TX *rty_MessagesTx,
-                      BUS_STATUS_TX *rty_StatusTx, DW_SupervisorFSM_TX_f_T
-                      *localDW)
+                      *rtu_ExternalFlags_fault_button, BUS_MESSAGES_TX
+                      *rty_MessagesTx, BUS_STATUS_TX *rty_StatusTx,
+                      DW_SupervisorFSM_TX_f_T *localDW)
 {
   boolean_T ev_foc;
 
@@ -179,7 +178,7 @@ void SupervisorFSM_TX(const SensorsData *rtu_SensorsData, const EstimatedData
     localDW->is_active_c3_SupervisorFSM_TX = 1U;
   } else if (rtu_Flags->enable_sending_msg_status) {
     rty_MessagesTx->foc.current = rtu_Estimates->Iq_filtered;
-    rty_MessagesTx->foc.velocity = rtu_TargetPlanner->position;
+    rty_MessagesTx->foc.velocity = rtu_Estimates->rotor_velocity;
     rty_MessagesTx->foc.position =
       rtu_SensorsData->motorsensors.qencoder.rotor_angle;
     ev_foc = true;

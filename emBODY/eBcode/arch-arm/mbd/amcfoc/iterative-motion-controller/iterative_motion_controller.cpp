@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 5.18
+// Model version                  : 5.20
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:02:00 2025
+// C/C++ source code generated on : Thu Sep 25 16:27:31 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -444,7 +444,6 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
   ReceivedEvents rtb_ImpSel_InsertedFor_Events_at_outport_0[4];
   ReceivedEvents struct_temp;
   SensorsData rtb_Transitionto1ms;
-  Targets rtb_ImpAsg_InsertedFor_TargetPlanner_at_inport_0[2];
   int32_T i;
   int8_T wrBufIdx;
   uint8_T counter_motor_1;
@@ -631,7 +630,6 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
                      &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                      Flags_p, &rtb_RateTransition2,
                      &iterative_motion_controller_U.ExternalFlags_j.fault_button,
-                     &rtb_MotionController_o6,
                      &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                      MessagesTx,
                      &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
@@ -777,10 +775,6 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
     rtb_ImpAsg_InsertedFor_MessagesFlags_at_inport_0[ForEach_itr] =
       iterative_motion_controller_DW.CoreSubsys[ForEach_itr].Model_o2;
 
-    // ForEachSliceAssignment generated from: '<S1>/TargetPlanner'
-    rtb_ImpAsg_InsertedFor_TargetPlanner_at_inport_0[ForEach_itr] =
-      rtb_MotionController_o6;
-
     // ForEachSliceAssignment generated from: '<S1>/Flags'
     rtb_ImpAsg_InsertedFor_Flags_at_inport_0[ForEach_itr] =
       iterative_motion_controller_DW.CoreSubsys[ForEach_itr].Flags_p;
@@ -825,10 +819,6 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
   iterative_motion_controller_Y.MessagesFlags[0] =
     rtb_ImpAsg_InsertedFor_MessagesFlags_at_inport_0[0];
 
-  // Outport: '<Root>/TargetPlanner'
-  iterative_motion_controller_Y.TargetPlanner[0] =
-    rtb_ImpAsg_InsertedFor_TargetPlanner_at_inport_0[0];
-
   // Outport: '<Root>/Estimates'
   iterative_motion_controller_Y.Estimates[1] =
     rtb_ImpAsg_InsertedFor_Estimates_at_inport_0[1];
@@ -840,10 +830,6 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
   // Outport: '<Root>/MessagesFlags'
   iterative_motion_controller_Y.MessagesFlags[1] =
     rtb_ImpAsg_InsertedFor_MessagesFlags_at_inport_0[1];
-
-  // Outport: '<Root>/TargetPlanner'
-  iterative_motion_controller_Y.TargetPlanner[1] =
-    rtb_ImpAsg_InsertedFor_TargetPlanner_at_inport_0[1];
 }
 
 // Model initialize function

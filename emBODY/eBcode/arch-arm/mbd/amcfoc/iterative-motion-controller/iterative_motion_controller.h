@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 5.18
+// Model version                  : 5.20
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:02:00 2025
+// C/C++ source code generated on : Thu Sep 25 16:27:31 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -98,7 +98,6 @@ struct ExtY_iterative_motion_controller_T {
   ActuatorConfiguration ConfigurationParameters[2];// '<Root>/ConfigurationParameters' 
   BUS_MESSAGES_TX Messages[2];         // '<Root>/Messages'
   BUS_STATUS_TX MessagesFlags[2];      // '<Root>/MessagesFlags'
-  Targets TargetPlanner[2];            // '<Root>/TargetPlanner'
 };
 
 // Real-time Model Data Structure

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'trajectory_planner'.
 //
-// Model version                  : 2.17
+// Model version                  : 2.33
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:15:01 2025
+// C/C++ source code generated on : Thu Sep 25 09:26:15 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -24,15 +24,16 @@
 
 // Block signals for model 'trajectory_planner'
 struct B_trajectory_planner_c_T {
-  real_T Product2;                     // '<S6>/Product2'
-  real_T Divide9[4];                   // '<S5>/Divide9'
+  real_T Product2;                     // '<S7>/Product2'
+  real_T Divide9[4];                   // '<S6>/Divide9'
   real_T OutportBufferForDen[4];
+  real32_T In;                         // '<S9>/In'
 };
 
 // Block states (default storage) for model 'trajectory_planner'
 struct DW_trajectory_planner_f_T {
   real_T UnitDelay_DSTATE;             // '<S4>/Unit Delay'
-  real_T DelayInput1_DSTATE;           // '<S7>/Delay Input1'
+  real_T DelayInput1_DSTATE;           // '<S8>/Delay Input1'
   real_T DiscreteFilter_states[3];     // '<S4>/Discrete Filter'
   real_T DiscreteFilter_tmp;           // '<S4>/Discrete Filter'
   real32_T DelayInput1_DSTATE_j;       // '<S3>/Delay Input1'
@@ -43,6 +44,7 @@ struct DW_trajectory_planner_f_T {
 // Zero-crossing (trigger) state for model 'trajectory_planner'
 struct ZCE_trajectory_planner_T {
   ZCSigState DiscreteFilter_Reset_ZCE; // '<S4>/Discrete Filter'
+  ZCSigState SampleandHold_Trig_ZCE;   // '<S5>/Sample and Hold'
   ZCSigState ComputeInitState_Trig_ZCE;// '<S4>/Compute Init State'
   ZCSigState ComputeCoefficients_Trig_ZCE;// '<S4>/Compute Coefficients'
 };
@@ -63,12 +65,6 @@ extern void trajectory_planner(const Flags *rtu_Flags, const Targets
   ZCE_trajectory_planner_T *localZCE);
 
 //-
-//  These blocks were eliminated from the model due to optimizations:
-//
-//  Block '<S1>/Cast To Double1' : Eliminate redundant data type conversion
-
-
-//-
 //  The generated code includes comments that allow you to trace directly
 //  back to the appropriate location in the model.  The basic format
 //  is <system>/block_name, where system is the system number (uniquely
@@ -87,9 +83,11 @@ extern void trajectory_planner(const Flags *rtu_Flags, const Targets
 //  '<S2>'   : 'trajectory_planner/If Action Subsystem3'
 //  '<S3>'   : 'trajectory_planner/If Action Subsystem2/Detect Change'
 //  '<S4>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk'
-//  '<S5>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Compute Coefficients'
-//  '<S6>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Compute Init State'
-//  '<S7>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Detect Change'
+//  '<S5>'   : 'trajectory_planner/If Action Subsystem2/velocity2time'
+//  '<S6>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Compute Coefficients'
+//  '<S7>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Compute Init State'
+//  '<S8>'   : 'trajectory_planner/If Action Subsystem2/Discrete Minimum Jerk/Detect Change'
+//  '<S9>'   : 'trajectory_planner/If Action Subsystem2/velocity2time/Sample and Hold'
 
 #endif                                 // trajectory_planner_h_
 

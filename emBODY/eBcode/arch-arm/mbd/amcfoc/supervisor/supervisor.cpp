@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 5.15
+// Model version                  : 5.24
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:43:01 2025
+// C/C++ source code generated on : Tue Sep 23 14:45:50 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -85,9 +85,9 @@ static void supervisor_SetPid(ControlModes pid_type, real32_T pid_P, real32_T
   *rty_ConfigurationParameters);
 static void supervisor_hardwareConfigMotor(uint8_T b_motor_id,
   ActuatorConfiguration *rty_ConfigurationParameters);
-static void supervisor_SetTarget(real32_T tg_trajectory_time, real32_T
-  tg_position, real32_T tg_velocity, real32_T tg_current, real32_T tg_voltage,
-  Targets *rty_targets, DW_supervisor_f_T *localDW);
+static void supervisor_SetTarget(real32_T tg_position, real32_T tg_velocity,
+  real32_T tg_current, real32_T tg_voltage, Targets *rty_targets,
+  DW_supervisor_f_T *localDW);
 static void supervisor_CheckCalibration(boolean_T
   motor_config_has_quadrature_encoder, int16_T motor_config_rotor_index_offset,
   const EstimatedData *rtu_EstimatedData, const FOCOutputs *rtu_ControlOutputs,
@@ -129,8 +129,8 @@ static void supervisor_TargetsManager(Targets *rty_targets, DW_supervisor_f_T
 
        case supervisor_IN_Position:
         rty_targets->position = static_cast<real32_T>(localDW->newSetpoint);
-        rty_targets->trajectory_time = localDW->newArrivalTime;
-        rty_targets->velocity = 0.0F;
+        rty_targets->velocity = static_cast<real32_T>
+          (localDW->trajectoryVelocity);
         break;
 
        default:
@@ -451,7 +451,7 @@ static void supervisor_Idle(const EstimatedData *rtu_EstimatedData, const
           rty_Flags->control_mode = ControlModes_Position;
           localDW->newSetpoint =
             rtu_SensorsData->motorsensors.qencoder.rotor_angle;
-          localDW->newArrivalTime = static_cast<real32_T>(0.5);
+          localDW->trajectoryVelocity = 1.0;
           g_previousEvent = localDW->sfEvent;
           localDW->sfEvent = supervisor_event_ControlModeSetpointChange;
           if (localDW->is_active_TargetsManager != 0) {
@@ -567,7 +567,7 @@ static void supervisor_Velocity(const EstimatedData *rtu_EstimatedData, const
         rty_Flags->control_mode = ControlModes_Position;
         localDW->newSetpoint =
           rtu_SensorsData->motorsensors.qencoder.rotor_angle;
-        localDW->newArrivalTime = static_cast<real32_T>(0.5);
+        localDW->trajectoryVelocity = 1.0;
         e_previousEvent = localDW->sfEvent;
         localDW->sfEvent = supervisor_event_ControlModeSetpointChange;
         if (localDW->is_active_TargetsManager != 0) {
@@ -928,7 +928,7 @@ static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData
       // Chart: '<Root>/Supervisor'
       rty_Flags->control_mode = ControlModes_Position;
       localDW->newSetpoint = rtu_SensorsData->motorsensors.qencoder.rotor_angle;
-      localDW->newArrivalTime = static_cast<real32_T>(0.5);
+      localDW->trajectoryVelocity = 1.0;
       m_previousEvent = localDW->sfEvent;
       localDW->sfEvent = supervisor_event_ControlModeSetpointChange;
       if (localDW->is_active_TargetsManager != 0) {
@@ -974,7 +974,7 @@ static void supervisor_ControlModeHandler(const EstimatedData *rtu_EstimatedData
       // Chart: '<Root>/Supervisor'
       rty_Flags->control_mode = ControlModes_Position;
       localDW->newSetpoint = rtu_SensorsData->motorsensors.qencoder.rotor_angle;
-      localDW->newArrivalTime = static_cast<real32_T>(0.5);
+      localDW->trajectoryVelocity = 1.0;
       m_previousEvent = localDW->sfEvent;
       localDW->sfEvent = supervisor_event_ControlModeSetpointChange;
       if (localDW->is_active_TargetsManager != 0) {
@@ -1146,9 +1146,9 @@ static void supervisor_hardwareConfigMotor(uint8_T b_motor_id,
 }
 
 // Function for Chart: '<Root>/Supervisor'
-static void supervisor_SetTarget(real32_T tg_trajectory_time, real32_T
-  tg_position, real32_T tg_velocity, real32_T tg_current, real32_T tg_voltage,
-  Targets *rty_targets, DW_supervisor_f_T *localDW)
+static void supervisor_SetTarget(real32_T tg_position, real32_T tg_velocity,
+  real32_T tg_current, real32_T tg_voltage, Targets *rty_targets,
+  DW_supervisor_f_T *localDW)
 {
   int32_T b_previousEvent;
   boolean_T guard1;
@@ -1164,7 +1164,7 @@ static void supervisor_SetTarget(real32_T tg_trajectory_time, real32_T
     guard1 = true;
   } else if (localDW->is_ControlModeHandler == supervisor_IN_Position) {
     localDW->newSetpoint = tg_position;
-    localDW->newArrivalTime = tg_trajectory_time;
+    localDW->trajectoryVelocity = tg_velocity;
     guard1 = true;
   } else if (localDW->is_ControlModeHandler != supervisor_IN_Calibration) {
     localDW->newSetpoint = 0.0;
@@ -1388,9 +1388,7 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
 
        case EventTypes_SetTarget:
         rty_Flags->enable_sending_msg_status = true;
-        supervisor_SetTarget(rtu_ReceivedEvents[ei].
-                             targets_content.trajectory_time,
-                             rtu_ReceivedEvents[ei].targets_content.position,
+        supervisor_SetTarget(rtu_ReceivedEvents[ei].targets_content.position,
                              rtu_ReceivedEvents[ei].targets_content.velocity,
                              rtu_ReceivedEvents[ei].targets_content.current,
                              rtu_ReceivedEvents[ei].targets_content.voltage,
@@ -1517,9 +1515,7 @@ void supervisor(const ExternalFlags *rtu_ExternalFlags, const EstimatedData
 
          case EventTypes_SetTarget:
           rty_Flags->enable_sending_msg_status = true;
-          supervisor_SetTarget(rtu_ReceivedEvents[ei].
-                               targets_content.trajectory_time,
-                               rtu_ReceivedEvents[ei].targets_content.position,
+          supervisor_SetTarget(rtu_ReceivedEvents[ei].targets_content.position,
                                rtu_ReceivedEvents[ei].targets_content.velocity,
                                rtu_ReceivedEvents[ei].targets_content.current,
                                rtu_ReceivedEvents[ei].targets_content.voltage,

@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'supervisor'.
 //
-// Model version                  : 5.15
+// Model version                  : 5.24
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Sep 23 09:43:01 2025
+// C/C++ source code generated on : Tue Sep 23 14:45:50 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -41,8 +41,8 @@ struct DW_supervisor_f_T {
   real_T talign;                       // '<Root>/Supervisor'
   real_T tzeroalign;                   // '<Root>/Supervisor'
   real_T v_threshold;                  // '<Root>/Supervisor'
+  real_T trajectoryVelocity;           // '<Root>/Supervisor'
   real32_T diff_index;                 // '<Root>/Supervisor'
-  real32_T newArrivalTime;             // '<Root>/Supervisor'
   int32_T sfEvent;                     // '<Root>/Supervisor'
   uint32_T temporalCounter_i1;         // '<Root>/Supervisor'
   ControlModes requestedControlMode;   // '<Root>/Supervisor'
