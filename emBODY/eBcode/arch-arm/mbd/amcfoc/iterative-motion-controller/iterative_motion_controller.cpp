@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 5.20
+// Model version                  : 5.22
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Thu Sep 25 16:27:31 2025
+// C/C++ source code generated on : Mon Sep 29 09:39:30 2025
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -427,9 +427,6 @@ void AMCFOC_step_FOC(void)             // Sample time: [4.5e-05s, 0.0s]
 // Model step function for TID2
 void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
 {
-  // local block i/o variables
-  Targets rtb_MotionController_o6;
-
   // local scratch DWork variables
   int32_T ForEach_itr;
   ActuatorConfiguration
@@ -615,7 +612,7 @@ void AMCFOC_step_Time_1ms(void)        // Sample time: [0.001s, 0.0s]
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                 MotionController_o4,
                 &iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
-                SensorsDataCalibration, &rtb_MotionController_o6,
+                SensorsDataCalibration,
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].
                   MotionController_InstanceData.rtb),
                 &(iterative_motion_controller_DW.CoreSubsys[ForEach_itr].

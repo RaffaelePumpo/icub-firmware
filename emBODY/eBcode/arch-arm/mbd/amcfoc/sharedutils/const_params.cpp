@@ -8,7 +8,6 @@
 //  Code generation for model "estimation_velocity".
 //
 //  Model version              : 8.11
-
 #include "rtwtypes.h"
 
 extern const real32_T rtCP_pooled_Az3IVI54Pn7X[32];
