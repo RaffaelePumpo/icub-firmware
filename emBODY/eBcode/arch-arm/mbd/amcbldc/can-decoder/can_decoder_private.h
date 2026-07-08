@@ -8,19 +8,19 @@
 // Code generated for Simulink model 'can_decoder'.
 //
 // Model version                  : 10.136
-// Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Oct 14 16:17:00 2025
+// Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
+// C/C++ source code generated on : Tue Jul  7 16:46:22 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef can_decoder_private_h_
-#define can_decoder_private_h_
+#ifndef CAN_DECODER_PRIVATE_H_
+#define CAN_DECODER_PRIVATE_H_
 #include "rtwtypes.h"
 #include "can_decoder_types.h"
-#endif                                 // can_decoder_private_h_
+#endif                                 // CAN_DECODER_PRIVATE_H_
 
 //
 // File trailer for generated code.

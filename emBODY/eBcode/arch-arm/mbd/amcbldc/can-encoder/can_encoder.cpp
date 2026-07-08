@@ -8,8 +8,8 @@
 // Code generated for Simulink model 'can_encoder'.
 //
 // Model version                  : 9.1
-// Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Tue Oct 14 16:17:06 2025
+// Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
+// C/C++ source code generated on : Tue Jul  7 16:46:27 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -75,8 +75,8 @@ void can_encoder(const BUS_MESSAGES_TX *rtu_messages_tx, const BUS_STATUS_TX
   //   DataTypeConversion: '<S4>/Data Type Conversion'
 
   rtb_DataTypeConversion_k = static_cast<int16_T>(rtb_DataTypeConversion_k << 5);
-  std::memcpy((void *)&tmp2[0], (void *)&rtb_DataTypeConversion_k, (size_t)2 *
-              sizeof(uint8_T));
+  std::memcpy((void *)&tmp2[0], (void *)&rtb_DataTypeConversion_k,
+              static_cast<size_t>(2) * sizeof(uint8_T));
   rtb_BusCreator_m.packet.PAYLOAD[2] = tmp2[0];
   rtb_BusCreator_m.packet.PAYLOAD[3] = tmp2[1];
   if (rtu_messages_tx->status.flags.OverCurrentFailure) {
@@ -123,8 +123,8 @@ void can_encoder(const BUS_MESSAGES_TX *rtu_messages_tx, const BUS_STATUS_TX
   //   Gain: '<S2>/Gain3'
 
   tmp = CAN_ANGLE_DEG2ICUB * rtu_messages_tx->foc.position;
-  if (tmp < 2.14748365E+9F) {
-    if (tmp >= -2.14748365E+9F) {
+  if (tmp < 2.1474836E+9F) {
+    if (tmp >= -2.1474836E+9F) {
       i = static_cast<int32_T>(tmp);
     } else {
       i = MIN_int32_T;
@@ -139,15 +139,16 @@ void can_encoder(const BUS_MESSAGES_TX *rtu_messages_tx, const BUS_STATUS_TX
   //   DataTypeConversion: '<S2>/Data Type Conversion1'
   //   DataTypeConversion: '<S2>/Data Type Conversion2'
 
-  std::memcpy((void *)&tmp2[0], (void *)&rtb_DataTypeConversion_k, (size_t)2 *
-              sizeof(uint8_T));
+  std::memcpy((void *)&tmp2[0], (void *)&rtb_DataTypeConversion_k,
+              static_cast<size_t>(2) * sizeof(uint8_T));
   rtb_BusCreator_n.packet.PAYLOAD[0] = tmp2[0];
   rtb_BusCreator_n.packet.PAYLOAD[1] = tmp2[1];
-  std::memcpy((void *)&tmp2[0], (void *)&rtb_DataTypeConversion1_0, (size_t)2 *
-              sizeof(uint8_T));
+  std::memcpy((void *)&tmp2[0], (void *)&rtb_DataTypeConversion1_0, static_cast<
+              size_t>(2) * sizeof(uint8_T));
   rtb_BusCreator_n.packet.PAYLOAD[2] = tmp2[0];
   rtb_BusCreator_n.packet.PAYLOAD[3] = tmp2[1];
-  std::memcpy((void *)&b_tmp[0], (void *)&i, (size_t)4 * sizeof(uint8_T));
+  std::memcpy((void *)&b_tmp[0], (void *)&i, static_cast<size_t>(4) * sizeof
+              (uint8_T));
   rtb_BusCreator_n.packet.PAYLOAD[4] = b_tmp[0];
   rtb_BusCreator_n.packet.PAYLOAD[5] = b_tmp[1];
   rtb_BusCreator_n.packet.PAYLOAD[6] = b_tmp[2];
