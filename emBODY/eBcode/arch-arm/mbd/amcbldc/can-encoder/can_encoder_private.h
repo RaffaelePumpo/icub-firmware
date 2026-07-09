@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'can_encoder'.
 //
-// Model version                  : 9.1
+// Model version                  : 11.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:27 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:32 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M

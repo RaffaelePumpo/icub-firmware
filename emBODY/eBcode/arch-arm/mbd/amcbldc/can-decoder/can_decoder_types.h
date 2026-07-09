@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'can_decoder'.
 //
-// Model version                  : 10.136
+// Model version                  : 11.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:22 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:28 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -26,22 +26,22 @@
 //
 //  Constraints for division operations in dimension variants
 
-#if ((CAN_MAX_NUM_PACKETS % 1) != 0)
-# error "The preprocessor definition '1' must not be equal to zero and     the division of 'CAN_MAX_NUM_PACKETS' by '1' must not have a remainder."
+#if ((MAX_EVENTS_PER_TICK % 1) != 0)
+# error "The preprocessor definition '1' must not be equal to zero and     the division of 'MAX_EVENTS_PER_TICK' by '1' must not have a remainder."
 #endif
 
 //
 //  Registered constraints for dimension variants
 
-// Constraint 'CAN_MAX_NUM_PACKETS == 4' registered by:
+// Constraint 'MAX_EVENTS_PER_TICK == 4' registered by:
 //  '<S2>/message_rx'
 
-#if CAN_MAX_NUM_PACKETS != 4
-# error "The preprocessor definition 'CAN_MAX_NUM_PACKETS' must be equal to '4'"
+#if MAX_EVENTS_PER_TICK != 4
+# error "The preprocessor definition 'MAX_EVENTS_PER_TICK' must be equal to '4'"
 #endif
 
-#if (CAN_MAX_NUM_PACKETS+1) <= CAN_MAX_NUM_PACKETS
-# error "The preprocessor definition '(CAN_MAX_NUM_PACKETS+1)' must be greater than 'CAN_MAX_NUM_PACKETS'"
+#if (MAX_EVENTS_PER_TICK+1) <= MAX_EVENTS_PER_TICK
+# error "The preprocessor definition '(MAX_EVENTS_PER_TICK+1)' must be greater than 'MAX_EVENTS_PER_TICK'"
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_BUS_CAN_PACKET_
@@ -123,7 +123,7 @@ struct BUS_CAN_ID_RX
 
 struct BUS_CAN_MULTIPLE
 {
-  BUS_CAN packets[CAN_MAX_NUM_PACKETS];
+  BUS_CAN packets[MAX_EVENTS_PER_TICK];
 };
 
 #endif

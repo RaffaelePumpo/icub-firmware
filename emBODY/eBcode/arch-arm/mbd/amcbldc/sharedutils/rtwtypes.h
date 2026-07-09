@@ -5,11 +5,11 @@
 //
 // File: rtwtypes.h
 //
-// Code generated for Simulink model 'can_decoder'.
+// Code generated for Simulink model 'SupervisorFSM_TX'.
 //
-// Model version                  : 10.136
+// Model version                  : 11.21
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:22 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:18 2026
 //
 #ifndef RTWTYPES_H
 #define RTWTYPES_H

@@ -9,7 +9,7 @@
 //
 // Model version                  : 8.11
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:43 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:44 2026
 //
 #ifndef RT_HYPOTF_H_
 #define RT_HYPOTF_H_

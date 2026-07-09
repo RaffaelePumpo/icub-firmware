@@ -9,7 +9,7 @@
 //
 // Model version                  : 12.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:51:35 2026
+// C/C++ source code generated on : Thu Jul  9 10:01:37 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -22,18 +22,6 @@
 
 // Includes for objects with custom storage classes
 #include "rtw_defines.h"
-
-//
-//  Registered constraints for dimension variants
-
-#if CAN_MAX_NUM_PACKETS <= 0
-# error "The preprocessor definition 'CAN_MAX_NUM_PACKETS' must be greater than '0'"
-#endif
-
-#if CAN_MAX_NUM_PACKETS >= 16
-# error "The preprocessor definition 'CAN_MAX_NUM_PACKETS' must be less than '16'"
-#endif
-
 #ifndef DEFINED_TYPEDEF_FOR_MOTORCONFIGURATIONEXTERNAL_
 #define DEFINED_TYPEDEF_FOR_MOTORCONFIGURATIONEXTERNAL_
 
@@ -226,7 +214,7 @@ typedef enum {
 
 struct BUS_CAN_MULTIPLE
 {
-  BUS_CAN packets[CAN_MAX_NUM_PACKETS];
+  BUS_CAN packets[MAX_EVENTS_PER_TICK];
 };
 
 #endif

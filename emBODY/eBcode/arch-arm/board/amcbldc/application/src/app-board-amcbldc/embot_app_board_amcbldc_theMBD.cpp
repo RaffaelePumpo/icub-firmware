@@ -447,9 +447,9 @@ bool embot::app::board::amcbldc::theMBD::Impl::tick(const std::vector<embot::app
         
     // add any input can frame into the supervisor input queue
     
-    size_t ninputframes = std::min(inputmessages.size(), static_cast<size_t>(CAN_MAX_NUM_PACKETS));
+    size_t ninputframes = std::min(inputmessages.size(), static_cast<size_t>(MAX_EVENTS_PER_TICK));
     
-    for(uint8_t i=0; i<CAN_MAX_NUM_PACKETS; i++) 
+    for(uint8_t i=0; i<MAX_EVENTS_PER_TICK; i++) 
     {
         AMC_BLDC_U.PacketsRx.packets[i].available = false;
     }
@@ -490,7 +490,7 @@ bool embot::app::board::amcbldc::theMBD::Impl::tick(const std::vector<embot::app
     
     // get any out can frame
     
-    for(uint8_t i=0; i<CAN_MAX_NUM_PACKETS; i++)
+    for(uint8_t i=0; i<MAX_EVENTS_PER_TICK; i++)
     {
         if(true == AMC_BLDC_Y.PacketsTx.packets[i].available)
         {           

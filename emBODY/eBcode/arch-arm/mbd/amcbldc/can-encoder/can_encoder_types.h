@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'can_encoder'.
 //
-// Model version                  : 9.1
+// Model version                  : 11.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:27 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:32 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -26,11 +26,11 @@
 //
 //  Registered constraints for dimension variants
 
-// Constraint 'CAN_MAX_NUM_PACKETS == 4' registered by:
+// Constraint 'MAX_EVENTS_PER_TICK == 4' registered by:
 //  '<S1>/Vector Concatenate'
 
-#if CAN_MAX_NUM_PACKETS != 4
-# error "The preprocessor definition 'CAN_MAX_NUM_PACKETS' must be equal to '4'"
+#if MAX_EVENTS_PER_TICK != 4
+# error "The preprocessor definition 'MAX_EVENTS_PER_TICK' must be equal to '4'"
 #endif
 
 #ifndef DEFINED_TYPEDEF_FOR_BUS_CAN_PACKET_
@@ -66,7 +66,7 @@ struct BUS_CAN
 
 struct BUS_CAN_MULTIPLE
 {
-  BUS_CAN packets[CAN_MAX_NUM_PACKETS];
+  BUS_CAN packets[MAX_EVENTS_PER_TICK];
 };
 
 #endif

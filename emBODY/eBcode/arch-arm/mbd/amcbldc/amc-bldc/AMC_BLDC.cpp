@@ -9,7 +9,7 @@
 //
 // Model version                  : 12.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:51:35 2026
+// C/C++ source code generated on : Thu Jul  9 10:01:37 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -427,7 +427,7 @@ void AMC_BLDC_step_1ms(void)           // Sample time: [0.001s, 0.0s]
   // End of RateTransition generated from: '<Root>/Motion Controller Single'
 
   // ModelReference: '<Root>/Motion Controller Single' incorporates:
-  //   Inport generated from: '<Root>/In Bus Element5'
+  //   Inport generated from: '<Root>/In Bus Element1'
   //   Outport generated from: '<Root>/Out Bus Element2'
 
   mc_1ms_tick(&rtb_TmpRTBAtMotionControllerSingleInport1,
@@ -543,7 +543,7 @@ void AMC_BLDC_step_1ms(void)           // Sample time: [0.001s, 0.0s]
   // End of RateTransition generated from: '<Root>/Component2'
 
   // ModelReference generated from: '<Root>/SupervisorFSM_TX' incorporates:
-  //   Inport generated from: '<Root>/In Bus Element5'
+  //   Inport generated from: '<Root>/In Bus Element1'
   //   Outport generated from: '<Root>/Out Bus Element2'
 
   SupervisorFSM_TX(&rtb_TmpRTBAtSupervisorFSM_TXInport1,

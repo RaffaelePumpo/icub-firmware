@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'can_encoder'.
 //
-// Model version                  : 9.1
+// Model version                  : 11.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:27 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:32 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -199,7 +199,7 @@ void can_encoder(const BUS_MESSAGES_TX *rtu_messages_tx, const BUS_STATUS_TX
   rtb_BusCreator_n_0[1] = rtb_BusCreator_n;
   rtb_BusCreator_n_0[2] = rtb_BusCreator_hs;
   rtb_BusCreator_n_0[3] = rtb_BusCreator_hs;
-  for (i = 0; i < CAN_MAX_NUM_PACKETS; i++) {
+  for (i = 0; i < MAX_EVENTS_PER_TICK; i++) {
     rty_pck_tx->packets[i] = rtb_BusCreator_n_0[i];
   }
 

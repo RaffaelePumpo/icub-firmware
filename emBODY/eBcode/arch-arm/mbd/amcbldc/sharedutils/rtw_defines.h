@@ -5,11 +5,11 @@
 //
 // File: rtw_defines.h
 //
-// Code generated for Simulink model 'supervisor'.
+// Code generated for Simulink model 'can_decoder'.
 //
-// Model version                  : 5.37
+// Model version                  : 11.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:47:10 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:28 2026
 //
 
 #ifndef RTW_DEFINES_H_
@@ -18,7 +18,6 @@
 
 // Exported data define
 // Definition for custom storage class: Define
-#define CAN_MAX_NUM_PACKETS            4                         // Maximum number of TX/RX packets handled per time instance.
 #define MAX_EVENTS_PER_TICK            4                         // The maximum number of events (e.g. messages related to control mode, setpoint...) that can be processed by the architectural model in a step().
 #endif                                 // RTW_DEFINES_H_
 

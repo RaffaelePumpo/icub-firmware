@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'can_decoder'.
 //
-// Model version                  : 10.136
+// Model version                  : 11.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:46:22 2026
+// C/C++ source code generated on : Thu Jul  9 10:00:28 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -687,7 +687,7 @@ void can_decoder_Init(DW_can_decoder_f_T *localDW)
   int32_T ForEach_itr;
 
   // SystemInitialize for Iterator SubSystem: '<S1>/For Each Subsystem'
-  for (ForEach_itr = 0; ForEach_itr < CAN_MAX_NUM_PACKETS; ForEach_itr++) {
+  for (ForEach_itr = 0; ForEach_itr < MAX_EVENTS_PER_TICK; ForEach_itr++) {
     // SystemInitialize for Atomic SubSystem: '<S2>/CAN_Decoder'
     // SystemInitialize for Chart: '<S3>/Decoding Logic'
     can_decoder_DecodingLogic_Init(&localDW->CoreSubsys[ForEach_itr].
@@ -713,7 +713,7 @@ void can_decoder(const BUS_CAN_MULTIPLE *rtu_pck_rx_raw, ReceivedEvents
   // Outputs for Iterator SubSystem: '<S1>/For Each Subsystem' incorporates:
   //   ForEach: '<S2>/For Each'
 
-  for (ForEach_itr = 0; ForEach_itr < CAN_MAX_NUM_PACKETS; ForEach_itr++) {
+  for (ForEach_itr = 0; ForEach_itr < MAX_EVENTS_PER_TICK; ForEach_itr++) {
     // MATLAB Function: '<S2>/RAW2STRUCT Decoding Logic' incorporates:
     //   ForEachSliceSelector generated from: '<S2>/pck_rx_raw'
 

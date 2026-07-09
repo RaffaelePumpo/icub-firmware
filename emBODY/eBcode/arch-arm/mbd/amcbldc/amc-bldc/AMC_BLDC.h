@@ -9,7 +9,7 @@
 //
 // Model version                  : 12.0
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Tue Jul  7 16:51:35 2026
+// C/C++ source code generated on : Thu Jul  9 10:01:37 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -27,9 +27,6 @@
 #include "SupervisorFSM_TX.h"
 #include "can_encoder.h"
 #include "zero_crossing_types.h"
-
-// Includes for objects with custom storage classes
-#include "rtw_defines.h"
 
 // Block signals (default storage)
 struct B_AMC_BLDC_T {
