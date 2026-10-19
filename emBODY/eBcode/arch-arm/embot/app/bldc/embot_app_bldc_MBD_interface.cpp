@@ -530,7 +530,7 @@ namespace embot::app::bldc::mbd::interface {
     
     void IO2::set_controlmode(const embot::app::bldc::mbd::interface::ControlModes cm, uint8_t motor)
     {
-        output->Flags_d[motor].control_mode = cm;
+        output->Flags_d.control_mode = cm;
     }
  
     void IO2::set_temperature(float celsiusdegrees, uint8_t motor)
@@ -540,25 +540,25 @@ namespace embot::app::bldc::mbd::interface {
     
     void IO2::set_powersupply(float volt, uint8_t motor)
     {
-        input->SensorData[motor].driversensors.Vcc = volt;
+        input->SensorData.driversensors.Vcc = volt;
     }
     
     void IO2::set(const FOCinput &i, uint8_t motor)
     {
-        input->SensorData[motor].motorsensors.electrical_angle = i.electricalangle;
-        input->SensorData[motor].motorsensors.Iabc[0] = i.currents.u;
-        input->SensorData[motor].motorsensors.Iabc[1] = i.currents.v;
-        input->SensorData[motor].motorsensors.Iabc[2] = i.currents.w;
-        input->SensorData[motor].motorsensors.qencoder.rotor_angle = i.mechanicalangle;
-        input->SensorData[motor].motorsensors.hallABC = i.hall;
-        input->SensorData[motor].motorsensors.qencoder.counter = i.qenc.counter;
-        input->SensorData[motor].motorsensors.qencoder.Idx_counter = i.qenc.indexcounter;
+        input->SensorData.motorsensors.electrical_angle = i.electricalangle;
+        input->SensorData.motorsensors.Iabc[0] = i.currents.u;
+        input->SensorData.motorsensors.Iabc[1] = i.currents.v;
+        input->SensorData.motorsensors.Iabc[2] = i.currents.w;
+        input->SensorData.motorsensors.qencoder.rotor_angle = i.mechanicalangle;
+        input->SensorData.motorsensors.hallABC = i.hall;
+        input->SensorData.motorsensors.qencoder.counter = i.qenc.counter;
+        input->SensorData.motorsensors.qencoder.Idx_counter = i.qenc.indexcounter;
         //input->SensorData[motor].motorsensors.qencoder.offset = 0; // stays 0 because it is actually a value coing from motor_config message
     }
     
     void IO2::get(FOCoutput &o, uint8_t motor) const
     {
-        o.pwm = { output->FOCOutputs_h[motor].Vabc[0], output->FOCOutputs_h[motor].Vabc[1], output->FOCOutputs_h[motor].Vabc[2] };    
+        o.pwm = { output->FOCOutputs_h.Vabc[0], output->FOCOutputs_h.Vabc[1], output->FOCOutputs_h.Vabc[2] };    
     }
         
     bool IO2::get_fault() const
@@ -568,7 +568,7 @@ namespace embot::app::bldc::mbd::interface {
     
     ControlModes IO2::get_controlmode(uint8_t motor) const
     {
-        return output->Flags_d[motor].control_mode;
+        return output->Flags_d.control_mode;
     }
     
 #warning verifica perche' entrambi i motori mandano ..... e non va bene    
@@ -582,12 +582,12 @@ namespace embot::app::bldc::mbd::interface {
                 
             case embot::prot::can::motor::periodic::CMD::STATUS:
             {
-                r = output->Flags_d[motor].enable_sending_msg_status;
+                r = output->Flags_d.enable_sending_msg_status;
             } break;
             
             case embot::prot::can::motor::periodic::CMD::FOC:
             {
-                r = output->Flags_d[motor].enable_sending_msg_status;
+                r = output->Flags_d.enable_sending_msg_status;
             } break; 
             case embot::prot::can::motor::periodic::CMD::ADDITIONAL_STATUS:
             {

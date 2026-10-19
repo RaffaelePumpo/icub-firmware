@@ -242,7 +242,7 @@ namespace embot::app::bldc::mbd::interface::mock {
             if(true == _thembddata.emit(m))
             {
                 // ok, i emit
-                _thembddata.io2->get_output()->Flags_d[m].enable_sending_msg_status = true;
+                _thembddata.io2->get_output()->Flags_d.enable_sending_msg_status = true;
                 
                 
                 // i fill what will be used for the CAN messages:
@@ -268,13 +268,13 @@ namespace embot::app::bldc::mbd::interface::mock {
                 
                 // 3. embot::prot::can::motor::periodic::CMD::ADDITIONAL_STATUS
                 // - temperature
-                _thembddata.io2->get_output()->Estimates[m].motor_temperature = 40.0f;
+                _thembddata.io2->get_output()->Estimates.motor_temperature = 40.0f;
                 
                 
             }
             else
             {
-                _thembddata.io2->get_output()->Flags_d[m].enable_sending_msg_status = false;
+                _thembddata.io2->get_output()->Flags_d.enable_sending_msg_status = false;
             }
             
         }

@@ -22,7 +22,7 @@
     
     in the same file we also define a:
     ```C++
-    namespace embot::app::bldc::mbd::interface { constexpr size_t maxMOTORs {2};  }
+    namespace embot::app::bldc::mbd::interface { constexpr size_t maxMOTORs {generatedMOTORs};  }
     ```
 #endif
 
@@ -43,7 +43,7 @@
 #include "embot_app_bldc_MBD_api.h"
 
 
-static_assert((embot::app::bldc::mbd::interface::maxMOTORs == 2), "");
+static_assert(embot::app::bldc::mbd::interface::maxMOTORs > 0, "");
 
 namespace embot::app::bldc::mbd::interface {
     

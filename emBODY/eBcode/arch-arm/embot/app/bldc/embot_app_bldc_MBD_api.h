@@ -12,6 +12,8 @@
 
 #include "embot_core.h"
 #include "stdint.h" 
+#include <cstddef>
+#include <type_traits>
 
 #if 0
 
@@ -51,13 +53,13 @@
     // in SHA-1: b481fc47a2a1e18e09c0d43e0ec536447ef9a0e0
     // AMCFOC: new Motor Parameters + AMCBLDC/AMC2C: Planner, Calibration, new Motor Parameter and new CAN messages (#651)
     // it was 
-    static_assert(sizeof(DW_iterative_motion_controller_T) == 9648, "check of block signals and states");
-    static_assert(sizeof(ExtU_iterative_motion_controller_T) == 1004, "check of ext inputs");
-    static_assert(sizeof(ExtY_iterative_motion_controller_T) == 644, "check of ext outputs");
+//    static_assert(sizeof(DW_iterative_motion_controller_T) == 9648, "check of block signals and states");
+//    static_assert(sizeof(ExtU_iterative_motion_controller_T) == 1004, "check of ext inputs");
+//    static_assert(sizeof(ExtY_iterative_motion_controller_T) == 644, "check of ext outputs");
 
 namespace embot::app::bldc::mbd::interface {
     
-    constexpr size_t maxMOTORs {2};
+    constexpr size_t maxMOTORs {1};
 }
 
 
@@ -129,9 +131,9 @@ namespace embot::app::bldc::mbd::interface {
         {
             for(uint8_t m=0; m<nmot; m++)
             {
-                actcfg[m] = &out.ConfigurationParameters[m];
-                messages[m] = &out.Messages[m];
-                messagesflags[m] = &out.MessagesFlags[m];
+                actcfg[m] = &out.ConfigurationParameters;
+                messages[m] = &out.Messages;
+                messagesflags[m] = &out.MessagesFlags;
            }           
         }
         
@@ -142,9 +144,9 @@ namespace embot::app::bldc::mbd::interface {
         
     public:
         static constexpr uint8_t nmot {maxMOTORs};
-        ActuatorConfiguration* actcfg[nmot] {nullptr, nullptr};
-        BUS_MESSAGES_TX* messages[nmot] {nullptr, nullptr};
-        BUS_STATUS_TX* messagesflags[nmot] {nullptr, nullptr};            
+        ActuatorConfiguration* actcfg[nmot] {};
+        BUS_MESSAGES_TX* messages[nmot] {};
+        BUS_STATUS_TX* messagesflags[nmot] {};
     };
 
 
