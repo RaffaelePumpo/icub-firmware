@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'iterative_motion_controller'.
 //
-// Model version                  : 6.3
+// Model version                  : 6.1
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Mon Oct 19 16:09:33 2026
+// C/C++ source code generated on : Tue Oct 20 12:03:16 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -29,18 +29,18 @@
 // Includes for objects with custom storage classes
 #include "rtw_defines.h"
 
-// Block signals and states (default storage) for system '<Root>'
-struct DW_iterative_motion_controller_T {
+// Block signals and states (default storage) for system '<Root>/Iterative Motion Controller' 
+struct DW_CoreSubsys_iterative_motion_controller_T {
   MdlrefDW_SupervisorFSM_TX_T Model_InstanceData;// '<S1>/Model'
   MdlrefDW_control_foc_T FOC_InstanceData;// '<S1>/FOC'
   MdlrefDW_motion_controller_T MotionController_InstanceData;// '<S1>/Motion Controller' 
   MdlrefDW_process_sensors_T ProcessSensors_InstanceData;// '<S1>/Process Sensors' 
   FOCSlowInputs RateTransition1_Buf[3];// '<S1>/Rate Transition1'
   ActuatorConfiguration TmpRTBAtProcessSensorsInport1_Buf[3];// synthesized block 
-  ReceivedEvents M[4];                 // '<Root>/Sort Events'
   FOCSlowInputs RateTransition1;       // '<S1>/Rate Transition1'
   ActuatorConfiguration ConfigurationParameters;// '<S1>/Motion Controller'
   SensorsData TmpRTBAtFOCInport4_Buf[3];// synthesized block
+  BUS_MESSAGES_TX MessagesTx;          // '<S1>/Model'
   SensorsData SensorsDataCalibration;  // '<S1>/Motion Controller'
   SensorsData Transitionto1ms_Buf0;    // '<S1>/Transition to 1 ms'
   SensorsData Transitionto1ms_Buf1;    // '<S1>/Transition to 1 ms'
@@ -51,6 +51,8 @@ struct DW_iterative_motion_controller_T {
   FOCOutputs RateTransition2_Buf1;     // '<S1>/Rate Transition2'
   FOCOutputs RateTransition2_Buf2;     // '<S1>/Rate Transition2'
   Flags Flags_a;                       // '<S1>/Motion Controller'
+  EstimatedData MotionController_o1;   // '<S1>/Motion Controller'
+  BUS_STATUS_TX Model_o2;              // '<S1>/Model'
   void* TmpRTBAtProcessSensorsInport1_SEMAPHORE;// synthesized block
   void* TmpRTBAtProcessSensorsInport2_SEMAPHORE;// synthesized block
   void* RateTransition1_SEMAPHORE;     // '<S1>/Rate Transition1'
@@ -72,6 +74,11 @@ struct DW_iterative_motion_controller_T {
   int8_T RateTransition2_RDBuf;        // '<S1>/Rate Transition2'
   int8_T Transitionto1ms_LstBufWR;     // '<S1>/Transition to 1 ms'
   int8_T Transitionto1ms_RDBuf;        // '<S1>/Transition to 1 ms'
+};
+
+// Block signals and states (default storage) for system '<Root>'
+struct DW_iterative_motion_controller_T {
+  DW_CoreSubsys_iterative_motion_controller_T CoreSubsys[1];// '<Root>/Iterative Motion Controller' 
 };
 
 // External inputs (root inport signals with default storage)

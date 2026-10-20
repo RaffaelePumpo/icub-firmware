@@ -5,11 +5,11 @@
 //
 // File: zero_crossing_types.h
 //
-// Code generated for Simulink model 'process_sensors'.
+// Code generated for Simulink model 'position_velocity_cascade'.
 //
-// Model version                  : 2.1
+// Model version                  : 10.15
 // Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
-// C/C++ source code generated on : Mon Oct 19 14:28:51 2026
+// C/C++ source code generated on : Tue Oct 20 12:02:24 2026
 //
 #ifndef ZERO_CROSSING_TYPES_H
 #define ZERO_CROSSING_TYPES_H
