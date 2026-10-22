@@ -349,12 +349,12 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>ULP2CM3</Key>
-          <Name>-UP1123199 -O206 -S12 -C0 -P00000000 -N00("ARM CoreSight SW-DP") -D00(6BA02477) -L00(0) -TO4115 -TC400000000 -TT100000000 -TP8 -TDX0 -TDD0 -TDS8000 -TDT0 -TDC1F -TIE80000001 -TIP9 -FO7 -FD20000000 -FC8000 -FN1 -FF0STM32H7x_2048.FLM -FS08000000 -FL0200000 -FP0($$Device:STM32H747AIIx$CMSIS\Flash\STM32H7x_2048.FLM)</Name>
+          <Name>-UP2214491 -O206 -S12 -C0 -P00000000 -N00("ARM CoreSight SW-DP") -D00(6BA02477) -L00(0) -TO4115 -TC400000000 -TT100000000 -TP8 -TDX0 -TDD0 -TDS8000 -TDT0 -TDC1F -TIE80000001 -TIP9 -FO7 -FD20000000 -FC8000 -FN1 -FF0STM32H7x_2048.FLM -FS08000000 -FL0200000 -FP0($$Device:STM32H747AIIx$CMSIS\Flash\STM32H7x_2048.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
           <Key>ARMRTXEVENTFLAGS</Key>
-          <Name>-L200 -Z23 -C0 -M1 -T1</Name>
+          <Name>-L200 -Z13 -C0 -M1 -T1</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -372,26 +372,83 @@
           <Name></Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>591</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>2</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\..\..\embot\app\bldc\embot_app_bldc_theMBD.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\cm7slave\../../../../../embot/app/bldc/embot_app_bldc_theMBD.cpp\591</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>567</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\..\..\bsp\portable\motor\embot_hw_motor_bldc_pwm_bsp_amcmj1.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>696</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>C:\Users\ksangalli\Desktop\Kevin_repo\icub-firmware\emBODY\eBcode\arch-arm\libs\lowlevel\stm32hal\src\driver\stm32h7-v1B5\src\stm32h7xx_hal_tim_ex.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Qenc1</ItemText>
+          <ItemText>_input</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>qenc,0x0A</ItemText>
+          <ItemText>_output</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pwm</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>_input</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>_input</ItemText>
         </Ww>
       </WatchWindow1>
-      <WatchWindow2>
-        <Ww>
-          <count>0</count>
-          <WinNumber>2</WinNumber>
-          <ItemText>osRtxInfo</ItemText>
-        </Ww>
-      </WatchWindow2>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
@@ -408,7 +465,7 @@
         <periodic>0</periodic>
         <aLwin>0</aLwin>
         <aCover>0</aCover>
-        <aSer1>0</aSer1>
+        <aSer1>1</aSer1>
         <aSer2>0</aSer2>
         <aPa>0</aPa>
         <viewmode>1</viewmode>
@@ -420,12 +477,12 @@
         <AscS3>0</AscS3>
         <aSer3>0</aSer3>
         <eProf>0</eProf>
-        <aLa>1</aLa>
+        <aLa>0</aLa>
         <aPa1>0</aPa1>
         <AscS4>0</AscS4>
         <aSer4>1</aSer4>
         <StkLoc>1</StkLoc>
-        <TrcWin>1</TrcWin>
+        <TrcWin>0</TrcWin>
         <newCpu>0</newCpu>
         <uProt>0</uProt>
       </DebugFlag>
@@ -459,12 +516,6 @@
           <SecondString>0000800000000000C2897DC0000000007CEC6E400000000000000000000000000000000051656E63316F666C617374696E646578000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000003000000555555555555D53F1600000000000000000000000000000000000000604B0108</SecondString>
         </Wi>
       </LogicAnalyzers>
-      <SystemViewers>
-        <Entry>
-          <Name>OS Support\Event Viewer</Name>
-          <WinId>35905</WinId>
-        </Entry>
-      </SystemViewers>
       <DebugDescription>
         <Enable>0</Enable>
         <EnableFlashSeq>0</EnableFlashSeq>
@@ -536,21 +587,13 @@
   </Group>
 
   <Group>
-    <GroupName>zz</GroupName>
-    <tvExp>0</tvExp>
-    <tvExpOptDlg>0</tvExpOptDlg>
-    <cbSel>0</cbSel>
-    <RteFlg>0</RteFlg>
-  </Group>
-
-  <Group>
     <GroupName>embot::app</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>4</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -562,7 +605,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>5</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -574,7 +617,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>6</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -586,7 +629,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>7</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -598,7 +641,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>8</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -610,7 +653,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>9</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -622,7 +665,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>10</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -634,7 +677,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>11</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -646,7 +689,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>12</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -658,7 +701,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>5</GroupNumber>
+      <GroupNumber>4</GroupNumber>
       <FileNumber>13</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -678,7 +721,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>14</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -690,7 +733,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>15</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -702,7 +745,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>16</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -714,7 +757,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>17</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -726,7 +769,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>18</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -738,7 +781,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>19</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -750,7 +793,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>6</GroupNumber>
+      <GroupNumber>5</GroupNumber>
       <FileNumber>20</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -765,12 +808,12 @@
 
   <Group>
     <GroupName>embot::app::bldc::mock</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>7</GroupNumber>
+      <GroupNumber>6</GroupNumber>
       <FileNumber>21</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -790,7 +833,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>22</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -802,7 +845,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>23</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -814,7 +857,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>24</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -826,7 +869,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>25</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -838,7 +881,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>26</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -850,7 +893,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>27</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -862,7 +905,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>28</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -874,7 +917,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>8</GroupNumber>
+      <GroupNumber>7</GroupNumber>
       <FileNumber>29</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -897,12 +940,12 @@
 
   <Group>
     <GroupName>stm32hal</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>10</GroupNumber>
+      <GroupNumber>9</GroupNumber>
       <FileNumber>30</FileNumber>
       <FileType>4</FileType>
       <tvExp>0</tvExp>
@@ -914,7 +957,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>10</GroupNumber>
+      <GroupNumber>9</GroupNumber>
       <FileNumber>31</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
@@ -926,7 +969,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>10</GroupNumber>
+      <GroupNumber>9</GroupNumber>
       <FileNumber>32</FileNumber>
       <FileType>4</FileType>
       <tvExp>0</tvExp>
@@ -938,7 +981,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>10</GroupNumber>
+      <GroupNumber>9</GroupNumber>
       <FileNumber>33</FileNumber>
       <FileType>2</FileType>
       <tvExp>0</tvExp>
@@ -958,7 +1001,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>11</GroupNumber>
+      <GroupNumber>10</GroupNumber>
       <FileNumber>34</FileNumber>
       <FileType>4</FileType>
       <tvExp>0</tvExp>
@@ -970,7 +1013,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>11</GroupNumber>
+      <GroupNumber>10</GroupNumber>
       <FileNumber>35</FileNumber>
       <FileType>1</FileType>
       <tvExp>0</tvExp>
@@ -990,7 +1033,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>12</GroupNumber>
+      <GroupNumber>11</GroupNumber>
       <FileNumber>36</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1002,7 +1045,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>12</GroupNumber>
+      <GroupNumber>11</GroupNumber>
       <FileNumber>37</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1014,7 +1057,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>12</GroupNumber>
+      <GroupNumber>11</GroupNumber>
       <FileNumber>38</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1034,7 +1077,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>39</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1046,7 +1089,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>40</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1058,7 +1101,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>41</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1070,7 +1113,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>42</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1082,7 +1125,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>43</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1094,7 +1137,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>44</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1106,7 +1149,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>45</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1118,7 +1161,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>13</GroupNumber>
+      <GroupNumber>12</GroupNumber>
       <FileNumber>46</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1138,7 +1181,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>14</GroupNumber>
+      <GroupNumber>13</GroupNumber>
       <FileNumber>47</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1158,7 +1201,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>48</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1170,7 +1213,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>49</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1182,7 +1225,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>50</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1194,7 +1237,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>51</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1206,7 +1249,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>52</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1218,7 +1261,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>53</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1230,7 +1273,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>15</GroupNumber>
+      <GroupNumber>14</GroupNumber>
       <FileNumber>54</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1250,7 +1293,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>16</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>55</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1262,7 +1305,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>16</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>56</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1274,7 +1317,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>16</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>57</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1286,7 +1329,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>16</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>58</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1298,7 +1341,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>16</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>59</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
@@ -1310,7 +1353,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>16</GroupNumber>
+      <GroupNumber>15</GroupNumber>
       <FileNumber>60</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1330,7 +1373,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>17</GroupNumber>
+      <GroupNumber>16</GroupNumber>
       <FileNumber>61</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1350,7 +1393,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>18</GroupNumber>
+      <GroupNumber>17</GroupNumber>
       <FileNumber>62</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1370,7 +1413,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>19</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>63</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1382,7 +1425,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>19</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>64</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1394,7 +1437,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>19</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>65</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1406,7 +1449,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>19</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>66</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1418,7 +1461,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>19</GroupNumber>
+      <GroupNumber>18</GroupNumber>
       <FileNumber>67</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1438,7 +1481,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>19</GroupNumber>
       <FileNumber>68</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1450,7 +1493,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>19</GroupNumber>
       <FileNumber>69</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1462,7 +1505,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>20</GroupNumber>
+      <GroupNumber>19</GroupNumber>
       <FileNumber>70</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1482,7 +1525,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>71</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1494,7 +1537,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>72</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1506,7 +1549,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>73</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1518,7 +1561,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>74</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1530,7 +1573,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>75</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1542,7 +1585,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>76</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1554,7 +1597,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>77</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1566,7 +1609,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>21</GroupNumber>
+      <GroupNumber>20</GroupNumber>
       <FileNumber>78</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1586,7 +1629,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>22</GroupNumber>
+      <GroupNumber>21</GroupNumber>
       <FileNumber>79</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1598,7 +1641,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>22</GroupNumber>
+      <GroupNumber>21</GroupNumber>
       <FileNumber>80</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1610,7 +1653,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>22</GroupNumber>
+      <GroupNumber>21</GroupNumber>
       <FileNumber>81</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1622,32 +1665,8 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>22</GroupNumber>
+      <GroupNumber>21</GroupNumber>
       <FileNumber>82</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\bsp\portable\motor\embot_hw_motor_bldc_adc_bsp_amcmj1.cpp</PathWithFileName>
-      <FilenameWithoutPath>embot_hw_motor_bldc_adc_bsp_amcmj1.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>22</GroupNumber>
-      <FileNumber>83</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\bsp\portable\motor\embot_hw_motor_bldc_hall_bsp_amcmj1.cpp</PathWithFileName>
-      <FilenameWithoutPath>embot_hw_motor_bldc_hall_bsp_amcmj1.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>22</GroupNumber>
-      <FileNumber>84</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1658,7 +1677,31 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>22</GroupNumber>
+      <GroupNumber>21</GroupNumber>
+      <FileNumber>83</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\bsp\portable\motor\embot_hw_motor_bldc_adc_bsp_amcmj1.cpp</PathWithFileName>
+      <FilenameWithoutPath>embot_hw_motor_bldc_adc_bsp_amcmj1.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>21</GroupNumber>
+      <FileNumber>84</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\bsp\portable\motor\embot_hw_motor_bldc_hall_bsp_amcmj1.cpp</PathWithFileName>
+      <FilenameWithoutPath>embot_hw_motor_bldc_hall_bsp_amcmj1.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>21</GroupNumber>
       <FileNumber>85</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1670,7 +1713,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>22</GroupNumber>
+      <GroupNumber>21</GroupNumber>
       <FileNumber>86</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1690,7 +1733,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>23</GroupNumber>
+      <GroupNumber>22</GroupNumber>
       <FileNumber>87</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1702,7 +1745,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>23</GroupNumber>
+      <GroupNumber>22</GroupNumber>
       <FileNumber>88</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1714,7 +1757,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>23</GroupNumber>
+      <GroupNumber>22</GroupNumber>
       <FileNumber>89</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1726,7 +1769,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>23</GroupNumber>
+      <GroupNumber>22</GroupNumber>
       <FileNumber>90</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1738,7 +1781,7 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>23</GroupNumber>
+      <GroupNumber>22</GroupNumber>
       <FileNumber>91</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1753,12 +1796,12 @@
 
   <Group>
     <GroupName>mbd::sharedutils</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>24</GroupNumber>
+      <GroupNumber>23</GroupNumber>
       <FileNumber>92</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1770,44 +1813,8 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>24</GroupNumber>
+      <GroupNumber>23</GroupNumber>
       <FileNumber>93</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rt_hypotf.cpp</PathWithFileName>
-      <FilenameWithoutPath>rt_hypotf.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>24</GroupNumber>
-      <FileNumber>94</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rt_remf.cpp</PathWithFileName>
-      <FilenameWithoutPath>rt_remf.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>24</GroupNumber>
-      <FileNumber>95</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rt_roundf.cpp</PathWithFileName>
-      <FilenameWithoutPath>rt_roundf.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>24</GroupNumber>
-      <FileNumber>96</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1818,8 +1825,8 @@
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>24</GroupNumber>
-      <FileNumber>97</FileNumber>
+      <GroupNumber>23</GroupNumber>
+      <FileNumber>94</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1829,43 +1836,79 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+    <File>
+      <GroupNumber>23</GroupNumber>
+      <FileNumber>95</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rt_hypotf.cpp</PathWithFileName>
+      <FilenameWithoutPath>rt_hypotf.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>23</GroupNumber>
+      <FileNumber>96</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rt_roundf.cpp</PathWithFileName>
+      <FilenameWithoutPath>rt_roundf.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>23</GroupNumber>
+      <FileNumber>97</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rt_remf.cpp</PathWithFileName>
+      <FilenameWithoutPath>rt_remf.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
   </Group>
 
   <Group>
     <GroupName>mbd</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>25</GroupNumber>
+      <GroupNumber>24</GroupNumber>
       <FileNumber>98</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rtw_motor_config.c</PathWithFileName>
-      <FilenameWithoutPath>rtw_motor_config.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rtw_enable_disable_motors.cpp</PathWithFileName>
+      <FilenameWithoutPath>rtw_enable_disable_motors.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>25</GroupNumber>
+      <GroupNumber>24</GroupNumber>
       <FileNumber>99</FileNumber>
-      <FileType>1</FileType>
+      <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rtw_enable_disable_motors.c</PathWithFileName>
-      <FilenameWithoutPath>rtw_enable_disable_motors.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\sharedutils\rtw_motor_config.cpp</PathWithFileName>
+      <FilenameWithoutPath>rtw_motor_config.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
-      <GroupNumber>25</GroupNumber>
+      <GroupNumber>24</GroupNumber>
       <FileNumber>100</FileNumber>
       <FileType>8</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\..\..\mbd\amcmj1\iterative-motion-controller\iterative_motion_controller.cpp</PathWithFileName>
@@ -1882,7 +1925,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>26</GroupNumber>
+      <GroupNumber>25</GroupNumber>
       <FileNumber>101</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1902,7 +1945,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>27</GroupNumber>
+      <GroupNumber>26</GroupNumber>
       <FileNumber>102</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1922,7 +1965,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>28</GroupNumber>
+      <GroupNumber>27</GroupNumber>
       <FileNumber>103</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1942,26 +1985,26 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>29</GroupNumber>
+      <GroupNumber>28</GroupNumber>
       <FileNumber>104</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\control-foc\FOCInnerLoop.cpp</PathWithFileName>
-      <FilenameWithoutPath>FOCInnerLoop.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>29</GroupNumber>
-      <FileNumber>105</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\..\..\mbd\amcmj1\control-foc\control_foc.cpp</PathWithFileName>
       <FilenameWithoutPath>control_foc.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>28</GroupNumber>
+      <FileNumber>105</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\control-foc\FOCInnerLoop.cpp</PathWithFileName>
+      <FilenameWithoutPath>FOCInnerLoop.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1974,7 +2017,7 @@
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>30</GroupNumber>
+      <GroupNumber>29</GroupNumber>
       <FileNumber>106</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
@@ -1988,23 +2031,31 @@
   </Group>
 
   <Group>
-    <GroupName>mbd::motion-controller</GroupName>
+    <GroupName>mbd::filter-current</GroupName>
     <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
     <File>
-      <GroupNumber>31</GroupNumber>
+      <GroupNumber>30</GroupNumber>
       <FileNumber>107</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\motion-controller\motion_controller_data.cpp</PathWithFileName>
-      <FilenameWithoutPath>motion_controller_data.cpp</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\filter-current\filter_current.cpp</PathWithFileName>
+      <FilenameWithoutPath>filter_current.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+  </Group>
+
+  <Group>
+    <GroupName>mbd::motion-controller</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>31</GroupNumber>
       <FileNumber>108</FileNumber>
@@ -2014,6 +2065,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\..\..\mbd\amcmj1\motion-controller\motion_controller.cpp</PathWithFileName>
       <FilenameWithoutPath>motion_controller.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>31</GroupNumber>
+      <FileNumber>109</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\motion-controller\motion_controller_data.cpp</PathWithFileName>
+      <FilenameWithoutPath>motion_controller_data.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -2027,7 +2090,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>32</GroupNumber>
-      <FileNumber>109</FileNumber>
+      <FileNumber>110</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -2047,33 +2110,13 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>33</GroupNumber>
-      <FileNumber>110</FileNumber>
+      <FileNumber>111</FileNumber>
       <FileType>8</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\..\..\mbd\amcmj1\trajectory-planner\trajectory_planner.cpp</PathWithFileName>
       <FilenameWithoutPath>trajectory_planner.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-  </Group>
-
-  <Group>
-    <GroupName>mbd::filter-current</GroupName>
-    <tvExp>0</tvExp>
-    <tvExpOptDlg>0</tvExpOptDlg>
-    <cbSel>0</cbSel>
-    <RteFlg>0</RteFlg>
-    <File>
-      <GroupNumber>34</GroupNumber>
-      <FileNumber>111</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>1</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\mbd\amcmj1\filter-current\filter_current.cpp</PathWithFileName>
-      <FilenameWithoutPath>filter_current.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
