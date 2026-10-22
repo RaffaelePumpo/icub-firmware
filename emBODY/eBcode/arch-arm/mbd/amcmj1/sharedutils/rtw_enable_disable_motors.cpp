@@ -20,7 +20,7 @@
 #include "pwm.h"
 #endif /* STM32HAL_BOARD_AMCBLDC */
 
-#if defined(STM32HAL_BOARD_AMCFOC_1CM7) || defined(STM32HAL_BOARD_AMCFOC_2CM4)
+#if defined(STM32HAL_BOARD_AMCFOC_1CM7) || defined(STM32HAL_BOARD_AMCFOC_2CM4) || defined(STM32HAL_BOARD_AMCMJ1) 
 #include "embot_hw_motor_bldc.h"
 #endif
 
@@ -33,7 +33,11 @@ void rtw_enableMotor(){
     #if defined(STM32HAL_BOARD_AMCFOC_1CM7) || defined(STM32HAL_BOARD_AMCFOC_2CM4)
     embot::hw::motor::bldc::enable(embot::hw::MOTOR::one, true);
     embot::hw::motor::bldc::enable(embot::hw::MOTOR::two, true);
-	#endif    
+	#endif
+
+    #if defined(STM32HAL_BOARD_AMCMJ1)
+    embot::hw::motor::bldc::enable(embot::hw::MOTOR::one, true);
+	#endif
 }
 
 void rtw_disableMotor(){
@@ -45,5 +49,9 @@ void rtw_disableMotor(){
     embot::hw::motor::bldc::enable(embot::hw::MOTOR::one, false);
     embot::hw::motor::bldc::enable(embot::hw::MOTOR::two, false);
     #endif     
+    
+    #if defined(STM32HAL_BOARD_AMCMJ1)
+    embot::hw::motor::bldc::enable(embot::hw::MOTOR::one, false);
+	#endif
     
 }
